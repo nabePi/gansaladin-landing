@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Next.js 16 (App Router) marketing site for **Yayasan Saladin Peradaban Berilmu / GenSa**, an Indonesian Islamic education/da'wah foundation. Five static pages, all content hardcoded in TSX (no CMS, no database, no API routes).
 
+Git remote: `https://github.com/nabePi/gansaladin-landing` (branch `main`).
+
 ## Commands
 
 ```bash
@@ -30,6 +32,14 @@ There is no test suite/framework configured in this repo (no test runner in `pac
 - **Path alias**: `@/*` → `src/*` (see `tsconfig.json`).
 - **`next.config.ts`**: sets `turbopack.root` explicitly to silence a false-positive root-inference warning caused by an unrelated `package-lock.json` in the parent home directory — keep this if the warning reappears.
 - **`refernesi/`**: the original static HTML/React-in-a-single-file design reference this site was ported from (colors, copy, layout, component structure). It is not part of the Next.js app, is excluded from ESLint (`eslint.config.mjs`), and should not be built or imported from — it's kept only as a design/content reference.
+
+## Deployment
+
+Deployed via **Dokploy** using the **Nixpacks** builder. `nixpacks.toml` at the repo root defines the build plan (`npm ci` → `npm run build` → `npm run start`, caching `.next/cache`); `package.json` pins `engines.node >= 20.9.0` so Nixpacks selects a compatible Node version. `next start` already binds to `0.0.0.0` and reads `PORT` from the environment, so no extra host/port config is needed — Dokploy injects `PORT` automatically.
+
+## ONBOARDING.md
+
+`ONBOARDING.md` is a separate, Indonesian-language guide for a **non-technical collaborator** pairing with Claude on this project. It instructs Claude to handle git (clone/pull/commit/push) and environment setup (node/npm) autonomously, including committing and pushing without asking for confirmation first. That auto-commit/push authorization is **scoped to sessions following that guide** (e.g. opened via its share link) — it does not change the normal confirm-before-commit/push behavior for regular technical sessions in this repo.
 
 ## Conventions observed in this codebase
 
