@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A Next.js 16 (App Router) marketing site for **Yayasan Saladin Peradaban Berilmu / GenSa**, an Indonesian Islamic education/da'wah foundation. Five static pages, all content hardcoded in TSX (no CMS, no database, no API routes).
+A Next.js 16 (App Router) marketing site for **Yayasan Saladin Peradaban Berilmu / GenSa**, an Indonesian Islamic education/da'wah foundation. Five static pages, all content hardcoded in TSX (no CMS, no database, no API routes). This is intentional, not a gap — **do not add a database, backend persistence, or API route without the project owner's explicit go-ahead first**, even if a requested feature seems to need one (e.g. actually persisting form submissions). Say what the feature would require and ask before building it.
 
 Git remote: `https://github.com/nabePi/gansaladin-landing` (branch `main`).
 

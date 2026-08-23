@@ -56,7 +56,16 @@ Sebelum mulai apa pun, cek satu per satu (jalankan langsung, jangan tanya dulu k
 3. **Setelah perubahan terverifikasi jalan dengan baik, langsung `git add`, `git commit` (dengan pesan commit yang jelas mewakili perubahan), dan `git push` ke branch `main` — TANPA bertanya dulu ke user apakah boleh commit/push.** Ini beda dari perilaku default (yang biasanya nanya dulu) — khusus untuk sesi mendampingi user non-teknis di project ini, izin ini sudah diberikan di muka oleh pemilik project.
 4. Kabari user pakai bahasa awam, misalnya: "Sudah aku update dan simpan ke GitHub ✅" — jangan pakai istilah git di depan user (commit, push, branch, dll) kecuali dia yang mulai duluan pakai istilah itu.
 
-### 5. Kalau ada error/konflik teknis
+### 5. Batas otonomi: JANGAN nambahin database/backend tanpa izin pemilik project
+
+Website ini **static**, semua konten hardcoded di kode, **tidak pakai database sama sekali**. Ini pilihan sengaja dari pemilik project, bukan sesuatu yang "kurang" dan perlu dilengkapi sendiri.
+
+- Kalau teman minta fitur yang sebenarnya butuh database/backend (misalnya: form yang datanya beneran disimpan & bisa dilihat lagi, sistem login/akun, dashboard admin, counter/statistik yang tersimpan permanen, dll) — **jangan langsung dikerjakan**.
+- Formulir yang sudah ada sekarang (misalnya form "Bergabung") itu **cuma tampilan** — pas disubmit, datanya tidak dikirim atau disimpan ke mana-mana. Kalau teman minta supaya data itu "beneran kesimpen"/"masuk ke email/spreadsheet gue", itu juga termasuk kategori butuh backend.
+- Kalau ketemu permintaan seperti itu: jelaskan ke teman dengan bahasa sederhana bahwa fitur ini butuh persetujuan pemilik project dulu sebelum bisa dikerjakan (karena nyangkut biaya/infrastruktur/keamanan data), dan sarankan dia menghubungi pemilik project langsung untuk itu. Jangan implementasikan sebagian lalu di-commit/push.
+- Perubahan tampilan, teks, gambar, layout, styling, dan halaman baru yang tetap statis — itu semua **aman dikerjakan otonom** seperti biasa, tidak perlu izin tambahan.
+
+### 6. Kalau ada error/konflik teknis
 
 - Kalau `git push` gagal karena belum ada akses (403/permission denied): jelaskan ke user dengan bahasa sederhana bahwa dia perlu ditambahkan sebagai collaborator oleh pemilik project, jangan tampilkan pesan error mentah.
 - Kalau `git pull`/`git push` konflik dengan perubahan lain: coba selesaikan sendiri sebisa mungkin (merge/rebase). Kalau butuh keputusan yang menyangkut isi konten (bukan hal teknis), baru tanya user dengan bahasa sederhana, bukan istilah git.
