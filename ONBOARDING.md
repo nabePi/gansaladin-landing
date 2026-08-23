@@ -28,19 +28,21 @@ Bagian di bawah ini adalah instruksi dari pemilik project, berlaku khusus saat m
 
 ### 1. Cek kesiapan lingkungan kerja di awal sesi
 
-Sebelum mulai apa pun, cek satu per satu (jalankan langsung, jangan tanya dulu ke user kecuali butuh konfirmasi instal):
+Sebelum mulai apa pun, cek satu per satu (jalankan langsung, jangan tanya dulu ke user kecuali butuh konfirmasi instal). Sesuaikan command dengan OS yang terdeteksi di sesi ini.
 
 - **Git ada atau tidak**: `git --version`. Kalau belum ada:
+  - **Windows**: coba install lewat command dulu (tanpa perlu user klik apa-apa): `winget install --id Git.Git -e --source winget`. Kalau `winget` tidak tersedia, baru arahkan user untuk download & jalankan installer dari [Git for Windows](https://git-scm.com/download/win) (next-next-install, opsi default semua aman dipilih).
   - macOS: `xcode-select --install` (dialog instal Command Line Tools), atau `brew install git` kalau Homebrew sudah ada.
-  - Windows: arahkan user untuk install [Git for Windows](https://git-scm.com/download/win) (butuh interaksi user karena ini installer GUI) — jelaskan dengan bahasa awam kenapa ini dibutuhkan.
+  - Setelah instal via installer GUI (bukan lewat command), Claude Code kemungkinan perlu **dibuka ulang** (restart terminal/sesi) supaya `git` terbaca di PATH — kalau `git --version` masih gagal setelah instal, minta user restart Claude Code sekali, dengan bahasa sederhana ("tolong tutup dan buka lagi aplikasinya ya, biar programnya kebaca").
 - **Node.js & npm ada atau tidak**: `node -v` dan `npm -v`. Project ini butuh **Node.js 20.9 atau lebih baru**. Kalau belum ada atau versinya kurang:
-  - macOS (ada Homebrew): `brew install node`
-  - Kalau tidak ada Homebrew, arahkan user download installer LTS dari https://nodejs.org (paling gampang untuk non-teknis, tinggal next-next-install).
-- **GitHub CLI (opsional tapi memudahkan auth push)**: cek `gh auth status`. Kalau user belum login dan push nanti gagal karena auth, jalankan `gh auth login` dan ikuti instruksinya bersama user (ini butuh interaksi browser/kode, bantu user langkah demi langkah dengan bahasa sederhana).
+  - **Windows**: `winget install OpenJS.NodeJS.LTS`. Kalau `winget` tidak tersedia, arahkan user download installer LTS dari https://nodejs.org (next-next-install).
+  - macOS (ada Homebrew): `brew install node`. Kalau tidak ada Homebrew, arahkan user download installer LTS dari https://nodejs.org.
+  - Sama seperti git: kalau baru instal lewat installer GUI, mungkin perlu restart Claude Code dulu sebelum `node`/`npm` kebaca.
+- **GitHub CLI (opsional tapi memudahkan auth push)**: cek `gh auth status`. Kalau belum ada, di Windows bisa `winget install --id GitHub.cli`. Kalau user belum login dan push nanti gagal karena auth, jalankan `gh auth login` dan ikuti instruksinya bersama user (ini butuh interaksi browser/kode, bantu user langkah demi langkah dengan bahasa sederhana).
 
 ### 2. Pastikan project sudah ter-clone
 
-- Kalau folder project **belum ada** di laptop user: clone dari `https://github.com/nabePi/gansaladin-landing.git` ke lokasi yang masuk akal (misalnya `~/Documents/gansaladin-landing` atau folder yang user sebutkan).
+- Kalau folder project **belum ada** di laptop user: clone dari `https://github.com/nabePi/gansaladin-landing.git` ke lokasi yang masuk akal (misalnya folder Documents user, atau folder yang user sebutkan).
 - Kalau folder **sudah ada**: sebelum mulai kerja, jalankan `git pull` supaya sinkron dengan perubahan terbaru dari GitHub (misalnya perubahan yang dibuat programmer/pemilik project). Kalau ada uncommitted changes yang menghalangi pull, tangani sendiri (commit dulu atau stash) — jangan minta user memutuskan hal teknis seperti ini.
 
 ### 3. Pastikan dependency ter-install
