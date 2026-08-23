@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --color-beige: oklch(97% 0.01 60);
+  --color-beige-mid: oklch(93% 0.018 60);
+  --color-beige-dark: oklch(88% 0.025 55);
+
+  --color-maroon: oklch(38% 0.12 20);
+  --color-maroon-light: oklch(48% 0.12 20);
+  --color-maroon-dark: oklch(28% 0.1 18);
+
+  --color-gold: oklch(72% 0.12 70);
+  --color-gold-light: oklch(82% 0.1 72);
+
+  --color-ink: oklch(18% 0.02 50);
+  --color-ink-mid: oklch(40% 0.02 50);
+  --color-ink-light: oklch(60% 0.015 55);
+}
+
+@theme inline {
+  --color-beige: var(--color-beige);
+  --color-beige-mid: var(--color-beige-mid);
+  --color-beige-dark: var(--color-beige-dark);
+
+  --color-maroon: var(--color-maroon);
+  --color-maroon-light: var(--color-maroon-light);
+  --color-maroon-dark: var(--color-maroon-dark);
+
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+
+  --color-ink: var(--color-ink);
+  --color-ink-mid: var(--color-ink-mid);
+  --color-ink-light: var(--color-ink-light);
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-dm-sans), Helvetica, Arial, sans-serif;
+
+  --animate-scroll-chevron: scroll-chevron 1.5s ease-in-out infinite;
+}
+
+@keyframes scroll-chevron {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-chevron {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-beige);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-maroon);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-beige-mid);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-maroon);
+  border-radius: 3px;
+}
