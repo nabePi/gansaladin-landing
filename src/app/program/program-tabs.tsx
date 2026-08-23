@@ -10,6 +10,7 @@ type ProgramItem = {
   manfaat: string;
   output: string;
   cara: string;
+  link?: string;
 };
 
 type Pillar = {
@@ -82,12 +83,23 @@ export default function ProgramTabs({ pillars }: { pillars: Pillar[] }) {
                 <div className="text-[13px] whitespace-nowrap text-ink-mid">
                   {item.cara}
                 </div>
-                <Link
-                  href="/bergabung"
-                  className="flex w-fit items-center gap-1.5 bg-maroon px-5 py-2.5 text-[13px] font-semibold whitespace-nowrap text-white"
-                >
-                  Ikut Serta <IconArrow />
-                </Link>
+                {item.link ? (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-fit items-center gap-1.5 bg-maroon px-5 py-2.5 text-[13px] font-semibold whitespace-nowrap text-white"
+                  >
+                    Ikut Serta <IconArrow />
+                  </a>
+                ) : (
+                  <Link
+                    href="/bergabung"
+                    className="flex w-fit items-center gap-1.5 bg-maroon px-5 py-2.5 text-[13px] font-semibold whitespace-nowrap text-white"
+                  >
+                    Ikut Serta <IconArrow />
+                  </Link>
+                )}
               </div>
             ))}
           </div>

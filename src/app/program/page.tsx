@@ -18,6 +18,7 @@ const pillars = [
         manfaat: "Pemuda & Masyarakat Umum",
         output: "Peserta kajian aktif",
         cara: "Hadir atau ikuti online",
+        link: "https://event.gensaladin.id",
       },
       {
         name: "Seminar & Workshop",
@@ -25,6 +26,7 @@ const pillars = [
         manfaat: "Pelajar & Mahasiswa",
         output: "Sertifikat & modul",
         cara: "Daftar per event",
+        link: "https://event.gensaladin.id",
       },
       {
         name: "Pengembangan Modul & Buku Ajar",

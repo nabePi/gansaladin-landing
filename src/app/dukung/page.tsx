@@ -76,9 +76,14 @@ export default function DukungPage() {
                   </span>
                 ))}
               </div>
-              <button className="flex items-center gap-2 bg-white px-8 py-3.5 text-[15px] font-bold text-maroon hover:bg-beige">
+              <a
+                href="https://gensaberilmu.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-2 bg-white px-8 py-3.5 text-[15px] font-bold text-maroon hover:bg-beige"
+              >
                 Kunjungi Store <IconArrow />
-              </button>
+              </a>
             </div>
 
             {/* Fundraising */}
