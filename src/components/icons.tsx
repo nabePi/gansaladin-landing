@@ -235,6 +235,68 @@ export function IconInstagram({ className }: { className?: string }) {
   );
 }
 
+export function IconPlay({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="4" width="20" height="15" rx="2.5" />
+      <path d="M10 8.5v6l5-3z" fill="currentColor" stroke="none" />
+      <line x1="8" y1="22" x2="16" y2="22" />
+      <line x1="12" y1="19" x2="12" y2="22" />
+    </svg>
+  );
+}
+
+export function IconGraduationCap({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M2 8.5 12 4l10 4.5-10 4.5-10-4.5z" />
+      <path d="M6 10.7v4.8c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.8" />
+      <path d="M21.5 9v6" />
+    </svg>
+  );
+}
+
+export function IconBuilding({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 21h18" />
+      <path d="M5 21V9l7-5 7 5v12" />
+      <path d="M9 21v-6h6v6" />
+      <path d="M9 12h.01M15 12h.01M9 9h.01M15 9h.01" />
+    </svg>
+  );
+}
+
 export function IconClose({ className }: { className?: string }) {
   return (
     <svg

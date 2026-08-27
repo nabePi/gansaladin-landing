@@ -9,7 +9,7 @@ const pillars = [
     Icon: IconBook,
     title: "Pendidikan & Karakter",
     desc: "Program terstruktur untuk mencetak intelektual berakhlak mulia dan berwawasan luas.",
-    detail: "Kajian non-formal · Seminar & workshop · Pembinaan komunitas pemuda",
+    detail: "GenSa Class · Modul & buku ajar · Pembinaan komunitas pemuda",
   },
   {
     num: "02",

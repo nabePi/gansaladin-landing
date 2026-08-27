@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { IconArrow } from "@/components/icons";
+import {
+  IconArrow,
+  IconBook,
+  IconInstagram,
+  IconPackage,
+  IconPlay,
+  IconUsers,
+} from "@/components/icons";
+import SectionLabel from "@/components/section-label";
 
 type ProgramItem = {
   name: string;
@@ -56,6 +64,7 @@ export default function ProgramTabs({ pillars }: { pillars: Pillar[] }) {
             <p className="text-[17px] text-ink-mid italic">{active.tagline}</p>
           </div>
 
+          {active.items.length > 0 && (
           <div className="grid gap-[2px]">
             {active.items.map((item) => (
               <div
@@ -66,9 +75,13 @@ export default function ProgramTabs({ pillars }: { pillars: Pillar[] }) {
                   <div className="mb-1.5 font-serif text-[19px] font-bold text-ink">
                     {item.name}
                   </div>
-                  <div className="text-[13px] text-ink-light">
-                    <span className="mr-4">👥 {item.manfaat}</span>
-                    <span>📦 {item.output}</span>
+                  <div className="flex items-center gap-4 text-[13px] text-ink-light">
+                    <span className="inline-flex items-center gap-1.5">
+                      <IconUsers /> {item.manfaat}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <IconPackage /> {item.output}
+                    </span>
                   </div>
                 </div>
                 <div
@@ -103,6 +116,81 @@ export default function ProgramTabs({ pillars }: { pillars: Pillar[] }) {
               </div>
             ))}
           </div>
+          )}
+
+          {active.num === "02" && (
+            <div className={active.items.length > 0 ? "mt-14" : ""}>
+              <SectionLabel>Konten Terbaru</SectionLabel>
+              <div className="mt-6 grid grid-cols-1 gap-[2px] sm:grid-cols-2 lg:grid-cols-3">
+                <div className="bg-white p-8">
+                  <div className="mb-4 text-maroon">
+                    <IconBook />
+                  </div>
+                  <div className="mb-2 text-xs font-bold tracking-[0.08em] text-gold uppercase">
+                    Ebook
+                  </div>
+                  <h3 className="mb-2.5 font-serif text-xl font-bold text-ink">
+                    Ebook GenSa
+                  </h3>
+                  <p className="mb-5 text-sm leading-relaxed text-ink-mid">
+                    Unduh koleksi ebook terbaru dari GenSa seputar sejarah dan
+                    peradaban Islam.
+                  </p>
+                  <Link
+                    href="/ebook"
+                    className="border-b-[1.5px] border-maroon pb-0.5 text-[13px] font-semibold text-maroon"
+                  >
+                    Lihat Koleksi Ebook →
+                  </Link>
+                </div>
+                <div className="bg-white p-8">
+                  <div className="mb-4 text-maroon">
+                    <IconPlay />
+                  </div>
+                  <div className="mb-2 text-xs font-bold tracking-[0.08em] text-gold uppercase">
+                    GenSa TV
+                  </div>
+                  <h3 className="mb-2.5 font-serif text-xl font-bold text-ink">
+                    Video Terbaru
+                  </h3>
+                  <p className="mb-5 text-sm leading-relaxed text-ink-mid">
+                    Tonton episode dan konten edukatif terbaru dari kanal
+                    YouTube GenSa TV.
+                  </p>
+                  <a
+                    href="https://www.youtube.com/@gensa_tv"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-b-[1.5px] border-maroon pb-0.5 text-[13px] font-semibold text-maroon"
+                  >
+                    Kunjungi GenSa TV →
+                  </a>
+                </div>
+                <div className="bg-white p-8">
+                  <div className="mb-4 text-maroon">
+                    <IconInstagram className="h-7 w-7" />
+                  </div>
+                  <div className="mb-2 text-xs font-bold tracking-[0.08em] text-gold uppercase">
+                    Instagram
+                  </div>
+                  <h3 className="mb-2.5 font-serif text-xl font-bold text-ink">
+                    Update Terbaru
+                  </h3>
+                  <p className="mb-5 text-sm leading-relaxed text-ink-mid">
+                    Ikuti kabar dan cuplikan kegiatan GenSa melalui Instagram.
+                  </p>
+                  <a
+                    href="https://www.instagram.com/gen.saladin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-b-[1.5px] border-maroon pb-0.5 text-[13px] font-semibold text-maroon"
+                  >
+                    Kunjungi Instagram →
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </>

@@ -12,6 +12,9 @@
   --color-gold: oklch(72% 0.12 70);
   --color-gold-light: oklch(82% 0.1 72);
 
+  --color-teal: oklch(45% 0.08 165);
+  --color-teal-light: oklch(90% 0.05 165);
+
   --color-ink: oklch(18% 0.02 50);
   --color-ink-mid: oklch(40% 0.02 50);
   --color-ink-light: oklch(60% 0.015 55);

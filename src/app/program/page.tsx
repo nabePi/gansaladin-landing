@@ -13,20 +13,11 @@ const pillars = [
     tagline: "Membentuk intelektual berakhlak mulia",
     items: [
       {
-        name: "Kajian Non-Formal",
+        name: "GenSa Class",
         status: "berjalan" as const,
         manfaat: "Pemuda & Masyarakat Umum",
-        output: "Peserta kajian aktif",
+        output: "Peserta kelas aktif",
         cara: "Hadir atau ikuti online",
-        link: "https://event.gensaladin.id",
-      },
-      {
-        name: "Seminar & Workshop",
-        status: "berjalan" as const,
-        manfaat: "Pelajar & Mahasiswa",
-        output: "Sertifikat & modul",
-        cara: "Daftar per event",
-        link: "https://event.gensaladin.id",
       },
       {
         name: "Pengembangan Modul & Buku Ajar",
@@ -37,7 +28,7 @@ const pillars = [
       },
       {
         name: "Pembinaan Komunitas Pemuda",
-        status: "berjalan" as const,
+        status: "segera" as const,
         manfaat: "Komunitas pemuda Islam",
         output: "Komunitas aktif terbina",
         cara: "Daftar komunitas mitra",
@@ -48,36 +39,7 @@ const pillars = [
     num: "02",
     title: "Literasi & Dakwah Digital",
     tagline: "Menjangkau generasi melalui teknologi",
-    items: [
-      {
-        name: "Produksi Konten Multi-Platform",
-        status: "berjalan" as const,
-        manfaat: "Pengguna media sosial",
-        output: "Konten dakwah berkualitas",
-        cara: "Follow & sebarkan",
-      },
-      {
-        name: "Podcast & Video Edukasi",
-        status: "berjalan" as const,
-        manfaat: "Umum",
-        output: "Episode reguler",
-        cara: "Subscribe & dengarkan",
-      },
-      {
-        name: "Platform Edukasi Digital",
-        status: "segera" as const,
-        manfaat: "Pelajar & masyarakat",
-        output: "Kursus & modul online",
-        cara: "Daftar akun gratis",
-      },
-      {
-        name: "Arsip Digital Peradaban Islam",
-        status: "segera" as const,
-        manfaat: "Peneliti & pelajar",
-        output: "Database tokoh & peristiwa",
-        cara: "Jadilah kontributor",
-      },
-    ],
+    items: [],
   },
   {
     num: "03",
@@ -86,14 +48,14 @@ const pillars = [
     items: [
       {
         name: "Kemitraan Strategis",
-        status: "berjalan" as const,
+        status: "segera" as const,
         manfaat: "Lembaga & organisasi",
         output: "Program kolaboratif",
         cara: "Hubungi tim kami",
       },
       {
         name: "Program Sosial & Kemanusiaan",
-        status: "berjalan" as const,
+        status: "segera" as const,
         manfaat: "Masyarakat marginal",
         output: "Bantuan langsung & pemberdayaan",
         cara: "Donasi atau relawan",
@@ -107,7 +69,7 @@ const pillars = [
       },
       {
         name: "Pembinaan Komunitas",
-        status: "berjalan" as const,
+        status: "segera" as const,
         manfaat: "Komunitas lokal",
         output: "Komunitas mandiri & aktif",
         cara: "Daftar komunitas binaan",

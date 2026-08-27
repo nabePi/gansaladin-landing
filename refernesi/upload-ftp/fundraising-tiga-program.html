@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dukung GenSa — Tiga Program, Satu Misi Peradaban</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════ TOKENS ═══════════════════════ */
+:root{
+  --cream:  #F6F0E8;
+  --cream2: #EDE4D6;
+  --cream3: #E2D6C4;
+  --ink:    #1A1410;
+  --ink2:   #2C2018;
+  --warm:   #5C4838;
+  --warm2:  #8A7060;
+  --warm3:  #B8A898;
+
+  /* Program colours */
+  --red:    #7B1A1A;   /* Studio Dakwah */
+  --red2:   #9E2828;
+  --redL:   #FFF0F0;
+  --redM:   #FCDEDE;
+
+  --teal:   #0E6B54;   /* GenSa Class */
+  --teal2:  #138068;
+  --tealL:  #E8F8F2;
+  --tealM:  #C4EDDF;
+
+  --gold:   #7A5C18;   /* Rumah Literasi */
+  --gold2:  #C9962A;
+  --goldL:  #FFF8E8;
+  --goldM:  #FAECC8;
+
+  --white:  #FFFFFF;
+  --fd: 'Playfair Display', Georgia, serif;
+  --fb: 'Inter', system-ui, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--ink);overflow-x:hidden;line-height:1.65}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+/* ═══════════════════════ NAV ═══════════════════════════ */
+#nav{
+  position:fixed;inset:0 0 auto;z-index:300;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;
+  background:rgba(246,240,232,0);
+  border-bottom:1px solid transparent;
+  transition:background .3s,border-color .3s,backdrop-filter .3s;
+}
+#nav.on{
+  background:rgba(246,240,232,.96);
+  border-color:rgba(92,72,56,.14);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.nb{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--red);text-decoration:none;display:flex;align-items:center;gap:.4rem}
+.nav-pills{display:flex;gap:.5rem}
+.np{
+  font-size:.72rem;font-weight:600;padding:.4rem .875rem;border-radius:100px;
+  text-decoration:none;border:1.5px solid;cursor:pointer;transition:all .2s;
+  white-space:nowrap;
+}
+.np-1{border-color:var(--red);color:var(--red);background:transparent}
+.np-1:hover{background:var(--red);color:#fff}
+.np-2{border-color:var(--teal);color:var(--teal);background:transparent}
+.np-2:hover{background:var(--teal);color:#fff}
+.np-3{border-color:var(--gold2);color:var(--gold);background:transparent}
+.np-3:hover{background:var(--gold2);color:#fff}
+.ham{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px;background:none;border:none}
+.ham span{display:block;width:20px;height:1.5px;background:var(--warm);border-radius:1px}
+
+/* ═══════════════════════ HERO ═══════════════════════════ */
+#hero{
+  min-height:100svh;padding:6rem 1.25rem 4rem;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+  background:var(--ink2);
+}
+.hero-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-geo svg{position:absolute;width:100%;height:100%;opacity:.06}
+.hero-inner{max-width:680px;margin:0 auto;position:relative;z-index:2}
+
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:2rem;
+  animation:fu .6s .1s ease both;
+}
+.hero-kicker::before{content:'';display:block;width:18px;height:1.5px;background:var(--gold2)}
+
+.hero-h{
+  font-family:var(--fd);
+  font-size:clamp(2.6rem,8vw,5rem);
+  font-weight:900;line-height:.95;
+  color:#fff;margin-bottom:1.5rem;
+  animation:fu .7s .2s ease both;
+}
+.hero-h .stroke{
+  -webkit-text-stroke:1.5px rgba(255,255,255,.5);
+  color:transparent;
+}
+.hero-p{
+  font-size:clamp(.95rem,2.2vw,1.1rem);
+  color:rgba(255,255,255,.6);line-height:1.8;
+  max-width:540px;margin-bottom:3rem;
+  animation:fu .7s .3s ease both;
+}
+
+/* Program jump cards */
+.hero-programs{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;
+  animation:fu .7s .45s ease both;
+}
+@media(max-width:560px){.hero-programs{grid-template-columns:1fr}}
+.hp-card{
+  border-radius:12px;padding:1.25rem;border:1.5px solid;
+  text-decoration:none;display:block;
+  transition:transform .2s,box-shadow .2s;
+}
+.hp-card:hover{transform:translateY(-3px)}
+.hp-1{border-color:rgba(168,40,40,.5);background:rgba(123,26,26,.2)}
+.hp-1:hover{box-shadow:0 10px 32px rgba(123,26,26,.3)}
+.hp-2{border-color:rgba(14,107,84,.5);background:rgba(14,107,84,.18)}
+.hp-2:hover{box-shadow:0 10px 32px rgba(14,107,84,.25)}
+.hp-3{border-color:rgba(201,150,42,.4);background:rgba(122,92,24,.18)}
+.hp-3:hover{box-shadow:0 10px 32px rgba(201,150,42,.2)}
+.hp-ico{font-size:1.5rem;margin-bottom:.625rem}
+.hp-name{font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.hp-range{font-size:.72rem;color:rgba(255,255,255,.45)}
+.hp-arrow{font-size:.82rem;color:rgba(255,255,255,.3);display:block;margin-top:.5rem}
+
+/* ═══════════════════════ PROGRAM CARDS ═══════════════════ */
+.prog-section{padding:5rem 1.25rem}
+.prog-inner{max-width:1060px;margin:0 auto}
+
+/* Header strip */
+.prog-header{
+  display:flex;align-items:flex-start;gap:1.25rem;
+  margin-bottom:3rem;
+  padding-bottom:2rem;
+  border-bottom:2px solid;
+}
+.prog-num{
+  font-family:var(--fd);font-size:5rem;font-weight:900;
+  line-height:.8;flex-shrink:0;opacity:.12;
+}
+.prog-head-text{}
+.prog-tag{
+  font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  margin-bottom:.625rem;display:flex;align-items:center;gap:.5rem;
+}
+.prog-tag::before{content:'';display:block;width:16px;height:2px;border-radius:1px}
+.prog-title{
+  font-family:var(--fd);
+  font-size:clamp(1.8rem,4.5vw,3rem);
+  font-weight:900;line-height:1;margin-bottom:.625rem;
+}
+.prog-subtitle{font-size:.95rem;color:var(--warm);line-height:1.7;max-width:580px}
+
+/* Two-col layout */
+.prog-body{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+@media(max-width:720px){.prog-body{grid-template-columns:1fr}}
+
+/* Left: story */
+.prog-story p{font-size:.92rem;color:var(--warm);line-height:1.85;margin-bottom:1rem}
+.prog-story p:last-child{margin-bottom:0}
+
+/* Breakdown list */
+.breakdown{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:.5rem}
+.breakdown li{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.625rem .875rem;border-radius:8px;font-size:.85rem;
+}
+.bl-label{color:var(--ink)}
+.bl-val{font-weight:700;white-space:nowrap;margin-left:1rem}
+
+/* Right: action card */
+.action-card{
+  border-radius:16px;padding:1.75rem;
+  border:2px solid;position:sticky;top:80px;
+}
+.ac-total-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.ac-total{font-family:var(--fd);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;line-height:1;margin-bottom:.25rem}
+.ac-horizon{font-size:.8rem;margin-bottom:1.25rem}
+
+/* Progress */
+.ac-prog-track{height:8px;border-radius:100px;overflow:hidden;margin-bottom:.625rem}
+.ac-prog-fill{height:100%;border-radius:100px;width:0%;transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+.ac-prog-meta{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:1.5rem}
+
+/* Donation pills */
+.pill-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.625rem}
+.pills{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem}
+.pill{
+  padding:.6rem .4rem;border-radius:8px;border:1.5px solid;
+  font-family:var(--fb);font-size:.78rem;font-weight:600;
+  cursor:pointer;text-align:center;transition:all .18s;background:transparent;
+  display:flex;flex-direction:column;gap:2px;
+}
+.pill small{font-size:.65rem;font-weight:400;opacity:.6}
+.cfield{
+  display:flex;align-items:center;gap:.5rem;
+  border:1.5px solid;border-radius:8px;
+  padding:.65rem .875rem;margin-bottom:1rem;transition:border-color .2s;
+}
+.cfield:focus-within{outline:2px solid;outline-offset:2px}
+.cfield span{font-size:.88rem;font-weight:600;opacity:.5}
+.cfield input{flex:1;border:none;background:transparent;outline:none;font-family:var(--fb);font-size:.95rem;font-weight:600;color:var(--ink)}
+.cfield input::placeholder{opacity:.35}
+
+.ac-cta{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;padding:1rem;border-radius:10px;border:none;
+  font-family:var(--fb);font-size:.95rem;font-weight:700;
+  cursor:pointer;transition:all .2s;text-decoration:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+.ac-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.ac-or{text-align:center;font-size:.72rem;margin:.875rem 0;color:var(--warm3)}
+.ac-wa{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;padding:.8rem;border-radius:10px;border:1.5px solid;
+  font-family:var(--fb);font-size:.82rem;font-weight:600;
+  cursor:pointer;text-decoration:none;transition:all .2s;background:transparent;
+}
+.ac-wa svg{width:17px;height:17px;flex-shrink:0}
+
+/* Perks list */
+.perks{list-style:none;margin-top:1.25rem;display:flex;flex-direction:column;gap:.5rem}
+.perks li{display:flex;gap:.625rem;font-size:.8rem;color:var(--warm);line-height:1.55}
+.perks li::before{content:'✓';font-weight:700;flex-shrink:0}
+
+/* ── PROGRAM 1: STUDIO (red) ── */
+#studio .prog-header{border-color:var(--redM)}
+#studio .prog-num{color:var(--red)}
+#studio .prog-tag{color:var(--red)}
+#studio .prog-tag::before{background:var(--red)}
+#studio .prog-title{color:var(--red)}
+.action-card.red{border-color:var(--redM);background:var(--redL)}
+.red .ac-total-label{color:var(--red)}
+.red .ac-total{color:var(--red)}
+.red .ac-horizon{color:var(--red2)}
+.red .ac-prog-track{background:var(--redM)}
+.red .ac-prog-fill{background:linear-gradient(90deg,var(--red),var(--red2))}
+.red .ac-prog-meta{color:var(--red2)}
+.red .pill-label{color:var(--red)}
+.red .pill{border-color:var(--redM);color:var(--red)}
+.red .pill:hover,.red .pill.on{border-color:var(--red);background:var(--red);color:#fff}
+.red .pill:hover small,.red .pill.on small{opacity:.8}
+.red .cfield{border-color:var(--redM)}
+.red .cfield:focus-within{border-color:var(--red);outline-color:rgba(123,26,26,.3)}
+.red .ac-cta{background:var(--red);color:#fff}
+.red .ac-cta:hover{background:var(--red2)}
+.red .ac-wa{border-color:var(--redM);color:var(--red)}
+.red .ac-wa:hover{background:var(--redM)}
+.red .perks li::before{color:var(--red)}
+.breakdown-red li{background:var(--redL)}
+.breakdown-red .bl-val{color:var(--red)}
+
+/* ── PROGRAM 2: GENSA CLASS (teal) ── */
+#class{background:var(--white)}
+#class .prog-header{border-color:var(--tealM)}
+#class .prog-num{color:var(--teal)}
+#class .prog-tag{color:var(--teal)}
+#class .prog-tag::before{background:var(--teal)}
+#class .prog-title{color:var(--teal)}
+.action-card.teal{border-color:var(--tealM);background:var(--tealL)}
+.teal .ac-total-label{color:var(--teal)}
+.teal .ac-total{color:var(--teal)}
+.teal .ac-horizon{color:var(--teal2)}
+.teal .ac-prog-track{background:var(--tealM)}
+.teal .ac-prog-fill{background:linear-gradient(90deg,var(--teal),var(--teal2))}
+.teal .ac-prog-meta{color:var(--teal2)}
+.teal .pill-label{color:var(--teal)}
+.teal .pill{border-color:var(--tealM);color:var(--teal)}
+.teal .pill:hover,.teal .pill.on{border-color:var(--teal);background:var(--teal);color:#fff}
+.teal .cfield{border-color:var(--tealM)}
+.teal .cfield:focus-within{border-color:var(--teal);outline-color:rgba(14,107,84,.3)}
+.teal .ac-cta{background:var(--teal);color:#fff}
+.teal .ac-cta:hover{background:var(--teal2)}
+.teal .ac-wa{border-color:var(--tealM);color:var(--teal)}
+.teal .ac-wa:hover{background:var(--tealL)}
+.teal .perks li::before{color:var(--teal)}
+.breakdown-teal li{background:var(--tealL)}
+.breakdown-teal .bl-val{color:var(--teal)}
+
+/* ── PROGRAM 3: RUMAH LITERASI (gold) ── */
+#rumah .prog-header{border-color:var(--goldM)}
+#rumah .prog-num{color:var(--gold2)}
+#rumah .prog-tag{color:var(--gold)}
+#rumah .prog-tag::before{background:var(--gold2)}
+#rumah .prog-title{color:var(--gold)}
+.action-card.gold{border-color:var(--goldM);background:var(--goldL)}
+.gold .ac-total-label{color:var(--gold)}
+.gold .ac-total{color:var(--gold)}
+.gold .ac-horizon{color:var(--gold2)}
+.gold .ac-prog-track{background:var(--goldM)}
+.gold .ac-prog-fill{background:linear-gradient(90deg,var(--gold2),#E8B84A)}
+.gold .ac-prog-meta{color:var(--gold)}
+.gold .pill-label{color:var(--gold)}
+.gold .pill{border-color:var(--goldM);color:var(--gold)}
+.gold .pill:hover,.gold .pill.on{border-color:var(--gold2);background:var(--gold2);color:#fff}
+.gold .cfield{border-color:var(--goldM)}
+.gold .cfield:focus-within{border-color:var(--gold2);outline-color:rgba(201,150,42,.3)}
+.gold .ac-cta{background:var(--gold2);color:#fff}
+.gold .ac-cta:hover{background:#B8841A}
+.gold .ac-wa{border-color:var(--goldM);color:var(--gold)}
+.gold .ac-wa:hover{background:var(--goldL)}
+.gold .perks li::before{color:var(--gold2)}
+.breakdown-gold li{background:var(--goldL)}
+.breakdown-gold .bl-val{color:var(--gold)}
+
+/* ═══════════════════════ DIVIDER ══════════════════════════ */
+.prog-divider{
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--cream3),transparent);
+  margin:0 1.25rem;
+}
+
+/* ═══════════════════════ BANK INFO ════════════════════════ */
+.bank-strip{
+  background:var(--ink2);padding:3.5rem 1.25rem;text-align:center;
+}
+.bank-strip-inner{max-width:640px;margin:0 auto}
+.bank-h{font-family:var(--fd);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;color:#fff;margin-bottom:.5rem}
+.bank-sub{font-size:.88rem;color:rgba(255,255,255,.5);margin-bottom:2rem;line-height:1.7}
+.bank-box{
+  display:inline-block;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(201,150,42,.3);
+  border-radius:14px;padding:1.5rem 2.5rem;
+  margin-bottom:1.5rem;
+}
+.bank-lbl{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem}
+.bank-num{font-family:var(--fd);font-size:2rem;font-weight:700;color:#fff;letter-spacing:.12em}
+.bank-an{font-size:.8rem;color:rgba(255,255,255,.45);margin-top:.25rem}
+.bank-note{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.7;max-width:480px;margin:0 auto}
+
+/* ═══════════════════════ FOOTER ════════════════════════════ */
+footer{background:var(--ink);padding:2.5rem 1.25rem;text-align:center}
+.fl{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--gold2);margin-bottom:.3rem}
+.ft{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem}
+.fd2{width:48px;height:1px;background:rgba(255,255,255,.1);margin:.875rem auto}
+.fl2{font-size:.72rem;color:rgba(255,255,255,.3);line-height:1.8}
+.fl2 a{color:var(--gold2);text-decoration:none}
+
+/* ═══════════════════════ REVEAL ════════════════════════════ */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ═══════════════════════ KEYFRAMES ═════════════════════════ */
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ═══════════════════════ RESPONSIVE ════════════════════════ */
+@media(max-width:720px){
+  .nav-pills{display:none}
+  .ham{display:flex}
+  .prog-header{flex-direction:column;gap:.75rem}
+  .prog-num{font-size:3.5rem}
+  .action-card{position:static}
+}
+@media(max-width:400px){
+  .pills{grid-template-columns:1fr 1fr}
+  .hero-programs{gap:.5rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#hero" class="nb"><span>☽✦</span> GenSa</a>
+  <div class="nav-pills">
+    <a href="#studio" class="np np-1">📹 Studio Dakwah</a>
+    <a href="#class"  class="np np-2">🎓 GenSa Class</a>
+    <a href="#rumah"  class="np np-3">🏛️ Rumah Literasi</a>
+  </div>
+  <button class="ham" aria-label="Menu" onclick="this.closest('nav').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-geo">
+    <svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="g" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="rgba(255,255,255,1)" stroke-width=".4"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#g)"/>
+      <circle cx="200" cy="350" r="250" fill="rgba(123,26,26,.3)"/>
+      <circle cx="800" cy="200" r="180" fill="rgba(14,107,84,.2)"/>
+      <circle cx="600" cy="600" r="200" fill="rgba(201,150,42,.12)"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-kicker">Yayasan Saladin Peradaban Berilmu · 2025</div>
+
+    <h1 class="hero-h">
+      Tiga<br>Program.<br><span class="stroke">Satu Misi.</span>
+    </h1>
+
+    <p class="hero-p">
+      Studio untuk konten dakwah yang menjangkau jutaan. Kelas yang membentuk karakter generasi. Rumah yang menjadi pusat peradaban Islam. Bantu kami mewujudkan ketiganya — mulai dari langkah yang paling kecil.
+    </p>
+
+    <div class="hero-programs">
+      <a href="#studio" class="hp-card hp-1">
+        <div class="hp-ico">📹</div>
+        <div class="hp-name">Studio Dakwah</div>
+        <div class="hp-range">Target Rp 75–150 jt · 90 hari</div>
+        <span class="hp-arrow">↓ Lihat program</span>
+      </a>
+      <a href="#class" class="hp-card hp-2">
+        <div class="hp-ico">🎓</div>
+        <div class="hp-name">GenSa Class</div>
+        <div class="hp-range">Target Rp 50–100 jt per batch</div>
+        <span class="hp-arrow">↓ Lihat program</span>
+      </a>
+      <a href="#rumah" class="hp-card hp-3">
+        <div class="hp-ico">🏛️</div>
+        <div class="hp-name">Rumah Literasi</div>
+        <div class="hp-range">Target Rp 4 M · 3–5 tahun</div>
+        <span class="hp-arrow">↓ Lihat program</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PROGRAM 1 — STUDIO DAKWAH
+═══════════════════════════════════════════════════════════════════════ -->
+<section id="studio" class="prog-section">
+  <div class="prog-inner">
+
+    <div class="prog-header rv">
+      <div class="prog-num">01</div>
+      <div class="prog-head-text">
+        <div class="prog-tag">Sprint 90 Hari · Satu Kamera, Jutaan Penonton</div>
+        <h2 class="prog-title">Studio Dakwah<br>GenSa TV</h2>
+        <p class="prog-subtitle">GenSa TV sudah memproduksi konten sejarah Islam yang menginspirasi jutaan orang — tapi masih dengan peralatan yang terbatas. Bantu kami membangun studio dakwah yang layak, agar konten berkualitas bisa diproduksi setiap hari.</p>
+      </div>
+    </div>
+
+    <div class="prog-body">
+      <!-- Story -->
+      <div class="prog-story">
+        <div class="rv">
+          <p>Setiap video yang tayang di GenSa TV dibuat dengan segala keterbatasan — pencahayaan seadanya, kamera yang dipinjam, dan ruang yang bukan untuk rekaman. Tapi penonton terus bertambah karena kontennya menyentuh: sejarah Islam yang disampaikan dengan cara yang jujur, kritis, dan relevan.</p>
+          <p>Studio Dakwah adalah fase berikutnya. Dengan peralatan yang proper, GenSa bisa melipatgandakan produksi — dari satu video seminggu menjadi konten harian yang menemani jutaan orang belajar sejarah Islam.</p>
+        </div>
+
+        <ul class="breakdown breakdown-red rv d1">
+          <li><span class="bl-label">Kamera & lensa utama</span><span class="bl-val">Rp 15–25 jt</span></li>
+          <li><span class="bl-label">Lighting rig profesional</span><span class="bl-val">Rp 8–15 jt</span></li>
+          <li><span class="bl-label">Mikrofon & audio interface</span><span class="bl-val">Rp 5–10 jt</span></li>
+          <li><span class="bl-label">Workstation editing</span><span class="bl-val">Rp 20–35 jt</span></li>
+          <li><span class="bl-label">Backdrop & set dressing</span><span class="bl-val">Rp 5–12 jt</span></li>
+          <li><span class="bl-label">Aksesoris & cadangan</span><span class="bl-val">Rp 7–15 jt</span></li>
+          <li><span class="bl-label">Produksi 90 hari pertama</span><span class="bl-val">Rp 15–38 jt</span></li>
+        </ul>
+
+        <div class="rv d2" style="margin-top:1.75rem;padding:1.25rem;border-radius:12px;background:var(--redL);border:1.5px solid var(--redM)">
+          <p style="font-size:.85rem;color:var(--red);font-weight:600;margin-bottom:.4rem">Kenapa 90 hari?</p>
+          <p style="font-size:.83rem;color:var(--warm)">Ini sprint, bukan maraton. Target: studio siap pakai dalam 90 hari, episode pertama tayang di hari ke-91. Setelah itu operasional berjalan dari pendapatan konten dan sponsorship — bukan terus bergantung donasi.</p>
+        </div>
+      </div>
+
+      <!-- Action Card -->
+      <div class="action-card red rv d1">
+        <div class="ac-total-label">Target pendanaan</div>
+        <div class="ac-total">Rp 75–150 jt</div>
+        <div class="ac-horizon">Sprint 90 hari · Dimulai segera</div>
+
+        <div class="ac-prog-track"><div class="ac-prog-fill" id="fill1"></div></div>
+        <div class="ac-prog-meta"><span>Mulai mengumpulkan</span><span>Target: Rp 150 jt</span></div>
+
+        <div class="pill-label">Donasi cepat</div>
+        <div class="pills">
+          <button class="pill" onclick="pickPill(this,'studio',200000)">Rp 200rb<small>1 hari produksi</small></button>
+          <button class="pill on" onclick="pickPill(this,'studio',500000)">Rp 500rb<small>1 lampu</small></button>
+          <button class="pill" onclick="pickPill(this,'studio',1000000)">Rp 1 jt<small>1 mikrofon</small></button>
+          <button class="pill" onclick="pickPill(this,'studio',5000000)">Rp 5 jt<small>satu lensa</small></button>
+          <button class="pill" onclick="pickPill(this,'studio',15000000)">Rp 15 jt<small>satu kamera</small></button>
+          <button class="pill" onclick="pickPill(this,'studio',25000000)">Rp 25 jt<small>workstation</small></button>
+        </div>
+
+        <div class="cfield red">
+          <span>Rp</span>
+          <input type="text" id="custom-studio" placeholder="Nominal lain" oninput="customInput(this,'studio')">
+        </div>
+
+        <a id="cta-studio" href="https://wa.me/6281944233210?text=Assalamualaikum%2C+saya+ingin+mendukung+Studio+Dakwah+GenSa+TV." class="ac-cta" target="_blank" rel="noopener">
+          📹 Dukung Studio Dakwah
+        </a>
+        <div class="ac-or">atau transfer langsung</div>
+        <a href="#bank" class="ac-wa red">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Lihat rekening BSI
+        </a>
+
+        <ul class="perks">
+          <li>Sertifikat digital "Batu Bata Studio GenSa" untuk setiap donatur</li>
+          <li>Nama di rolling kredit episode perdana</li>
+          <li>Update mingguan progress pengadaan peralatan</li>
+          <li>Akses nobar premiere episode perdana (online)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="prog-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PROGRAM 2 — GENSA CLASS
+═══════════════════════════════════════════════════════════════════════ -->
+<section id="class" class="prog-section">
+  <div class="prog-inner">
+
+    <div class="prog-header rv">
+      <div class="prog-num">02</div>
+      <div class="prog-head-text">
+        <div class="prog-tag">Beasiswa Kelas · Ilmu yang Bisa Dirasakan Langsung</div>
+        <h2 class="prog-title">GenSa<br>Class</h2>
+        <p class="prog-subtitle">GenSa Class adalah program kelas intensif sejarah Islam dan pembentukan karakter. Tidak semua yang ingin hadir bisa membayar tiket. Donasi kamu memungkinkan mereka tetap bisa belajar.</p>
+      </div>
+    </div>
+
+    <div class="prog-body">
+      <!-- Story -->
+      <div class="prog-story">
+        <div class="rv">
+          <p>Setiap batch GenSa Class diikuti 20–40 peserta — mahasiswa, ibu rumah tangga, profesional muda. Mereka datang bukan karena tidak ada tempat lain, tapi karena di sini materi disampaikan dengan jujur, mendalam, dan penuh konteks sejarah yang jarang diajarkan di tempat lain.</p>
+          <p>Tapi tiket kelas adalah penghalang bagi sebagian orang. Program beasiswa GenSa Class memungkinkan siapa saja dengan semangat belajar yang kuat untuk hadir — tanpa harus memikirkan biaya.</p>
+        </div>
+
+        <ul class="breakdown breakdown-teal rv d1">
+          <li><span class="bl-label">Satu tiket kelas (subsidi penuh)</span><span class="bl-val">Rp 250rb</span></li>
+          <li><span class="bl-label">Satu batch penuh (20 orang)</span><span class="bl-val">Rp 5 jt</span></li>
+          <li><span class="bl-label">Satu batch penuh (40 orang)</span><span class="bl-val">Rp 10 jt</span></li>
+          <li><span class="bl-label">Sponsor satu sesi bulanan</span><span class="bl-val">Rp 15–25 jt</span></li>
+          <li><span class="bl-label">Sponsor program 1 kuartal</span><span class="bl-val">Rp 40–75 jt</span></li>
+        </ul>
+
+        <div class="rv d2" style="margin-top:1.75rem;padding:1.25rem;border-radius:12px;background:var(--tealL);border:1.5px solid var(--tealM)">
+          <p style="font-size:.85rem;color:var(--teal);font-weight:600;margin-bottom:.4rem">Model berkelanjutan</p>
+          <p style="font-size:.83rem;color:var(--warm)">2–3 batch per bulan, masing-masing 20–40 peserta. Peserta berbayar mensubsidi peserta beasiswa — sehingga satu donasi kamu bisa menjangkau lebih dari satu orang. Target awal: 30% kursi tiap batch adalah kursi beasiswa.</p>
+        </div>
+
+        <div class="rv d3" style="margin-top:1rem;padding:1.25rem;border-radius:12px;background:var(--cream);border:1.5px solid var(--cream2)">
+          <p style="font-size:.82rem;color:var(--warm);font-weight:600;margin-bottom:.5rem">Kurikulum yang sudah berjalan:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.25rem">
+            <span style="font-size:.75rem;padding:.3rem .65rem;border-radius:100px;background:var(--tealL);color:var(--teal);font-weight:500">The Fitrah Code</span>
+            <span style="font-size:.75rem;padding:.3rem .65rem;border-radius:100px;background:var(--tealL);color:var(--teal);font-weight:500">The Legacy Code</span>
+            <span style="font-size:.75rem;padding:.3rem .65rem;border-radius:100px;background:var(--tealL);color:var(--teal);font-weight:500">Sejarah Al-Aqsa</span>
+            <span style="font-size:.75rem;padding:.3rem .65rem;border-radius:100px;background:var(--cream2);color:var(--warm);font-weight:500">+ kelas baru segera</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Card -->
+      <div class="action-card teal rv d1">
+        <div class="ac-total-label">Target per batch</div>
+        <div class="ac-total">Rp 50–100 jt</div>
+        <div class="ac-horizon">Berkelanjutan · 2–3 batch per bulan</div>
+
+        <div class="ac-prog-track"><div class="ac-prog-fill" id="fill2"></div></div>
+        <div class="ac-prog-meta"><span>Beasiswa aktif dibuka</span><span>Target: 30% kursi subsidi</span></div>
+
+        <div class="pill-label">Pilih kontribusi</div>
+        <div class="pills">
+          <button class="pill" onclick="pickPill(this,'class',100000)">Rp 100rb<small>subsidi 40%</small></button>
+          <button class="pill on" onclick="pickPill(this,'class',250000)">Rp 250rb<small>1 tiket penuh</small></button>
+          <button class="pill" onclick="pickPill(this,'class',500000)">Rp 500rb<small>2 tiket</small></button>
+          <button class="pill" onclick="pickPill(this,'class',2500000)">Rp 2,5 jt<small>10 peserta</small></button>
+          <button class="pill" onclick="pickPill(this,'class',5000000)">Rp 5 jt<small>1 batch kecil</small></button>
+          <button class="pill" onclick="pickPill(this,'class',10000000)">Rp 10 jt<small>1 batch penuh</small></button>
+        </div>
+
+        <div class="cfield teal">
+          <span>Rp</span>
+          <input type="text" id="custom-class" placeholder="Nominal lain" oninput="customInput(this,'class')">
+        </div>
+
+        <a id="cta-class" href="https://wa.me/6281944233210?text=Assalamualaikum%2C+saya+ingin+mendukung+beasiswa+GenSa+Class." class="ac-cta" target="_blank" rel="noopener">
+          🎓 Sponsori Peserta GenSa Class
+        </a>
+        <div class="ac-or">atau transfer langsung</div>
+        <a href="#bank" class="ac-wa teal">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Lihat rekening BSI
+        </a>
+
+        <ul class="perks">
+          <li>Sertifikat "Sponsor Ilmu" per donasi tiket</li>
+          <li>Update jumlah peserta yang kamu sponsori</li>
+          <li>Undangan hadir sebagai tamu kehormatan di satu batch</li>
+          <li>Nama di materi kelas sebagai sponsor beasiswa</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="prog-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PROGRAM 3 — RUMAH LITERASI
+═══════════════════════════════════════════════════════════════════════ -->
+<section id="rumah" class="prog-section">
+  <div class="prog-inner">
+
+    <div class="prog-header rv">
+      <div class="prog-num">03</div>
+      <div class="prog-head-text">
+        <div class="prog-tag">Wakaf Jangka Panjang · Bangun Sekali, Manfaat Selamanya</div>
+        <h2 class="prog-title">Rumah Literasi<br>GenSa</h2>
+        <p class="prog-subtitle">Satu bangunan fisik di Jatibening, Bekasi — dekat Stasiun LRT Cikunir 1 — yang menjadi pusat kafe buku, perpustakaan, kelas, dan studio dakwah. Dibangun dari wakaf. Beroperasi mandiri dari pendapatan kafe dan kelas.</p>
+      </div>
+    </div>
+
+    <div class="prog-body">
+      <!-- Story -->
+      <div class="prog-story">
+        <div class="rv">
+          <p>Ini bukan proyek jangka pendek. Rumah Literasi GenSa adalah ikhtiar 3–5 tahun untuk membangun tempat yang belum ada di kawasan Bekasi Barat: ruang belajar yang hangat, studio dakwah yang proper, perpustakaan dengan koleksi wakaf buku, dan kafe yang menanggung biaya operasionalnya sendiri.</p>
+          <p>Setiap rupiah wakaf memiliki "rumah" yang jelas — bukan masuk ke kas umum, tapi tercatat sebagai kontribusi terhadap lahan, dinding, atau peralatan yang nama wakif-nya terukir permanen.</p>
+        </div>
+
+        <ul class="breakdown breakdown-gold rv d1">
+          <li><span class="bl-label">Wakaf Generasi (buku & item)</span><span class="bl-val">Rp 150rb – 1 jt</span></li>
+          <li><span class="bl-label">Wakaf Ibnu Khaldun (fasilitas)</span><span class="bl-val">Rp 1 jt – 100 jt</span></li>
+          <li><span class="bl-label">Wakaf Shalahuddin (ruangan)</span><span class="bl-val">Rp 100 jt – 500 jt</span></li>
+          <li><span class="bl-label">Wakaf Al-Fatih (gedung/lantai)</span><span class="bl-val">Rp 500 jt+</span></li>
+          <li><span class="bl-label">Cicilan Jariyah bulanan</span><span class="bl-val">mulai Rp 500rb/bln</span></li>
+        </ul>
+
+        <div class="rv d2" style="margin-top:1.75rem;display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+          <div style="padding:1rem;border-radius:10px;background:var(--goldL);border:1.5px solid var(--goldM);text-align:center">
+            <div style="font-family:var(--fd);font-size:1.6rem;font-weight:900;color:var(--gold2);line-height:1">Rp 4 M</div>
+            <div style="font-size:.75rem;color:var(--warm);margin-top:4px">total target wakaf</div>
+          </div>
+          <div style="padding:1rem;border-radius:10px;background:var(--goldL);border:1.5px solid var(--goldM);text-align:center">
+            <div style="font-family:var(--fd);font-size:1.6rem;font-weight:900;color:var(--teal);line-height:1">±400 m²</div>
+            <div style="font-size:.75rem;color:var(--warm);margin-top:4px">lahan di Jatibening</div>
+          </div>
+          <div style="padding:1rem;border-radius:10px;background:var(--goldL);border:1.5px solid var(--goldM);text-align:center">
+            <div style="font-family:var(--fd);font-size:1.6rem;font-weight:900;color:var(--red);line-height:1">3–5 thn</div>
+            <div style="font-size:.75rem;color:var(--warm);margin-top:4px">roadmap pembangunan</div>
+          </div>
+          <div style="padding:1rem;border-radius:10px;background:var(--goldL);border:1.5px solid var(--goldM);text-align:center">
+            <div style="font-family:var(--fd);font-size:1.6rem;font-weight:900;color:var(--gold2);line-height:1">28 mnt</div>
+            <div style="font-size:.75rem;color:var(--warm);margin-top:4px">dari Sudirman via LRT</div>
+          </div>
+        </div>
+
+        <div class="rv d3" style="margin-top:1rem;padding:1.25rem;border-radius:12px;background:var(--goldL);border:1.5px solid var(--goldM)">
+          <p style="font-size:.82rem;font-weight:600;color:var(--gold);margin-bottom:.35rem">Mengapa wakaf, bukan donasi biasa?</p>
+          <p style="font-size:.82rem;color:var(--warm);line-height:1.7">Karena wakaf tidak habis dipakai. Lahan yang diwakafkan tetap menjadi lahan. Bangunan yang diwakafkan tetap menjadi bangunan. Dan selama ada orang yang belajar, bertanya, atau membaca di sana — pahala mengalir terus kepada setiap wakif, bahkan setelah mereka tidak ada.</p>
+        </div>
+      </div>
+
+      <!-- Action Card -->
+      <div class="action-card gold rv d1">
+        <div class="ac-total-label">Target wakaf total</div>
+        <div class="ac-total">Rp 4 Miliar</div>
+        <div class="ac-horizon">Roadmap 3–5 tahun · Fase 1 aktif sekarang</div>
+
+        <div class="ac-prog-track"><div class="ac-prog-fill" id="fill3"></div></div>
+        <div class="ac-prog-meta"><span>Fase 1: fondasi kepercayaan</span><span>Target fase 1: Rp 700 jt</span></div>
+
+        <div class="pill-label">Mulai dari sini</div>
+        <div class="pills">
+          <button class="pill" onclick="pickPill(this,'rumah',150000)">Rp 150rb<small>1 buku wakaf</small></button>
+          <button class="pill on" onclick="pickPill(this,'rumah',500000)">Rp 500rb<small>cicilan jariyah</small></button>
+          <button class="pill" onclick="pickPill(this,'rumah',1000000)">Rp 1 jt<small>1 kursi kelas</small></button>
+          <button class="pill" onclick="pickPill(this,'rumah',5000000)">Rp 5 jt<small>1 rak buku</small></button>
+          <button class="pill" onclick="pickPill(this,'rumah',10000000)">Rp 10 jt<small>1 meja baca</small></button>
+          <button class="pill" onclick="pickPill(this,'rumah',100000000)">Rp 100 jt<small>1 ruangan</small></button>
+        </div>
+
+        <div class="cfield gold">
+          <span>Rp</span>
+          <input type="text" id="custom-rumah" placeholder="Nominal lain" oninput="customInput(this,'rumah')">
+        </div>
+
+        <a id="cta-rumah" href="https://wa.me/6281944233210?text=Assalamualaikum%2C+saya+ingin+berwakaf+untuk+Rumah+Literasi+GenSa." class="ac-cta" target="_blank" rel="noopener">
+          🏛️ Wakaf Rumah Literasi GenSa
+        </a>
+        <div class="ac-or">atau transfer langsung</div>
+        <a href="#bank" class="ac-wa gold">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Lihat rekening BSI
+        </a>
+
+        <ul class="perks">
+          <li>Sertifikat wakaf digital (fisik untuk ≥ Rp 1 jt)</li>
+          <li>Nama terukir permanen sesuai tier wakaf</li>
+          <li>Laporan triwulanan progress pembangunan</li>
+          <li>Undangan grand opening sebagai founding member</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ BANK STRIP ══════════════════════════════════════════════════════ -->
+<div class="bank-strip" id="bank">
+  <div class="bank-strip-inner">
+    <h2 class="bank-h">Satu Rekening<br>untuk Ketiga Program</h2>
+    <p class="bank-sub">Transfer ke rekening wakaf resmi Yayasan Saladin Peradaban Berilmu, lalu konfirmasi via WhatsApp dengan menyebutkan program yang kamu dukung.</p>
+    <div class="bank-box">
+      <div class="bank-lbl">Bank Syariah Indonesia (BSI) · Rekening Wakaf</div>
+      <div class="bank-num">7332  6101  33</div>
+      <div class="bank-an">a.n. Yayasan Saladin Peradaban Berilmu</div>
+    </div>
+    <p class="bank-note">
+      Setelah transfer, konfirmasi ke WhatsApp <strong style="color:rgba(255,255,255,.7)">0819-4423-3210</strong><br>
+      Format: Nama · Nominal · Program (Studio / GenSa Class / Rumah Literasi) · Nama untuk sertifikat
+    </p>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="fl">☽✦ GenSaladin</div>
+  <div class="ft">Learn History · Repeat Victory</div>
+  <div class="fd2"></div>
+  <p class="fl2">
+    Yayasan Saladin Peradaban Berilmu · NO. AHU-0024132.AH.01.04.TAHUN 2025 · NIB: 2310250075237<br>
+    <a href="https://gensaladin.id" target="_blank">gensaladin.id</a> · Instagram <a href="https://instagram.com/gen.saladin" target="_blank">@gen.saladin</a> · WA <a href="tel:+6281944233210">0819-4423-3210</a>
+  </p>
+</footer>
+
+<script>
+/* ── Sticky nav ─────────────────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('on', window.scrollY > 56);
+}, { passive: true });
+
+/* ── Reveal on scroll ───────────────────────────────────────── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* ── Progress bars ──────────────────────────────────────────── */
+const bars = [
+  { id: 'fill1', pct: '2%'  },
+  { id: 'fill2', pct: '5%'  },
+  { id: 'fill3', pct: '1%'  },
+];
+bars.forEach(b => {
+  const el = document.getElementById(b.id);
+  const fillIO = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) {
+      setTimeout(() => { el.style.width = b.pct; }, 300);
+      fillIO.disconnect();
+    }
+  }, { threshold: 0.5 });
+  fillIO.observe(el);
+});
+
+/* ── Pill picker ─────────────────────────────────────────────── */
+function pickPill(btn, prog, amount) {
+  btn.closest('.pills').querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('custom-' + prog).value = '';
+  updateCTA(prog, amount);
+}
+
+function customInput(input, prog) {
+  input.closest('.action-card').querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
+  const val = parseInt(input.value.replace(/\D/g, '')) || 0;
+  if (val > 0) updateCTA(prog, val);
+}
+
+const progLabel = { studio: 'Studio+Dakwah+GenSa+TV', class: 'beasiswa+GenSa+Class', rumah: 'Rumah+Literasi+GenSa' };
+const progEmoji = { studio: '📹', class: '🎓', rumah: '🏛️' };
+
+function updateCTA(prog, amount) {
+  const fmt = new Intl.NumberFormat('id-ID').format(amount);
+  const msg = `Assalamualaikum%2C+saya+ingin+mendukung+${progLabel[prog]}+dengan+nominal+Rp+${fmt.replace(/\./g,'.')+'.'}`;
+  const cta = document.getElementById('cta-' + prog);
+  if (cta) cta.href = `https://wa.me/6281944233210?text=${msg}`;
+}
+
+/* init CTAs */
+updateCTA('studio', 500000);
+updateCTA('class',  250000);
+updateCTA('rumah',  500000);
+
+/* ── Smooth scroll ───────────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>

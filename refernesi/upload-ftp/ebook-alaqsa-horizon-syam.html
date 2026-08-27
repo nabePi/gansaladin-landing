@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al-Aqsa dan Horizon Syam — Tim GenSa</title>
+<!-- Fonts: system stacks (no external font requests, so the file stays fully self-contained and works offline) -->
+<style>
+:root{
+  --maroon:#7A1524;
+  --maroon-deep:#4a0d16;
+  --gold:#A8842B;
+  --gold-light:#cfae5c;
+  --ink:#231F20;
+  --grey:#666666;
+  --quote:#8a1a1a;
+  --cream:#FBF6EC;
+  --cream-deep:#F3EAD6;
+  --paper:#FFFEFB;
+  --border:#e4d7ba;
+  --shadow: 0 8px 30px rgba(74,13,22,0.12);
+  --serif: Georgia, 'Noto Serif', 'Times New Roman', serif;
+  --display: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --arabic: 'Traditional Arabic', 'Scheherazade New', 'Amiri', 'Arial', serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family: var(--serif);
+  color: var(--ink);
+  background: var(--cream);
+  line-height:1.75;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============ SCROLL PROGRESS ============ */
+#progress{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background: linear-gradient(90deg, var(--maroon), var(--gold));
+  z-index:9999; transition: width .1s linear;
+}
+
+/* ============ TOP BAR ============ */
+#topbar{
+  position:fixed; top:0; left:0; right:0; height:56px;
+  background: rgba(251,246,236,0.92); backdrop-filter: blur(8px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 14px; z-index:900;
+}
+#topbar .brand{
+  font-family:var(--display); font-weight:900; color:var(--maroon);
+  letter-spacing:.5px; font-size:15px; display:flex; align-items:center; gap:8px;
+  cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#topbar .brand small{font-weight:400; color:var(--grey); font-size:11px;}
+#menuBtn{
+  width:40px; height:40px; border-radius:8px; border:1px solid var(--border);
+  background:var(--paper); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; flex-shrink:0;
+}
+#menuBtn span, #menuBtn::before, #menuBtn::after{
+  content:''; display:block; width:18px; height:2px; background:var(--maroon);
+  position:relative;
+}
+#menuBtn{flex-direction:column; gap:4px;}
+.topbar-tools{display:flex; align-items:center; gap:8px;}
+.fontctl{display:flex; align-items:center; gap:2px; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--paper);}
+.fontctl button{
+  border:none; background:transparent; width:34px; height:34px; cursor:pointer;
+  font-family:var(--display); font-weight:700; color:var(--maroon); font-size:14px;
+}
+.fontctl button:hover{background:var(--cream-deep);}
+.fontctl button:first-child{font-size:11px;}
+
+/* ============ LAYOUT ============ */
+#app{display:flex; padding-top:56px; min-height:100vh;}
+
+/* ============ SIDEBAR / TOC ============ */
+#sidebar{
+  width:300px; flex-shrink:0; background:var(--paper);
+  border-right:1px solid var(--border);
+  position:fixed; top:56px; bottom:0; left:0; overflow-y:auto;
+  transition: transform .3s ease; z-index:800; padding:22px 0 60px;
+}
+#sidebar .toc-title{
+  font-family:var(--display); font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--gold); font-weight:700; padding:0 22px 12px;
+}
+#sidebar nav a{
+  display:block; padding:9px 22px; color:var(--ink); text-decoration:none;
+  font-size:14.5px; border-left:3px solid transparent; transition: all .15s;
+}
+#sidebar nav a:hover{background:var(--cream-deep);}
+#sidebar nav a.active{
+  border-left-color:var(--maroon); background:var(--cream-deep); color:var(--maroon); font-weight:600;
+}
+#sidebar nav a.sub{padding-left:38px; font-size:13.5px; color:var(--grey);}
+#sidebar nav .divider{height:1px; background:var(--border); margin:14px 22px;}
+#overlay{
+  position:fixed; inset:0; background:rgba(30,10,10,0.4); z-index:700;
+  opacity:0; pointer-events:none; transition:opacity .3s;
+}
+#overlay.show{opacity:1; pointer-events:auto;}
+
+/* ============ MAIN CONTENT ============ */
+#main{flex:1; min-width:0; margin-left:300px; transition: margin .3s ease;}
+.page{max-width:700px; margin:0 auto; padding:0 24px;}
+
+/* ============ COVER ============ */
+#cover{
+  position:relative; min-height:calc(100vh - 56px);
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  text-align:center; color:#fff; overflow:hidden; padding:40px 20px;
+  background: radial-gradient(ellipse at center, #2a0d10 0%, #17070a 70%, #0d0405 100%);
+}
+#cover .bg{
+  position:relative; max-width:min(92vw, 460px); width:100%;
+  margin:0 auto; border-radius:6px; overflow:hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+#cover .bg img{ display:block; width:100%; height:auto; }
+#cover .scrim{ display:none; }
+#cover .content{position:relative; z-index:2; max-width:560px; margin-top:28px;}
+#cover .kicker{
+  font-family:var(--display); letter-spacing:3px; text-transform:uppercase;
+  font-size:12px; color:var(--gold-light); margin-bottom:18px; font-weight:700;
+}
+#cover h1{
+  font-family:var(--display); font-weight:900; font-size:clamp(34px,7vw,54px);
+  line-height:1.08; margin-bottom:20px; text-shadow:0 2px 20px rgba(0,0,0,.4);
+}
+#cover .subtitle{
+  font-family:var(--serif); font-style:italic; font-size:clamp(16px,3vw,20px);
+  color:var(--gold-light); margin-bottom:26px; line-height:1.5;
+}
+#cover .tagline{
+  font-size:14px; color:#f0e4d0; max-width:380px; margin:0 auto 34px; line-height:1.7;
+}
+#cover .byline{font-family:var(--display); font-size:13px; letter-spacing:1px; color:#e8dcc8;}
+#cover .byline b{color:#fff;}
+#cover .site{font-size:12px; color:var(--gold-light); margin-top:4px;}
+#cover .motto{font-size:12px; color:#cbb98a; margin-top:14px; font-style:italic;}
+#startBtn{
+  margin-top:34px; display:inline-flex; align-items:center; gap:10px;
+  background:var(--gold); color:#2a1a05; font-family:var(--display); font-weight:700;
+  padding:14px 30px; border-radius:40px; text-decoration:none; font-size:14px;
+  letter-spacing:.5px; box-shadow:0 10px 30px rgba(0,0,0,.3); transition:transform .2s;
+}
+#startBtn:hover{transform:translateY(-2px);}
+.arch-divider{
+  width:44px; height:44px; margin:0 auto 20px; opacity:.85;
+}
+
+/* ============ CONTENT TYPOGRAPHY ============ */
+.section{padding:64px 0; border-bottom:1px solid var(--border);}
+.section:last-of-type{border-bottom:none;}
+.kicker-label{
+  font-family:var(--display); font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--gold); font-weight:700; margin-bottom:10px;
+}
+h1.page-title{
+  font-family:var(--display); font-weight:900; color:var(--maroon);
+  font-size:clamp(28px,5vw,42px); line-height:1.15; margin-bottom:8px;
+}
+h2.chapter-sub{
+  font-family:var(--serif); font-style:italic; color:var(--grey);
+  font-size:clamp(15px,2.4vw,18px); margin-bottom:34px; padding-bottom:30px;
+  border-bottom:2px solid var(--gold-light);
+}
+h3.section-head{
+  font-family:var(--display); font-weight:700; color:var(--maroon);
+  font-size:clamp(19px,3vw,23px); margin:38px 0 16px;
+}
+p{margin-bottom:18px; text-align:justify; hyphens:auto;}
+.lede{font-size:1.1em; color:var(--maroon-deep);}
+
+.pull-idea{
+  background: linear-gradient(135deg, var(--cream-deep), #efe2c4);
+  border:1px solid var(--gold-light); border-left:4px solid var(--gold);
+  border-radius:6px; padding:20px 24px; margin:26px 0 34px;
+  font-family:var(--serif); font-style:italic; color:var(--maroon-deep);
+  font-size:1.02em;
+}
+.pull-idea .label{
+  display:block; font-family:var(--display); font-style:normal; font-weight:700;
+  font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold);
+  margin-bottom:8px;
+}
+
+.quote-block{
+  background:#fff8f0; border:1px solid #e8c9c9; border-radius:6px;
+  padding:22px 24px; margin:22px 0; box-shadow:var(--shadow);
+}
+.quote-arabic{
+  font-family:var(--arabic); direction:rtl; text-align:right; color:var(--quote);
+  font-size:1.35em; line-height:2.1; margin-bottom:14px;
+}
+.quote-trans{
+  color:var(--quote); font-style:italic; font-size:1.02em; margin-bottom:0; text-align:justify;
+}
+.quote-cite{
+  display:block; margin-top:10px; font-size:.85em; color:var(--grey); font-style:normal;
+  font-family:var(--display); letter-spacing:.2px;
+}
+.intro-line{color:var(--quote); font-weight:600; margin-bottom:6px;}
+
+.reflect-box{
+  background:var(--maroon); color:#fdf6ea; border-radius:8px;
+  padding:26px 26px; margin:36px 0 8px; position:relative;
+}
+.reflect-box .label{
+  font-family:var(--display); font-weight:700; font-size:10.5px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gold-light); display:block; margin-bottom:10px;
+}
+.reflect-box p{color:#fdf6ea; font-style:italic; text-align:left; margin:0;}
+
+.note-box{
+  background:#fff; border:1px dashed var(--gold); border-radius:6px;
+  padding:16px 20px; margin:24px 0; font-size:.92em; color:var(--grey);
+}
+.note-box b{color:var(--maroon);}
+
+/* ============ LISTS / GLOSSARY ============ */
+.gloss-entry{padding:16px 0; border-bottom:1px solid var(--border);}
+.gloss-term{font-family:var(--display); font-weight:700; color:var(--maroon); font-size:1.05em; margin-bottom:4px;}
+.ref-cat h4{font-family:var(--display); color:var(--maroon); font-size:15px; margin:24px 0 10px; letter-spacing:.3px;}
+.ref-item{font-size:.95em; padding:8px 0 8px 16px; border-left:2px solid var(--gold-light); margin-bottom:6px; color:var(--ink);}
+
+/* ============ TIMELINE ============ */
+.tl{position:relative; margin:30px 0; padding-left:26px; border-left:2px solid var(--gold-light);}
+.tl-item{position:relative; padding-bottom:26px;}
+.tl-item::before{
+  content:''; position:absolute; left:-32px; top:4px; width:12px; height:12px;
+  border-radius:50%; background:var(--maroon); border:2px solid var(--gold);
+}
+.tl-time{font-family:var(--display); font-weight:700; color:var(--maroon); font-size:13px; letter-spacing:.3px;}
+.tl-event{font-weight:700; margin:2px 0 4px;}
+.tl-desc{font-size:.93em; color:var(--grey); text-align:left;}
+
+/* ============ FOUR LAYERS CARDS ============ */
+.layer-grid{display:grid; grid-template-columns:1fr; gap:14px; margin:20px 0 30px;}
+.layer-card{
+  background:#fff; border:1px solid var(--border); border-radius:8px; padding:18px 20px;
+  border-top:3px solid var(--gold);
+}
+.layer-card h4{font-family:var(--display); color:var(--maroon); font-size:15px; margin-bottom:8px;}
+.layer-card p{font-size:.94em; margin-bottom:0; text-align:left;}
+
+/* ============ CHAPTER NAV ============ */
+.chapternav{
+  display:flex; justify-content:space-between; gap:14px; margin-top:50px; padding-top:24px;
+  border-top:1px solid var(--border);
+}
+.chapternav a{
+  flex:1; text-decoration:none; color:var(--ink); border:1px solid var(--border);
+  border-radius:8px; padding:14px 16px; transition:all .15s; background:#fff;
+}
+.chapternav a:hover{border-color:var(--gold); box-shadow:var(--shadow);}
+.chapternav .dir{font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--gold); font-family:var(--display); font-weight:700;}
+.chapternav .ttl{font-family:var(--display); font-weight:700; color:var(--maroon); margin-top:4px; font-size:14px;}
+.chapternav .next{text-align:right;}
+
+/* ============ CHAPTER HERO IMAGE (placeholder ready) ============ */
+.chapter-hero{
+  width:100%; aspect-ratio:5/7; max-height:420px; object-fit:cover; border-radius:10px;
+  margin-bottom:30px; box-shadow:var(--shadow);
+  background:linear-gradient(135deg,var(--maroon-deep),var(--maroon) 60%,var(--gold-light));
+}
+
+/* ============ FOOTER ============ */
+#footer{
+  text-align:center; padding:50px 24px 70px; color:var(--grey); font-size:13px;
+  font-family:var(--display);
+}
+#footer .tag{color:var(--maroon); font-weight:700;}
+
+/* ============ CONTACT TABLE ============ */
+.contact-row{display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); font-size:.95em;}
+.contact-row .k{width:110px; flex-shrink:0; font-weight:700; color:var(--maroon); font-family:var(--display); font-size:.85em; text-transform:uppercase; letter-spacing:.5px;}
+
+/* ============ FONT-SIZE VARIANTS ============ */
+body.fs-sm{font-size:15.5px;}
+body.fs-lg{font-size:19px;}
+
+/* ============ BACK TO TOP ============ */
+#toTop{
+  position:fixed; bottom:24px; right:24px; width:46px; height:46px; border-radius:50%;
+  background:var(--maroon); color:#fff; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.3); opacity:0; pointer-events:none;
+  transition:opacity .25s; z-index:850; font-size:18px;
+}
+#toTop.show{opacity:1; pointer-events:auto;}
+
+/* ============ RESPONSIVE ============ */
+@media (min-width: 901px){
+  #menuBtn{display:none;}
+}
+@media (max-width: 900px){
+  #sidebar{transform:translateX(-100%); width:82%; max-width:320px; box-shadow:0 0 40px rgba(0,0,0,.3);}
+  #sidebar.open{transform:translateX(0);}
+  #main{margin-left:0;}
+  .page{padding:0 18px;}
+  .section{padding:44px 0;}
+  body{font-size:16px;}
+}
+@media (max-width:480px){
+  .quote-arabic{font-size:1.15em;}
+  #cover h1{font-size:30px;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header id="topbar">
+  <button id="menuBtn" aria-label="Buka daftar isi"></button>
+  <div class="brand" onclick="document.getElementById('cover').scrollIntoView({behavior:'smooth'})">
+    AL-AQSA &amp; HORIZON SYAM <small>Tim GenSa</small>
+  </div>
+  <div class="topbar-tools">
+    <div class="fontctl">
+      <button onclick="setFont('sm')" title="Teks kecil">A</button>
+      <button onclick="setFont('md')" title="Teks sedang" style="font-size:15px;">A</button>
+      <button onclick="setFont('lg')" title="Teks besar" style="font-size:17px;">A</button>
+    </div>
+  </div>
+</header>
+
+<div id="overlay" onclick="closeSidebar()"></div>
+
+<div id="app">
+  <aside id="sidebar">
+    <div class="toc-title">Daftar Isi</div>
+    <nav id="tocNav">
+      <a href="#cover">Sampul</a>
+      <a href="#kata-pengantar">Kata Pengantar</a>
+      <a href="#prolog">Prolog</a>
+      <a href="#cara-membaca">Cara Membaca Buku Ini</a>
+      <a href="#timeline">Timeline Lintas Bab</a>
+      <div class="divider"></div>
+      <a href="#bab1">Bab Satu — Al-Aqsa dalam Isra' Mi'raj</a>
+      <a href="#bab2">Bab Dua — Baitul Maqdis sebagai Kiblat Awal</a>
+      <a href="#bab3">Bab Tiga — Horizon Syam</a>
+      <a href="#bab4">Bab Empat — Pasukan Usamah</a>
+      <div class="divider"></div>
+      <a href="#epilog">Epilog</a>
+      <a href="#tentang-gensa">Tentang GenSa</a>
+      <a href="#glosarium">Glosarium</a>
+      <a href="#rujukan">Daftar Rujukan</a>
+    </nav>
+  </aside>
+
+  <main id="main">
+    <!-- ===================== COVER ===================== -->
+    <section id="cover">
+      <div class="bg"><img src="cover.jpg" alt="Al-Aqsa dan Horizon Syam"></div>
+      <div class="content">
+        <a href="#kata-pengantar" id="startBtn">Mulai Membaca &nbsp;&rarr;</a>
+      </div>
+    </section>
+
+    <div class="page">
+
+      <!-- ===================== KATA PENGANTAR ===================== -->
+      <section id="kata-pengantar" class="section">
+        <div class="kicker-label">Bagian Depan</div>
+        <h1 class="page-title">Kata Pengantar</h1>
+        <p class="lede">Al-Aqsa adalah salah satu nama yang paling sering kita ucapkan, namun paling jarang benar-benar kita pahami.</p>
+        <p>Kebanyakan dari kita mengenalnya melalui berita. Melalui foto-foto yang membuat dada sesak, melalui doa yang dipanjatkan setiap kali namanya disebut, melalui simbol yang kita cintai tanpa selalu tahu persis mengapa. Kecintaan itu tulus, dan tidak ada yang keliru darinya. Namun kecintaan yang berdiri sendiri, tanpa ilmu yang menopangnya, mudah goyah begitu ada yang bertanya, memang mengapa Al-Aqsa begitu penting.</p>
+        <p>Buku ini ditulis untuk menjawab pertanyaan itu dengan menelusuri Al-Aqsa sebagaimana ia disebutkan dalam Al-Qur'an, dijelaskan hadits-hadits sahih, dicatat riwayat sirah, dan dituturkan sejarah awal Islam. Dari sumber-sumber itulah kita akan memahami Al-Aqsa sebagai tempat yang diberkahi dan kiblat awal umat Islam, sekaligus menelusuri keterkaitannya dengan horizon Syam dan keputusan-keputusan generasi sahabat setelah wafat Nabi &#65018;.</p>
+        <p>Kami percaya, cinta yang paling kokoh adalah cinta yang berdiri di atas ilmu, bukan yang hanya menyala ketika berita datang. Karena itu, buku ini mengajak kamu belajar dengan disiplin, membedakan apa yang ditegaskan oleh nash, apa yang disampaikan melalui riwayat sejarah, dan apa yang merupakan pembacaan makna. Ketiganya penting, namun tidak boleh dicampur begitu saja seolah memiliki bobot yang sama.</p>
+        <p>Buku ini disusun oleh tim GenSa, dengan semangat yang terus kami bawa: <em>Learn History. Repeat Victory.</em> Kami percaya bahwa belajar sejarah bukan untuk berhenti pada nostalgia, melainkan untuk memahami bagaimana generasi terdahulu menghadapi zamannya, agar kita lebih jernih dalam membaca zaman kita sendiri.</p>
+        <p>Kami berharap, setelah menyelesaikan buku ini, cara kamu memandang Al-Aqsa tidak lagi sama seperti sebelumnya. Bukan karena emosi yang bertambah, melainkan karena ilmu yang bertambah pula.</p>
+        <p style="margin-top:30px;">Selamat membaca.</p>
+        <p style="margin-bottom:0;"><b>Tim GenSa</b><br>Yayasan Saladin Peradaban Berilmu</p>
+      </section>
+
+      <!-- ===================== PROLOG ===================== -->
+      <section id="prolog" class="section">
+        <div class="kicker-label">Prolog</div>
+        <h1 class="page-title">Dari Berita Menuju Pengetahuan</h1>
+        <p class="lede">Kamu mungkin sudah mengenal nama Al-Aqsa jauh sebelum membuka buku ini.</p>
+        <p>Bukan dari kitab atau majelis ilmu, melainkan dari layar. Dari judul berita yang datang silih berganti, dari foto-foto yang membuat dada sesak, dan dari pesan yang dibagikan berulang kali. Nama Al-Aqsa terasa begitu akrab, padahal yang paling sering kita kenal hanyalah luka yang mengelilinginya.</p>
+        <p>Itu bukan sesuatu yang perlu disesali. Begitulah sebagian besar dari kita pertama kali berjumpa dengan nama ini, melalui rasa sebelum ilmu, melalui simpati sebelum pemahaman. Rasa itu tulus, sebagaimana kepedulian seorang mukmin kepada saudaranya. Namun rasa saja, betapapun tulusnya, tidak cukup untuk menopang kecintaan yang ingin bertahan lama. Tanpa ilmu, ia mudah meredup ketika berita berhenti mengalir dan mudah goyah ketika seseorang bertanya, memang mengapa Al-Aqsa begitu penting?</p>
+        <p>Buku ini mengajakmu menjawab pertanyaan itu, dimulai dari empat pertanyaan yang akan kita telusuri bersama.</p>
+
+        <div class="pull-idea">
+          <span class="label">Empat Pertanyaan Utama</span>
+          Mengapa dalam rangkaian Isra' Mi'raj, Rasulullah &#65018; lebih dahulu dibawa menuju Al-Aqsa sebelum mengalami Mi'raj ke langit? Jika kiblat kemudian dipindahkan menuju Ka'bah, apakah Al-Aqsa kehilangan kemuliaannya? Mengapa pada penghujung fase Madinah, perhatian Rasulullah &#65018; semakin berkaitan dengan wilayah Syam? Dan mengapa perhatian terhadap wilayah itu tetap berlanjut dalam keputusan para sahabat setelah beliau wafat?
+        </div>
+
+        <p>Empat pertanyaan tersebut bukan sekadar pembuka. Keempatnya adalah peta. Bab demi bab dalam buku ini akan menuntunmu menapaki peta itu satu demi satu, dari makna spiritual, menuju kedudukan syariat, menuju strategi dakwah dalam sejarah, hingga sampai pada estafet yang diteruskan generasi sahabat.</p>
+        <p>Kamu akan melihat bagaimana rangkaian Isra' Mi'raj menghadirkan Al-Aqsa sebagai tempat yang diberkahi, dan bagaimana dari rangkaian itu kita dapat membaca posisinya sebagai simpul kesinambungan risalah. Islam tidak lahir di ruang kosong. Ia datang membenarkan dan menyempurnakan risalah tauhid yang dibawa oleh para nabi sebelumnya.</p>
+        <p>Kamu akan menelusuri bagaimana kedudukan Al-Aqsa sebagai kiblat awal umat Islam tidak gugur ketika arah kiblat berubah. Perpindahan itu menempatkan setiap tempat suci dalam kedudukan syar'i yang tepat, tanpa menghapus kemuliaan yang telah ditetapkan baginya.</p>
+        <p>Kamu akan membaca bagaimana perhatian Rasulullah &#65018; terhadap Syam tidak dapat disederhanakan sebagai ambisi perluasan wilayah. Ia terlihat dalam rangkaian dakwah, diplomasi, perlindungan terhadap utusan, keamanan, dan kesiapan menghadapi perubahan di kawasan utara.</p>
+        <p>Dan kamu akan mengikuti bagaimana perhatian terhadap Syam berlanjut melalui keputusan para sahabat setelah wafat Nabi &#65018;, dari pelaksanaan pasukan Usamah pada masa Abu Bakar hingga perkembangan pada masa Umar, sampai memasuki babak penyerahan Baitul Maqdis kepada pemerintahan Islam.</p>
+        <p>Buku ini bukan sekadar kumpulan informasi tentang Al-Aqsa. Ini adalah ruang untuk membangun pemahaman yang utuh, dari ayat, hadits, peristiwa sirah, dan perjalanan generasi setelah Nabi &#65018;, dilihat sebagai bagian-bagian yang saling berhubungan, tanpa mencampur tingkat kepastian masing-masing.</p>
+        <p>Di situlah letak perbedaan antara mengenal dan memahami. Mengenal cukup dengan mendengar sebuah nama berulang kali. Memahami menuntut ketekunan, kerendahan hati, dan keberanian untuk tidak tergesa-gesa menyimpulkan.</p>
+        <p>Pada akhirnya, kecintaan yang paling kokoh bukanlah kecintaan yang paling keras suaranya, melainkan yang paling dalam akarnya. Cinta yang berdiri di atas ilmu tidak mudah padam ketika berita berhenti mengalir, sebab ia tidak sepenuhnya bergantung pada berita untuk tetap hidup.</p>
+        <p style="margin-bottom:0;">Selamat memasuki halaman-halaman berikutnya. Mari kita mulai, dari berita menuju pengetahuan.</p>
+      </section>
+
+      <!-- ===================== CARA MEMBACA ===================== -->
+      <section id="cara-membaca" class="section">
+        <div class="kicker-label">Panduan</div>
+        <h1 class="page-title">Cara Membaca Buku Ini</h1>
+        <p>Memahami Al-Aqsa berarti melihat ayat, hadits, riwayat sirah, dan pembacaan makna sebagai bagian-bagian yang saling berhubungan, tanpa mencampur tingkat kepastian masing-masing. Setiap kali menemukan sebuah pernyataan dalam buku ini, ajukan dua pertanyaan: dari mana ia berasal, dan seberapa kuat dasar yang menopangnya. Jawabannya akan membawamu ke salah satu dari empat lapis berikut.</p>
+
+        <div class="layer-grid">
+          <div class="layer-card">
+            <h4>Lapis Pertama &mdash; Al-Qur'an</h4>
+            <p>Kalam Allah yang teksnya diwariskan secara mutawatir, kepastian sumbernya tidak diragukan. Namun memahami maknanya tetap membutuhkan tafsir para ulama.</p>
+          </div>
+          <div class="layer-card">
+            <h4>Lapis Kedua &mdash; Hadits</h4>
+            <p>Memiliki tingkat kekuatan yang beragam, dibaca melalui sanad, matan, dan penilaian ahli hadits. Setiap kutipan disertai koleksi asal dan statusnya.</p>
+          </div>
+          <div class="layer-card">
+            <h4>Lapis Ketiga &mdash; Riwayat Sirah dan Sejarah Awal Islam</h4>
+            <p>Sebagian bersanad dan dapat diperbandingkan, sebagian lain berasal dari kitab sejarah dengan tingkat kehati-hatian berbeda.</p>
+          </div>
+          <div class="layer-card">
+            <h4>Lapis Keempat &mdash; Kajian Modern dan Satu Cara Membaca</h4>
+            <p>Membantu memahami konteks dan pelajaran, tetapi tetap analisis, bukan dalil. Pijakannya selalu kembali kepada Al-Qur'an, hadits, dan sumber sirah.</p>
+          </div>
+        </div>
+
+        <p>Keempat lapis ini saling berkaitan. Sebuah bab biasanya dimulai dari nash, dilengkapi riwayat dan konteks sejarah, lalu bergerak menuju pembacaan makna. Namun alur ini tidak boleh mengaburkan bobotnya. Analisis, betapapun masuk akal, tidak pernah setara dengan kepastian Al-Qur'an atau hadits sahih yang menjadi dasarnya.</p>
+
+        <h3 class="section-head">Tentang Catatan Kaki dan Rujukan</h3>
+        <p>Kutipan hadits disertai nama koleksi, kitab atau bab, perawi, status, dan nomor edisi, karena penomoran dapat berbeda antar cetakan. Daftar rujukan lengkap tersusun per kategori di akhir buku.</p>
+
+        <h3 class="section-head">Tentang Istilah Al-Aqsa dan Baitul Maqdis</h3>
+        <p>Al-Masjid al-Aqsa merujuk pada kawasan suci yang diberkahi, tidak terbatas pada bangunan Masjid Qibli yang dikenal hari ini. Baitul Maqdis, dalam sumber klasik, dapat merujuk pada kawasan itu sendiri atau Jerusalem secara lebih luas, tergantung konteks.</p>
+        <p style="margin-bottom:0;">Dengan bekal ini, kamu siap memasuki bab pertama: bukan sebagai pembaca yang menerima pernyataan secara mentah, melainkan yang tahu kapan berpegang pada nash, kapan membaca riwayat dengan hati-hati, dan kapan menimbang sebuah analisis sebagai salah satu kemungkinan pembacaan.</p>
+      </section>
+
+      <!-- ===================== TIMELINE ===================== -->
+      <section id="timeline" class="section">
+        <div class="kicker-label">Peta Waktu</div>
+        <h1 class="page-title">Timeline Lintas Bab</h1>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-time">sekitar 620&ndash;621 M</div><div class="tl-event">Isra' dan Mi'raj</div><div class="tl-desc">Al-Aqsa disebut sebagai tujuan Isra', kawasan yang diberkahi, dan tempat salat sebelum Mi'raj.</div></div>
+          <div class="tl-item"><div class="tl-time">1&ndash;2 H / 622&ndash;624 M</div><div class="tl-event">Kiblat menuju Baitul Maqdis, kemudian dipindahkan</div><div class="tl-desc">Umat diuji untuk mengikuti Rasul. Ka'bah ditetapkan sebagai arah salat, sedangkan kemuliaan Al-Aqsa tetap terjaga.</div></div>
+          <div class="tl-item"><div class="tl-time">sekitar 6&ndash;7 H</div><div class="tl-event">Surat kepada Heraklius</div><div class="tl-desc">Dakwah memasuki ruang diplomatik yang lebih luas.</div></div>
+          <div class="tl-item"><div class="tl-time">8 H / 629 M</div><div class="tl-event">Mu'tah</div><div class="tl-desc">Tiga pemimpin gugur berurutan. Peristiwa memperlihatkan kehormatan utusan dan estafet komando.</div></div>
+          <div class="tl-item"><div class="tl-time">9 H / 630 M</div><div class="tl-event">Tabuk</div><div class="tl-desc">Mobilisasi besar menuju kawasan utara menjadi ujian kesiapan, loyalitas, dan kemampuan mengalahkan penundaan.</div></div>
+          <div class="tl-item"><div class="tl-time">11 H / 632 M</div><div class="tl-event">Pasukan Usamah</div><div class="tl-desc">Penunjukan pemimpin muda menjadi pelajaran tentang kelayakan, kepercayaan, dan amanah.</div></div>
+          <div class="tl-item"><div class="tl-time">632&ndash;634 M</div><div class="tl-event">Konsolidasi Abu Bakar</div><div class="tl-desc">Pasukan Usamah diberangkatkan, kemudian gerak ke Irak dan Syam memasuki fase baru.</div></div>
+          <div class="tl-item"><div class="tl-time">634 M</div><div class="tl-event">Ajnadayn</div><div class="tl-desc">Salah satu kemenangan awal penting di kawasan Palestina dan Syam.</div></div>
+          <div class="tl-item"><div class="tl-time">636 M</div><div class="tl-event">Yarmuk</div><div class="tl-desc">Titik balik utama yang melemahkan kekuatan lapangan Romawi di Syam.</div></div>
+          <div class="tl-item" style="padding-bottom:0;"><div class="tl-time">637&ndash;638 M</div><div class="tl-event">Penyerahan Baitul Maqdis</div><div class="tl-desc">Umar datang menerima penyerahan. Sumber berbeda dalam menempatkan tahapan peristiwa.</div></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================== BAB SATU ===================== -->
+    <section id="bab1" class="section" style="background:var(--paper); padding-top:60px;">
+      <div class="page">
+        <div class="chapter-hero" role="img" aria-label="Ilustrasi pembuka Bab Satu"></div>
+        <div class="kicker-label">Bab Satu</div>
+        <h1 class="page-title">Al-Aqsa dalam Isra' Mi'raj</h1>
+        <h2 class="chapter-sub">Al-Aqsa hadir dalam Isra' sebagai tempat yang diberkahi dan simpul kesinambungan risalah para nabi.</h2>
+
+        <p>Ada satu malam dalam sirah nabawiyah yang paling sering dituturkan dengan penuh kekaguman, tetapi paling jarang direnungkan susunan peristiwanya. Pada malam itu, Rasulullah &#65018; diperjalankan dari Masjidil Haram menuju Masjidil Aqsa. Dari sana, beliau mengalami Mi'raj ke langit, bertemu dengan para nabi, dan diperlihatkan sebagian tanda kebesaran Allah yang belum pernah beliau saksikan sebelumnya. Rangkaian peristiwa itu dikenal sebagai Isra' dan Mi'raj, salah satu peristiwa paling agung dalam sejarah kenabian.</p>
+
+        <p>Namun ada satu hal yang mudah terlewat ketika perhatian kita langsung tertuju kepada perjalanan menuju langit. Sebelum mengalami Mi'raj, Rasulullah &#65018; lebih dahulu dibawa menuju sebuah tempat di bumi. Bukan ke sembarang tempat, melainkan ke Al-Aqsa, dan justru di situlah letak sesuatu yang layak direnungkan lebih dalam. Mengapa dalam rangkaian menuju langit yang begitu agung itu, Allah lebih dahulu menyebut sebuah tempat di bumi?</p>
+
+        <p>Perjalanan menuju Al-Aqsa itu disebutkan dalam Al-Qur'an, sementara rangkaian Mi'raj ke langit baru diterangkan lebih lanjut melalui hadits-hadits sahih. Dalam salah satu riwayat, Rasulullah &#65018; menceritakan bahwa beliau dibawa dengan Buraq menuju Baitul Maqdis, menambatkan Buraq, memasuki masjid, dan melaksanakan salat, sebelum perjalanan menuju langit dilanjutkan.</p>
+
+        <div class="quote-block">
+          <div class="quote-arabic">أنَّ النبي صلَّى اللَّه عليه وسلم أُتِيَ بالبراقِ ليلةَ أسري بِهِ ملجمًا مسرجًا فاستصعبَ عليْهِ فقالَ لَهُ جبريلُ أبمحمَّدٍ تفعلُ هذا فما رَكبَكَ أحدٌ أَكرمُ على اللَّهِ منْهُ قالَ : فارفضَّ عرقًا</div>
+          <p class="quote-trans">"Sesungguhnya Nabi &#65018; didatangkan seekor Buraq pada malam Isra'. Buraq itu telah dipasang kekang dan pelana, namun ia tampak sulit dikendalikan (gelisah). Lalu Jibril berkata kepadanya, 'Apakah kepada Muhammad engkau berbuat seperti ini? Demi Allah, tidak pernah ada seorang pun yang lebih mulia di sisi Allah daripada beliau yang pernah menunggangimu.' Maka seketika itu Buraq pun bercucuran keringat."
+          <span class="quote-cite">HR. at-Tirmidzi</span></p>
+        </div>
+
+        <p>Perihal alasan di balik susunan perjalanan ini sendiri tidak dijelaskan secara terperinci oleh nash. Kita tidak akan mengklaim mengetahui secara pasti alasan yang tidak dinyatakan oleh Allah dan Rasul-Nya. Namun ayat dan riwayat ini membuka ruang bagi para ulama untuk membaca kedudukan Al-Aqsa dalam sejarah risalah, dan pembacaan itu tidak berdiri di ruang kosong.</p>
+
+        <h3 class="section-head">Peneguhan pada Fase Makkah Akhir</h3>
+        <p>Banyak penulis sirah menempatkan Isra' Mi'raj pada fase akhir periode Makkah, sebuah masa yang berat bagi Rasulullah &#65018; dan kaum Muslimin.</p>
+
+        <div class="quote-block">
+          <p class="quote-trans" style="margin-top:0;">"Para sejarawan dan penulis sirah, seperti Ibnu al-Atsir dan al-Waqidi, berpendapat bahwa peristiwa Isra' terjadi pada tahun ke-12 kenabian, tepatnya sekitar delapan belas bulan atau satu tahun sebelum hijrah."
+          <span class="quote-cite">Dr. Raghib Sirjani, dalam Qisshatu Islam</span></p>
+        </div>
+
+        <p>Boikot terhadap Bani Hasyim telah berakhir, namun tidak lama kemudian Khadijah dan Abu Thalib, dua orang yang memiliki kedudukan penting dalam kehidupan Rasulullah &#65018;, wafat dalam rentang waktu yang berdekatan. Periode itu dikenal dalam banyak karya sirah sebagai 'Am al-Huzn, tahun kesedihan.</p>
+
+        <p>Penanggalan pasti Isra' Mi'raj sendiri diperselisihkan di kalangan penulis sirah, sehingga hubungan kronologisnya dengan masa-masa sulit itu memiliki perbedaan riwayat. Namun sebagian ulama membaca kedekatan waktu tersebut sebagai bentuk peneguhan dari Allah kepada Rasul-Nya di tengah kesulitan yang dihadapinya, sebuah pembacaan hikmah yang kuat, meski tidak dinyatakan secara eksplisit oleh nash itu sendiri.</p>
+
+        <h3 class="section-head">Jejak Risalah yang Lebih Tua</h3>
+        <p>Ada pula konteks yang lebih tua dari sekadar masa hidup Rasulullah &#65018;. Al-Aqsa dan Baitul Maqdis telah lama berkaitan dengan sejarah para nabi dan tradisi tauhid, jauh sebelum kerasulan Nabi Muhammad &#65018;.</p>
+
+        <p class="intro-line">Abdullah bin Abbas mengatakan,</p>
+        <div class="quote-block">
+          <div class="quote-arabic">البيت المقدس بنته الأنبياء وسكنته الأنبياء، ما فيه موضع شبر إلا وقد صلّى فيه نبي أو أقام فيه ملك</div>
+          <p class="quote-trans">"Baitul Maqdis dibangun oleh para nabi dan dihuni oleh para nabi. Tidak ada sejengkal pun tempat di sana, kecuali pernah digunakan untuk salat oleh seorang nabi atau pernah menjadi tempat tinggal seorang malaikat."
+          <span class="quote-cite">Mu'jam al-Buldan, Yaqut al-Hamawi</span></p>
+        </div>
+
+        <p>Ia bukan lokasi yang baru mendapatkan makna pada masanya. Ketika Al-Qur'an menyebutnya sebagai tujuan Isra', ayat itu menunjuk kepada tempat yang telah memiliki hubungan panjang dengan sejarah kenabian, dan dari hubungan itulah para ulama kemudian membaca Al-Aqsa sebagai bagian dari kesinambungan risalah para nabi.</p>
+
+        <div class="quote-block">
+          <p class="quote-trans" style="margin-top:0;">"Baitul Maqdis adalah tempat yang paling dekat di bumi dengan langit. Dajjal dihalangi untuk memasukinya. Ya'juj dan Ma'juj akan binasa di sekitarnya. Nabi Adam berwasiat agar dimakamkan di sana; demikian pula Ishaq dan Ibrahim. Ya'qub dibawa dari negeri Mesir hingga dimakamkan di sana. Yusuf juga berwasiat ketika wafat di Mesir agar jasadnya dipindahkan ke sana. Ibrahim berhijrah dari 'Kutsi' menuju Baitul Maqdis. Di sanalah tempat manusia dikumpulkan (mahsyar), dan darinya mereka dibangkitkan kembali. Di sana Allah menerima tobat Dawud, di sana Ibrahim membenarkan mimpinya, dan di sana Isa berbicara kepada manusia ketika masih berada dalam buaian."
+          <span class="quote-cite">Ithaf al-Ikhsa bi Fada'il al-Masjid al-Aqsa, hlm. 102&ndash;104. Lihat juga: Mu'jam al-Buldan, hlm. 166.</span></p>
+        </div>
+
+        <h3 class="section-head">Keberkahan di Sekelilingnya</h3>
+        <p class="intro-line">Allah berfirman,</p>
+        <div class="quote-block">
+          <div class="quote-arabic">سُبْحَٰنَ ٱلَّذِىٓ أَسْرَىٰ بِعَبْدِهِۦ لَيْلًا مِّنَ ٱلْمَسْجِدِ ٱلْحَرَامِ إِلَى ٱلْمَسْجِدِ ٱلْأَقْصَا ٱلَّذِى بَٰرَكْنَا حَوْلَهُۥ</div>
+          <p class="quote-trans">"Maha Suci Allah, yang telah memperjalankan hamba-Nya pada suatu malam dari Al Masjidil Haram ke Al Masjidil Aqsha yang telah Kami berkahi sekelilingnya&hellip;"
+          <span class="quote-cite">QS. Al-Isra': 1</span></p>
+        </div>
+
+        <p>Ayat ini menyebut perjalanan Isra' secara eksplisit, dengan Al-Aqsa sebagai tujuannya, dan menyebut salah satu hikmahnya, agar Allah memperlihatkan sebagian tanda kebesaran-Nya.</p>
+        <p>Salah satu bagian terpenting dari ayat ini adalah frasa <em>alladzi barakna hawlahu</em>, "yang telah Kami berkahi sekelilingnya".</p>
+        <p>Al-Qur'an tidak hanya menyebut keberkahan pada satu bangunan, tetapi pada kawasan di sekelilingnya, sebuah pernyataan yang menolak pemahaman bahwa keberkahan Al-Aqsa terbatas pada bentuk fisik bangunan tertentu.</p>
+        <p>Ini penting diingat, karena bentuk arsitektur yang berdiri hari ini belum ada pada masa Isra' Mi'raj. Ketika kita berbicara tentang Al-Aqsa pada masa Nabi &#65018;, yang dimaksud adalah tempat dan kawasan sucinya, bukan bangunan modern yang kita kenal.</p>
+        <p>Meski demikian, batas geografis kawasan yang diberkahi tidak ditetapkan secara terperinci oleh ayat ini. Para mufasir, termasuk dalam Tafsir al-Tabari dan Tafsir Ibn Katsir, menghubungkan keberkahan tersebut dengan Baitul Maqdis dan wilayah sekitarnya, sementara sebagian penjelasan tafsir mengaitkannya dengan kawasan Syam dalam cakupan yang lebih luas.</p>
+        <p>Kita tidak menetapkan satu garis batas yang pasti, karena batas itu sendiri tidak dinyatakan secara eksplisit oleh ayat. Yang dapat kita pegang dengan kokoh adalah bahwa keberkahan itu nyata dan mencakup kawasan sekitar Al-Aqsa, sementara rincian luasnya tetap berada dalam ruang penafsiran.</p>
+
+        <p class="intro-line">Syaikhul Islam Ibnu Taimiyyah berkata,</p>
+        <div class="quote-block">
+          <div class="quote-arabic">والبركة تتناول البركة في الدين، والبركة في الدنيا وكلاهما معلوم لا ريب فيه</div>
+          <p class="quote-trans">"Keberkahan itu (Al Aqsha dan Baitul Maqdis) mencakup keberkahan dalam urusan agama dan keberkahan dalam urusan dunia. Keduanya merupakan perkara yang telah nyata dan tidak diragukan lagi."
+          <span class="quote-cite">Majmu' al-Fatawa li Syaikh al-Islam Ibn Taymiyyah, jilid 27, hlm. 44</span></p>
+        </div>
+
+        <h3 class="section-head">Bertemu dan Mengimami Para Nabi</h3>
+        <p>Al-Aqsa juga tidak hanya disebut sebagai tempat yang diberkahi. Dalam rangkaian Isra' Mi'raj, ia berkaitan dengan pertemuan Rasulullah &#65018; bersama para nabi terdahulu. Sejumlah riwayat sahih menyebutkan bahwa Rasulullah &#65018; berkumpul dan melaksanakan salat bersama para nabi di Baitul Maqdis, dengan beliau sebagai imam, meski rincian susunan peristiwanya berbeda-beda antara satu riwayat dengan riwayat lain.</p>
+
+        <div class="quote-block">
+          <div class="quote-arabic">فَلَمَّا دَخَلَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ الْمَسْجِدَ الأَقْصَى، قَامَ يُصَلِّي، ثُمَّ الْتَفَتَ، فَإِذَا النَّبِيُّونَ أَجْمَعُونَ يُصَلُّونَ مَعَهُ.</div>
+          <p class="quote-trans">"Ketika Nabi &#65018; memasuki Masjid al-Aqsa, beliau berdiri untuk melaksanakan salat. Setelah itu beliau menoleh, ternyata seluruh para nabi sedang salat bersama beliau."
+          <span class="quote-cite">Musnad Ahmad</span></p>
+        </div>
+
+        <p>Para ulama membaca imamah ini sebagai simbol kedudukan risalah terakhir dan kesinambungannya dengan risalah para nabi sebelumnya, bahwa Islam tidak lahir di ruang kosong, melainkan datang membenarkan dan menyempurnakan apa yang telah dibawa sebelumnya.</p>
+        <p>Namun perlu ditegaskan, peristiwa mengimami para nabi itu sendiri disebutkan dalam riwayat, sementara pemahaman bahwa peristiwa itu melambangkan kesinambungan risalah adalah hasil pembacaan para ulama terhadap maknanya.</p>
+
+        <h3 class="section-head">Kemuliaan yang Mendahului Konflik Modern</h3>
+        <p>Memahami hal ini penting, sebab ada satu anggapan yang cukup sering muncul, terutama bagi mereka yang mengenal Al-Aqsa melalui pemberitaan, bahwa Al-Aqsa baru menjadi penting bagi umat Islam setelah konflik modern terjadi.</p>
+        <p>Anggapan ini keliru. Al-Aqsa telah disebut dalam Al-Qur'an sejak periode Makkah, ketika umat Islam belum memiliki kekuatan politik dan belum menguasai wilayah mana pun. Kedudukannya dalam Islam tidak dibangun sebagai respons terhadap konflik hari ini. Konflik modern membuat perhatian dunia kembali tertuju kepadanya, namun konflik itu bukan sumber kemuliaannya.</p>
+
+        <h3 class="section-head">Antara Nash dan Pembacaan Makna</h3>
+        <p>Di sinilah dua tingkat pemahaman yang telah kita telusuri saling menemukan tempatnya. Yang ditegaskan langsung oleh Al-Qur'an dan riwayat sahih adalah bahwa Rasulullah &#65018; diperjalankan dari Masjidil Haram menuju Al-Aqsa, bahwa kawasan sekelilingnya diberkahi, dan bahwa peristiwa itu memperlihatkan sebagian tanda kebesaran Allah.</p>
+        <p>Yang dituntun maknanya oleh para ulama adalah bahwa Al-Aqsa merupakan simpul kesinambungan risalah para nabi, dan bahwa imamah Rasulullah &#65018; melambangkan penyempurnaan risalah terakhir. Tanpa pembacaan para ulama, kita mungkin tahu bahwa Rasulullah &#65018; pernah diperjalankan ke Al-Aqsa, tetapi tidak sepenuhnya memahami mengapa itu penting bagi kedudukan risalah yang beliau bawa.</p>
+        <p>Isra' Mi'raj sering dikenang melalui perjalanan Rasulullah &#65018; menuju langit. Namun rangkaian perjalanan agung itu lebih dahulu membawa beliau menuju Al-Aqsa, sebuah tempat yang telah lama diberkahi dan berkaitan dengan sejarah panjang para nabi.</p>
+        <p style="margin-bottom:0;">Ia tidak baru menjadi penting ketika konflik modern terjadi. Ia telah lama menjadi bagian dari sejarah wahyu, jauh sebelum namanya hadir melalui layar dan berita yang kita saksikan hari ini.</p>
+
+        <div class="reflect-box">
+          <span class="label">Pertanyaan Reflektif</span>
+          <p>Setelah memahami keberkahan Al-Aqsa dan hubungannya dengan rangkaian risalah para nabi, adakah yang berubah dalam cara kita memandang tempat ini?</p>
+        </div>
+
+        <div class="chapternav">
+          <a href="#cara-membaca"><span class="dir">&larr; Sebelumnya</span><div class="ttl">Cara Membaca Buku Ini</div></a>
+          <a href="#bab2" class="next"><span class="dir">Selanjutnya &rarr;</span><div class="ttl">Bab Dua &mdash; Kiblat Awal</div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BAB DUA ===================== -->
+    <section id="bab2" class="section" style="background:var(--paper); padding-top:60px;">
+      <div class="page">
+        <div class="chapter-hero" role="img" aria-label="Ilustrasi pembuka Bab Dua"></div>
+        <div class="kicker-label">Bab Dua</div>
+        <h1 class="page-title">Baitul Maqdis sebagai Kiblat Awal</h1>
+        <h2 class="chapter-sub">Perpindahan kiblat mengubah arah salat, bukan menghapus kemuliaan Al-Aqsa.</h2>
+
+        <p>Ada sebuah pertanyaan yang mungkin pernah terlintas ketika seseorang pertama kali mengetahui bahwa umat Islam dahulu salat menghadap Baitul Maqdis, sebelum kemudian menghadap Ka'bah.</p>
+        <p>Jika arah salat itu dipindahkan, apakah Baitul Maqdis kehilangan kemuliaannya? Apakah tempat yang pernah menjadi kiblat, lalu tidak lagi menjalankan fungsi tersebut, berkurang kedudukannya di sisi Allah?</p>
+        <p>Pertanyaan ini wajar muncul. Dalam pengalaman manusia, sesuatu yang digantikan sering dianggap kalah dari yang menggantikannya. Namun, perpindahan kiblat bukan kisah tentang satu tempat yang menang dan tempat lain yang kalah. Status Baitul Maqdis sebagai arah salat memang berubah, tetapi kemuliaan Al-Aqsa tidak ikut berpindah bersamanya.</p>
+
+        <h3 class="section-head">Ketika Arah Berubah</h3>
+        <p>Setelah hijrah ke Madinah, Rasulullah &#65018; dan kaum Muslimin salat menghadap Baitul Maqdis selama kurang lebih enam belas hingga tujuh belas bulan.</p>
+
+        <p class="intro-line">Dari Al-Barra bin Azib <em>radhiyallahu anhu</em> meriwayatkan,</p>
+        <div class="quote-block">
+          <div class="quote-arabic">صلينا مع النبيِّ نحو بيت المقدسِ ستةَ عشرَ شهرًا، أو سبعةَ عشرَ شهرًا وصُرف إلى القبلةِ</div>
+          <p class="quote-trans">"Kami shalat bersama Nabi &#65018; menghadap Baitul Maqdis selama enam belas bulan, atau tujuh belas bulan. Kemudian beliau diperintahkan untuk berpaling menghadap kiblat (Ka'bah)."
+          <span class="quote-cite">HR. al-Bukhari (no. 40), Muslim (no. 525), dan at-Tirmidzi</span></p>
+        </div>
+
+        <p>Setelah itu, Allah memerintahkan mereka menghadap Masjidil Haram, sebagaimana disebutkan dalam ayat berikut:</p>
+        <div class="quote-block">
+          <div class="quote-arabic">قَدْ نَرَىٰ تَقَلُّبَ وَجْهِكَ فِى ٱلسَّمَآءِ ۖ فَلَنُوَلِّيَنَّكَ قِبْلَةً تَرْضَىٰهَا ۚ فَوَلِّ وَجْهَكَ شَطْرَ ٱلْمَسْجِدِ ٱلْحَرَامِ ۚ وَحَيْثُ مَا كُنتُمْ فَوَلُّوا۟ وُجُوهَكُمْ شَطْرَهُ</div>
+          <p class="quote-trans">"Sungguh Kami (sering) melihat mukamu menengadah ke langit, maka sungguh Kami akan memalingkan kamu ke kiblat yang kamu sukai. Palingkanlah mukamu ke arah Masjidil Haram. Dan dimana saja kamu berada, palingkanlah mukamu ke arahnya&hellip;"
+          <span class="quote-cite">QS. Al-Baqarah: 144</span></p>
+        </div>
+
+        <p>Rangkaian ayat tersebut menegaskan bahwa perpindahan arah bukan perubahan yang lahir dari pertimbangan manusia, melainkan ketetapan Allah. Di dalamnya terdapat ujian ketaatan. Perubahan kiblat menampakkan siapa yang benar-benar mengikuti Rasulullah &#65018; dan siapa yang berpaling ketika ketetapan Allah tidak sesuai dengan kebiasaan atau harapannya.</p>
+
+        <div class="quote-block">
+          <div class="quote-arabic">مَا جَعَلْنَا ٱلْقِبْلَةَ ٱلَّتِى كُنتَ عَلَيْهَآ إِلَّا لِنَعْلَمَ مَن يَتَّبِعُ ٱلرَّسُولَ مِمَّن يَنقَلِبُ عَلَىٰ عَقِبَيْهِ</div>
+          <p class="quote-trans">"&hellip;Dan Kami tidak menetapkan kiblat yang menjadi kiblatmu (sekarang) melainkan agar Kami mengetahui (supaya nyata) siapa yang mengikuti Rasul dan siapa yang membelot&hellip;"
+          <span class="quote-cite">QS. Al-Baqarah: 143</span></p>
+        </div>
+
+        <p>Ayat 143 juga menjelaskan bahwa perubahan itu terasa berat, kecuali bagi orang-orang yang diberi petunjuk oleh Allah. Dengan demikian, perpindahan kiblat bukan sekadar persoalan geografis. Ia merupakan bagian dari pendidikan keimanan, ketundukan, dan kepatuhan kepada wahyu.</p>
+        <p>Perintah menghadap Ka'bah kemudian menetapkan Masjidil Haram sebagai kiblat tetap umat Islam. Namun, berakhirnya status Baitul Maqdis sebagai arah salat tidak berarti seluruh kedudukannya ikut berakhir. Menjadi kiblat merupakan salah satu kedudukan syar'i yang pernah dimilikinya. Ketika kedudukan tersebut berpindah, keutamaan lain yang telah ditetapkan bagi Al-Aqsa tetap terjaga.</p>
+
+        <div class="quote-block">
+          <p class="quote-trans" style="margin-top:0;">"Masjid Al Aqsha memang bukan lagi menjadi kiblat shalat kita, namun ia masih dan akan senantiasa menjadi kiblat jihad kita."
+          <span class="quote-cite">Asy Syaikh Mahmud Shiyam, Ulama Palestina</span></p>
+        </div>
+
+        <h3 class="section-head">Kemuliaan yang Tidak Ikut Berpindah</h3>
+        <p>Kedudukan khusus Al-Aqsa disebutkan melalui hadits-hadits Rasulullah &#65018; yang tidak bergantung pada statusnya sebagai kiblat.</p>
+        <p>Dalam hadits yang diriwayatkan Abu Hurairah, Rasulullah &#65018; menyebut tiga masjid sebagai tujuan perjalanan khusus untuk beribadah, yaitu Masjidil Haram, Masjid Nabawi, dan Masjidil Aqsa. Hadits ini menempatkan Al-Aqsa bersama dua masjid utama lainnya dalam satu penyebutan yang istimewa.</p>
+
+        <p class="intro-line">Ada pula hadits Abu Dzar al-Ghifari.</p>
+        <div class="quote-block">
+          <div class="quote-arabic">يا رسولَ اللهِ ، أيُّ مسجدٍ وضعَ في الأرضِ أولَ ؟ قال : المسجدُ الحرامُ ، قلتُ : ثم أيُّ ؟ قال : المسجدُ الأقصى ، قلتُ : كم بينهما ؟ قال : أربعون سنةً</div>
+          <p class="quote-trans">"Aku bertanya, 'Wahai Rasulullah, masjid apakah yang pertama kali dibangun di muka bumi?' Beliau menjawab, 'Masjidil Haram.' Aku bertanya lagi, 'Kemudian masjid apa?' Beliau menjawab, 'Masjid al-Aqsa.' Aku bertanya, 'Berapa jarak waktu antara pembangunan keduanya?' Beliau menjawab, 'Empat puluh tahun. Kemudian, di mana pun waktu salat telah tiba untukmu, maka salatlah di sana, karena seluruh bumi dapat menjadi tempat salat.'"
+          <span class="quote-cite">HR. al-Bukhari, Muslim no. 520, dan an-Nasa'i no. 690</span></p>
+        </div>
+
+        <p>Hadits-hadits tersebut menyampaikan hal yang berbeda. Hadits tiga masjid menegaskan kedudukan khusus Al-Aqsa sebagai tujuan perjalanan ibadah. Sementara itu, hadits Abu Dzar menunjukkan posisinya yang sangat awal dalam sejarah rumah ibadah di bumi.</p>
+        <p>Fakta bahwa Masjidil Aqsa disebut sebagai masjid kedua memperlihatkan betapa dalam akar sejarahnya dalam tradisi tauhid.</p>
+        <p>Masjidil Haram memang memiliki kedudukan yang lebih utama dalam sejumlah aspek syariat. Ia menjadi kiblat tetap umat Islam, tempat pelaksanaan haji, dan masjid pertama yang dibangun di bumi sebagaimana disebutkan dalam hadits Abu Dzar. Namun, keutamaan Masjidil Haram tidak meniadakan kedudukan khusus Al-Aqsa.</p>
+        <p>Mengakui adanya hierarki keutamaan bukan berarti menghapus kemuliaan tempat lain. Yang berubah adalah status Baitul Maqdis sebagai arah salat umat Islam. Yang tetap adalah keberkahan, kedudukan sejarah, dan keutamaan ibadah yang ditetapkan baginya melalui sumber-sumber yang lain.</p>
+
+        <h3 class="section-head">Kesinambungan Risalah, Kekhususan Syariat</h3>
+        <p>Sebagian ulama membaca perpindahan kiblat sebagai salah satu penanda terbentuknya identitas ibadah umat Muhammad &#65018;.</p>
+        <p>Selama menghadap Baitul Maqdis, kaum Muslimin dan komunitas Yahudi di Madinah sama-sama menjadikan kawasan tersebut sebagai arah dalam ibadah mereka, meskipun berada dalam tradisi dan ketentuan yang berbeda. Perintah menghadap Ka'bah kemudian menegaskan kekhususan syariat umat Islam dan menghubungkan mereka kembali dengan warisan Nabi Ibrahim.</p>
+        <p>Namun, pembentukan identitas bukan satu-satunya makna yang dapat dibaca dari rangkaian ayat tersebut. QS al-Baqarah juga menekankan ketaatan kepada Rasulullah &#65018;, ujian keimanan, kedudukan umat pertengahan, hubungan dengan warisan Ibrahim, dan ketundukan penuh kepada ketetapan Allah.</p>
+        <p>Karena itu, perpindahan kiblat tidak boleh dibaca hanya sebagai upaya membedakan umat Islam dari umat yang lain. Ia merupakan peristiwa yang memiliki makna yang begitu besar.</p>
+        <p>Perpindahan tersebut juga tidak memutus kesinambungan risalah tauhid. Islam hadir sebagai kelanjutan dan penyempurnaan risalah para nabi. Kekhususan syariat umat Muhammad &#65018; tidak meniadakan hubungan tersebut.</p>
+
+        <p class="intro-line">Abu Hurairah meriwayatkan,</p>
+        <div class="quote-block">
+          <div class="quote-arabic">مَثَلي ومَثَلُ الأنْبِياءِ مِن قَبْلي كمَثَلِ رَجُلٍ ابْتَنى بُنْيانًا فأحسَنَه وأكمَلَه، إلَّا مَوْضِعَ لَبِنَةٍ مِن زاوِيَةٍ مِن زواياه</div>
+          <p class="quote-trans">"Perumpamaanku dan perumpamaan para nabi sebelumku adalah seperti seorang laki-laki yang membangun sebuah bangunan. Ia membangunnya dengan sangat indah dan sempurna, hanya saja masih tersisa satu tempat untuk sebuah batu bata di salah satu sudutnya. Lalu orang-orang mengelilingi bangunan itu, mengaguminya, dan berkata, 'Kami belum pernah melihat bangunan yang lebih indah daripada ini, seandainya saja tempat batu bata itu tidak kosong.' Maka akulah batu bata itu."
+          <span class="quote-cite">HR. Muslim no. 2286 dan Ahmad no. 7485</span></p>
+        </div>
+
+        <p>Umat Islam melanjutkan risalah tauhid yang sama, tetapi dengan syariat dan arah ibadah yang ditetapkan khusus bagi mereka. Di sinilah kesinambungan risalah dan kekhususan syariat bertemu. Islam tidak berdiri terpisah dari sejarah para nabi, tetapi juga tidak melebur tanpa identitas ke dalam tradisi yang telah ada sebelumnya.</p>
+
+        <h3 class="section-head">Apa yang Berubah, Apa yang Tetap</h3>
+        <p>Di sinilah batas antara pernyataan eksplisit nash dan pembacaan para ulama perlu kembali diperjelas.</p>
+        <p>Perintah perpindahan kiblat dinyatakan dalam QS al-Baqarah ayat 142 sampai 144. Kedudukan khusus Al-Aqsa sebagai tujuan perjalanan ibadah disebutkan dalam hadits tiga masjid. Sementara itu, hadits Abu Dzar menempatkan Masjidil Aqsa sangat awal dalam sejarah rumah ibadah di bumi.</p>
+        <p>Pokok-pokok pernyataan tersebut disebutkan secara eksplisit oleh sumber. Namun, cakupan, hubungan, dan implikasinya tetap membutuhkan penjelasan tafsir dan syarah.</p>
+        <p>Sementara itu, pemahaman bahwa perpindahan kiblat turut menegaskan kekhususan syariat dan identitas ibadah umat Muhammad &#65018; merupakan pembacaan para ulama terhadap konteks serta rangkaian ayat. Pembacaan ini memiliki dasar yang kuat, tetapi tidak boleh ditempatkan sebagai satu-satunya maksud ayat atau sebagai bunyi eksplisit teks.</p>
+        <p>Pembedaan tersebut menjaga kita dari dua kekeliruan. Kekeliruan pertama adalah menganggap bahwa Baitul Maqdis kehilangan seluruh kemuliaannya ketika tidak lagi menjadi kiblat. Kekeliruan kedua adalah menolak adanya perbedaan keutamaan antara Masjidil Haram dan Masjidil Aqsa.</p>
+        <p style="margin-bottom:0;">Mengakui hierarki keutamaan tidak berarti menghapus kedudukan khusus yang telah ditetapkan wahyu bagi Al-Aqsa.</p>
+
+        <div class="reflect-box">
+          <span class="label">Pertanyaan Reflektif</span>
+          <p>Jika perpindahan kiblat tidak menghapus kemuliaan Al-Aqsa, apa yang perlu diperbaiki dari cara kita memahami hubungan antara Ka'bah dan Baitul Maqdis, dua tempat suci yang keutamaannya ditetapkan melalui wahyu, meskipun dengan kedudukan yang berbeda?</p>
+        </div>
+
+        <div class="chapternav">
+          <a href="#bab1"><span class="dir">&larr; Sebelumnya</span><div class="ttl">Bab Satu &mdash; Isra' Mi'raj</div></a>
+          <a href="#bab3" class="next"><span class="dir">Selanjutnya &rarr;</span><div class="ttl">Bab Tiga &mdash; Horizon Syam</div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BAB TIGA ===================== -->
+    <section id="bab3" class="section" style="background:var(--paper); padding-top:60px;">
+      <div class="page">
+        <div class="chapter-hero" role="img" aria-label="Ilustrasi pembuka Bab Tiga"></div>
+        <div class="kicker-label">Bab Tiga</div>
+        <h1 class="page-title">Horizon Syam pada Fase Madinah Akhir</h1>
+        <h2 class="chapter-sub">Perhatian ke Syam tumbuh melalui dakwah, diplomasi, keamanan, dan kesiapan, bukan melalui satu agenda tunggal.</h2>
+
+        <p>Ada satu perubahan yang berlangsung perlahan pada fase akhir kehidupan Rasulullah &#65018; di Madinah. Dakwah yang sebelumnya banyak berhadapan dengan masyarakat Makkah dan berbagai kabilah di Jazirah Arab mulai bersentuhan dengan kawasan yang lebih jauh. Di utara terbentang Syam, wilayah luas yang terhubung dengan kekuasaan Romawi dan komunitas-komunitas Arab yang berada dalam pengaruhnya.</p>
+        <p>Perubahan ini tidak muncul dalam satu keputusan besar yang berdiri sendiri. Ia terlihat melalui beberapa peristiwa dengan sebab dan konteks yang berbeda. Ada surat yang dikirim kepada seorang penguasa, ada utusan yang tidak kembali dengan selamat, dan ada mobilisasi panjang yang menguji kesiapan kaum Muslimin.</p>
+        <p>Jika dilihat secara terpisah, masing-masing merupakan peristiwa dengan persoalannya sendiri. Jika dipandang dari kejauhan, ketiganya memperlihatkan bahwa cakrawala Madinah mulai meluas menuju kawasan Syam.</p>
+        <p>Setelah Perjanjian Hudaibiyah, tercipta masa gencatan antara Rasulullah &#65018; dan Quraisy. Ruang yang sebelumnya banyak tersita oleh konflik dengan Makkah mulai terbuka untuk hubungan yang lebih luas. Dalam fase inilah Rasulullah &#65018; mengirim surat kepada sejumlah pemimpin di luar Madinah, termasuk kepada Heraklius, penguasa Romawi.</p>
+        <p>Riwayat Abu Sufyan memberi gambaran yang menarik tentang perjalanan surat tersebut. Ketika sedang berdagang di Syam pada masa gencatan dengan Rasulullah &#65018;, Abu Sufyan dipanggil menghadap Heraklius di Ilya, Jerusalem. Heraklius kemudian menanyainya mengenai nasab Rasulullah &#65018;, para pengikut beliau, perkembangan dakwahnya, dan sifat ajaran yang dibawanya.</p>
+        <p>Surat tersebut bukan sekadar perpindahan pesan dari satu tempat ke tempat lain. Ia memperlihatkan bahwa dakwah Islam mulai berkomunikasi dengan dunia yang berada di luar struktur kabilah Jazirah Arab. Madinah tidak lagi hanya menghadapi tetangga-tetangga terdekatnya, tetapi mulai berbicara kepada kekuatan yang memiliki jaringan politik dan wilayah jauh lebih luas.</p>
+        <p style="margin-bottom:0;">Surat dakwah juga menunjukkan bahwa hubungan dengan kawasan utara tidak dimulai melalui pertempuran. Ia bermula dari penyampaian risalah. Sebelum pasukan bergerak menuju Mu'tah dan Tabuk, pesan telah lebih dahulu menempuh jalan menuju Syam.</p>
+
+        <h3 class="section-head">Mu'tah dan Kehormatan Seorang Utusan</h3>
+        <p>Pada tahun kedelapan hijriah, hubungan dengan kawasan utara memasuki fase yang berbeda. Menurut riwayat-riwayat sirah, al-Harits bin Umair al-Azdi diutus membawa pesan Rasulullah &#65018; menuju penguasa di kawasan Busra.</p>
+        <p>Dalam perjalanan, ia ditangkap dan dibunuh oleh seorang pemimpin yang berhubungan dengan kekuatan Ghassan. Sejumlah sumber sirah, terutama al-Waqidi dan Ibn Sa'd, menyebut peristiwa ini sebagai salah satu latar langsung pemberangkatan pasukan menuju Mu'tah.</p>
+        <p>Pembunuhan seorang utusan bukan sekadar kehilangan satu orang. Seorang pembawa pesan menjalankan tugas atas nama pihak yang mengutusnya. Menyerangnya berarti merusak keamanan misi diplomatik dan menghina pihak yang diwakilinya. Dalam konteks inilah Mu'tah dapat dipahami sebagai respons terhadap pelanggaran serius atas kehormatan dan keamanan seorang utusan.</p>
+
+        <p class="intro-line">Dari Abdullah bin Umar, ia meriwayatkan,</p>
+        <div class="quote-block">
+          <div class="quote-arabic">أمَّر رسولُ اللهِ صلَّى اللهُ عليه وسلَّم في غزوةِ مؤتةَ زيدَ بنَ حارثةَ وقال: ( إنْ قُتِل زيدٌ فجعفرٌ وإنْ قُتِل جعفرٌ فعبدُ اللهِ بنُ رواحةَ )</div>
+          <p class="quote-trans">Rasulullah &#65018; mengangkat Zaid bin Haritsah sebagai panglima dalam Perang Mu'tah, lalu beliau bersabda, "Jika Zaid gugur, maka yang memimpin adalah Ja'far. Jika Ja'far gugur, maka yang memimpin adalah Abdullah bin Rawahah."</p>
+          <p class="quote-trans">Abdullah (bin Umar) berkata, "Aku ikut bersama mereka dalam peperangan itu. Kami mencari Ja'far bin Abi Thalib, lalu menemukannya di antara para syuhada. Pada tubuhnya kami dapati lebih dari tujuh puluh luka akibat sabetan pedang dan tusukan tombak."
+          <span class="quote-cite">HR. al-Bukhari no. 4261</span></p>
+        </div>
+
+        <p>Panji pasukan akhirnya diambil oleh Khalid bin Walid, yang belum ditunjuk sebelumnya sebagai salah satu dari tiga pemimpin tersebut.</p>
+        <p>Riwayat tentang Mu'tah memperlihatkan sebuah ekspedisi yang mahal harganya. Tiga pemimpin yang telah ditentukan Rasulullah &#65018; gugur secara berurutan. Ketika kabar itu disampaikan kepada masyarakat Madinah, Rasulullah &#65018; menyebut nama mereka satu per satu, sementara air mata beliau mengalir.</p>
+        <p style="margin-bottom:0;">Peristiwa ini awalnya tidak harus langsung dibaca sebagai tahap pertama pembebasan Baitul Maqdis. Mu'tah memiliki sebab langsungnya sendiri. Hubungannya dengan perkembangan berikutnya di Syam baru tampak ketika sejarah dibaca dari masa sesudahnya.</p>
+
+        <h3 class="section-head">Tabuk dan Ujian Kesiapan</h3>
+        <p>Setahun setelah Mu'tah, pada 9 H, Rasulullah &#65018; memimpin mobilisasi menuju Tabuk. Kali ini tantangannya tidak hanya berada di ujung perjalanan. Ujian telah dimulai bahkan sebelum pasukan meninggalkan Madinah.</p>
+
+        <div class="quote-block">
+          <div class="quote-arabic">لَّقَد تَّابَ ٱللَّهُ عَلَى ٱلنَّبِىِّ وَٱلْمُهَٰجِرِينَ وَٱلْأَنصَارِ ٱلَّذِينَ ٱتَّبَعُوهُ فِى سَاعَةِ ٱلْعُسْرَةِ</div>
+          <p class="quote-trans">"Sesungguhnya Allah telah menerima taubat Nabi, orang-orang muhajirin dan orang-orang anshar yang mengikuti Nabi dalam masa kesulitan, setelah hati segolongan dari mereka hampir berpaling, kemudian Allah menerima taubat mereka itu. Sesungguhnya Allah Maha Pengasih lagi Maha Penyayang kepada mereka."
+          <span class="quote-cite">QS. At-Taubah: 117</span></p>
+        </div>
+
+        <p>Tabuk berlangsung pada musim yang sangat panas. Perjalanannya jauh, medan yang harus dilalui kering, dan persiapan yang dibutuhkan besar. Dalam riwayat Ka'b bin Malik, Rasulullah &#65018; menyampaikan tujuan perjalanan secara terbuka agar kaum Muslimin dapat mempersiapkan bekal dan kendaraan dengan memadai.</p>
+        <p>Al-Qur'an menggambarkan beratnya mobilisasi itu. Surah at-Taubah menegur orang-orang yang merasa berat untuk berangkat dan memilih melekat pada kenyamanan hidup.</p>
+        <p>Di sinilah Tabuk menjadi ujian loyalitas. Ujian tersebut tidak hanya berbentuk keberanian menghadapi lawan. Ia hadir dalam kemampuan mengalahkan penundaan, meninggalkan kenyamanan, menyiapkan biaya, mencari kendaraan, dan berangkat menuju perjalanan yang hasil akhirnya belum terlihat.</p>
+        <p>Ka'b bin Malik menggambarkan ujian itu dari pengalaman pribadinya. Pada saat mobilisasi berlangsung, ia sebenarnya berada dalam keadaan yang lebih lapang daripada sebelumnya. Namun, ia terus menunda persiapan hingga pasukan berangkat meninggalkannya. Ketika Rasulullah &#65018; kembali, Ka'b memilih berkata jujur dan mengakui bahwa ia tidak memiliki alasan yang dapat membenarkan ketidakhadirannya. Kisahnya kemudian berakhir dengan penerimaan tobat setelah masa penantian yang berat, sebagaimana diabadikan dalam QS. At-Taubah ayat 118.</p>
+        <p>Kisah Ka'b memperlihatkan bahwa loyalitas tidak selalu diuji pada orang yang membenci perjuangan. Ujian juga dapat datang kepada orang baik yang menunda terlalu lama.</p>
+        <p>Mobilisasi menuju Tabuk tidak berakhir dengan pertempuran terbuka. Namun, ketiadaan pertempuran tidak menjadikannya peristiwa tanpa hasil. Pasukan Muslim telah menempuh perjalanan jauh, menunjukkan kesiapan di kawasan utara, dan berinteraksi dengan komunitas-komunitas yang berada di sekitar jalur tersebut.</p>
+        <p style="margin-bottom:0;">Yang dapat kita pegang dengan lebih kokoh adalah beratnya perjalanan, keterbukaan tujuan mobilisasi, kebutuhan persiapan besar, ujian terhadap orang-orang yang enggan berangkat, dan perjalanan Rasulullah &#65018; hingga Tabuk. Dari sana, para ulama dan penulis sejarah membaca peristiwa tersebut sebagai penegasan kesiapan Madinah menghadapi perubahan keamanan di kawasan utara.</p>
+
+        <h3 class="section-head">Perjuangan Lintas Generasi</h3>
+        <p>Sebelum surat-surat dakwah dikirim ke berbagai penguasa, Rasulullah &#65018; telah lebih dahulu menuntaskan urusan keamanan di kawasan utara Madinah melalui penaklukan Khaibar, pada tahun ketujuh hijriah, tidak lama setelah Perjanjian Hudaibiyah. Khaibar adalah kawasan pertanian yang dihuni komunitas Yahudi, dan penaklukannya mengakhiri ancaman yang selama ini datang dari arah tersebut terhadap Madinah.</p>
+        <p>Jika Khaibar, surat kepada Heraklius, Mu'tah, dan Tabuk disusun berdampingan, tampak sebuah pola yang menarik. Dakwah bergerak melampaui Jazirah melalui surat. Keamanan seorang utusan menjadi alasan pemberangkatan pasukan ke Mu'tah. Setahun kemudian, mobilisasi Tabuk membawa kaum Muslimin kembali menuju kawasan utara dalam skala yang lebih besar.</p>
+        <p>Rangkaian ini, ditambah dengan peristiwa-peristiwa pada masa Abu Bakar dan Umar setelahnya, membentuk satu perjuangan lintas generasi menuju pembebasan Baitul Maqdis, sebuah alur panjang yang menyambungkan masa Nabi &#65018; dengan masa para khalifah sesudahnya.</p>
+        <p>Cara membaca ini memberi pemahaman baru pada perjuangan kita, membantu kita melihat kesinambungan sejarah dan mengambil pelajaran tentang bagaimana sebuah perjuangan dapat diwariskan antargenerasi, tanpa harus tuntas di tangan satu orang saja.</p>
+
+        <div class="quote-block">
+          <p class="quote-trans" style="margin-top:0;">"Sesungguhnya pertempuran wilayah utara pada masa Nabi &#65018;, dimulai dari Khaibar, Mu'tah, Tabuk, hingga pengiriman Pasukan Usamah bin Zaid, bukan sekadar respons militer biasa. Melainkan berfungsi sebagai <b>karpet merah</b> dan persiapan strategis mutlak yang digelar oleh Nabi &#65018; untuk melatih umat dan militer Muslim menuju tujuan terbesar, yaitu Pembebasan Baitul Maqdis dan penaklukan Syam."
+          <span class="quote-cite">Dr. Usamah Jum'ah Al-Asykar, dalam Futuh Filisthin, Muassasah Filisthin li ats-Tsaqafah wa an-Nasyr</span></p>
+        </div>
+
+        <p>Surat dakwah ke raja-raja dunia, pertempuran Mu'tah, dan ekspedisi Tabuk dapat dibaca sebagai rangkaian yang memperluas pertemuan Madinah dengan Syam. Hubungannya terletak pada perubahan jangkauan dakwah, diplomasi, dan keamanan.</p>
+        <p>Perhatian terhadap Syam pada fase Madinah akhir bukan kisah sederhana tentang ambisi wilayah. Ia merupakan pertemuan antara dakwah yang meluas, kehormatan yang harus dijaga, perubahan kondisi keamanan, dan umat yang sedang dididik agar siap memenuhi amanahnya.</p>
+        <p style="margin-bottom:0;">Bab berikutnya akan membawa perjalanan ini memasuki fase yang berbeda. Setelah Rasulullah &#65018; wafat, para sahabat mengambil keputusan dalam konteks mereka sendiri. Mereka tidak sekadar mengulang tindakan sebelumnya, tetapi menghadapi keadaan baru dengan tanggung jawab yang kini berada di tangan mereka.</p>
+
+        <div class="reflect-box">
+          <span class="label">Pertanyaan Reflektif</span>
+          <p>Setelah melihat bagaimana Khaibar, surat dakwah, Mu'tah, dan Tabuk menjadi karpet merah menuju pembebasan Baitul Maqdis, persiapan apa dalam hidupmu hari ini yang sedang menggelar jalan bagi sesuatu yang lebih besar, meski hasilnya belum tentu kamu saksikan sendiri?</p>
+        </div>
+
+        <div class="chapternav">
+          <a href="#bab2"><span class="dir">&larr; Sebelumnya</span><div class="ttl">Bab Dua &mdash; Kiblat Awal</div></a>
+          <a href="#bab4" class="next"><span class="dir">Selanjutnya &rarr;</span><div class="ttl">Bab Empat &mdash; Estafet</div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BAB EMPAT ===================== -->
+    <section id="bab4" class="section" style="background:var(--paper); padding-top:60px;">
+      <div class="page">
+        <div class="chapter-hero" role="img" aria-label="Ilustrasi pembuka Bab Empat"></div>
+        <div class="kicker-label">Bab Empat</div>
+        <h1 class="page-title">Pasukan Usamah dan Estafet Sejarah</h1>
+
+        <div class="pull-idea">
+          <span class="label">Gagasan Utama</span>
+          Estafet sejarah adalah kesinambungan tanggung jawab, bukan pewarisan satu blueprint politik.
+        </div>
+
+        <p>Menjelang akhir hayatnya, Rasulullah &#65018; menunjuk Usamah bin Zaid untuk memimpin sebuah pasukan menuju kawasan utara yang terhubung dengan Syam.</p>
+
+        <p class="intro-line">Abdullah bin Umar meriwayatkan,</p>
+        <div class="quote-block">
+          <div class="quote-arabic">بَعَثَ النَّبيُّ صلَّى اللهُ عليه وسلَّم بَعثًا، وأمَّرَ عليهم أُسامةَ بنَ زَيدٍ، فطَعَنَ بَعضُ النَّاسِ في إمارَتِه</div>
+          <p class="quote-trans">Rasulullah &#65018; mengirim sebuah pasukan dan mengangkat Usamah bin Zaid sebagai panglimanya. Sebagian orang kemudian mencela kepemimpinannya. Maka Nabi &#65018; bersabda: "Jika kalian mencela kepemimpinannya, sungguh dahulu kalian juga pernah mencela kepemimpinan ayahnya. Demi Allah, sesungguhnya ayahnya benar-benar layak menjadi seorang pemimpin, dan termasuk orang yang paling aku cintai. Adapun Usamah ini, sungguh ia juga termasuk orang yang paling aku cintai setelah ayahnya."
+          <span class="quote-cite">HR. al-Bukhari no. 3730 dan Muslim no. 2426</span></p>
+        </div>
+
+        <p>Sebagian orang mempersoalkan kepemimpinannya karena usianya yang masih muda. Rasulullah &#65018; tetap mempertahankan keputusan tersebut dan menegaskan kelayakan Usamah, sebagaimana sebelumnya beliau juga membela kepemimpinan ayahnya, Zaid bin Haritsah.</p>
+        <p>Dari keteguhan Rasulullah &#65018; mempertahankan keputusan tersebut, kita dapat membaca satu pelajaran penting. Kepercayaan tidak ditentukan oleh usia dan kedudukan sosial semata. Ia juga dibangun di atas kelayakan, pengalaman, dan keyakinan bahwa seseorang mampu menunaikan amanah yang diberikan kepadanya.</p>
+
+        <div class="quote-block">
+          <p class="quote-trans" style="margin-top:0;">"Ini menjadi pelajaran penting bagi generasi muda tentang peran dan kedudukan mereka dalam mengabdi kepada Islam. Jika kita menelusuri kembali sejarah dakwah Islam pada periode Makkah maupun Madinah, akan ditemukan banyak bukti bahwa para pemuda memegang peranan besar dalam menjaga Al-Qur'an dan Sunnah, mengelola urusan pemerintahan, ikut berjihad di jalan Allah, serta berdakwah menyebarkan Islam."
+          <span class="quote-cite">Dr. Ali Ash-Shalabi, Durus wa al-'Ibar min Infadz ash-Shiddiq Jaisy Usamah</span></p>
+        </div>
+
+        <p>Ketika pasukan itu masih berada dalam tahap persiapan untuk menjalankan misinya, Rasulullah &#65018; wafat. Madinah segera memasuki masa yang sangat berat. Beberapa kelompok mengaku sebagai nabi, sebagian orang menolak membayar zakat, dan sebagian lainnya keluar dari ketaatan kepada pemerintahan Islam.</p>
+        <p style="margin-bottom:0;">Keputusan yang sebelumnya berada di bawah kepemimpinan Nabi &#65018; kini harus ditangani oleh khalifah pertama, di tengah krisis yang belum pernah dihadapi umat ini sebelumnya.</p>
+
+        <h3 class="section-head">Keputusan yang Tidak Ditunda</h3>
+        <p>Dalam keadaan tersebut, muncul pertimbangan agar keberangkatan pasukan Usamah ditunda. Madinah membutuhkan kekuatan untuk menghadapi berbagai ancaman yang datang dari dalam Jazirah.</p>
+        <p>Namun, dalam riwayat sejarah, Abu Bakar menegaskan bahwa pasukan yang telah dipersiapkan Rasulullah &#65018; harus tetap diberangkatkan. Ia tidak mengubah keputusan tersebut hanya karena keadaan telah berganti dan tekanan semakin besar.</p>
+        <p>Yang diteruskan secara langsung oleh Abu Bakar adalah pasukan Usamah, bukan satu proyek politik yang secara eksplisit dirumuskan untuk membebaskan Baitul Maqdis. Di tengah krisis, ia memilih menjalankan sesuatu yang telah ditetapkan Rasulullah &#65018;, sementara persoalan di dalam negeri tetap harus dihadapi secara bersamaan.</p>
+        <p>Dari keputusan tersebut, kita dapat membaca pelajaran tentang keteguhan. Menjaga amanah tidak selalu dilakukan ketika keadaan mendukung. Terkadang, justru pada saat keadaan berubah dan alasan untuk menunda terasa paling kuat, kesungguhan seseorang diuji.</p>
+        <p style="margin-bottom:0;">Pasukan Usamah kemudian diberangkatkan. Abu Bakar sendiri memimpin penanganan krisis di Jazirah Arab.</p>
+
+        <h3 class="section-head">Ketika Keseimbangan Syam Berubah</h3>
+        <p>Setelah krisis di Jazirah mulai terkendali, pemerintahan Abu Bakar mengirim beberapa pasukan menuju Irak dan Syam. Di antara para panglima utama yang bergerak menuju kawasan Syam terdapat Abu Ubaidah bin Jarrah, Amr bin Ash, Yazid bin Abi Sufyan, dan Syurahbil bin Hasanah. Dalam fase awal operasi tersebut, Khalid bin Walid juga dipindahkan dari front Irak untuk memperkuat pasukan Muslim di Syam.</p>
+        <p>Pada 634 M, pasukan Muslim meraih kemenangan penting dalam Pertempuran Ajnadayn. Sumber-sumber sejarah tidak selalu memberikan rincian yang sama mengenai susunan komando kedua pihak. Namun, pertempuran tersebut dapat ditempatkan sebagai salah satu titik penting dalam melemahnya pertahanan Romawi di Palestina.</p>
+        <p>Ketika Abu Bakar wafat, kepemimpinan berpindah kepada Umar bin Khattab. Salah satu keputusan Umar adalah menegaskan kepemimpinan Abu Ubaidah bin Jarrah sebagai komandan utama pasukan Muslim di front Syam.</p>
+        <p>Alasan perubahan komando tersebut disampaikan dalam bentuk yang beragam dalam sumber sejarah. Sebagian pembacaan melihatnya sebagai upaya menjaga disiplin komando dan mencegah ketergantungan umat kepada satu figur. Pembacaan lain menempatkannya dalam konteks administrasi dan kebijakan pemerintahan Umar yang lebih luas.</p>
+        <p>Sejumlah riwayat menggambarkan Khalid menerima perubahan komando dan tetap mengambil bagian dalam operasi berikutnya.</p>
+        <p>Pada 636 M, pasukan Muslim meraih kemenangan besar dalam Pertempuran Yarmuk. Kemenangan tersebut meruntuhkan kekuatan lapangan utama Romawi dan mengubah keseimbangan kekuatan di Syam. Namun, Yarmuk tidak langsung mengakhiri seluruh perlawanan Romawi di kawasan tersebut.</p>
+        <p>Baitul Maqdis termasuk di antara kota-kota yang kemudian menghadapi pengepungan. Dengan demikian, Yarmuk tidak perlu disebut sebagai akhir dari seluruh proses, tetapi sebagai salah satu perubahan besar yang membuka fase berikutnya dalam sejarah Syam.</p>
+        <p>Setiap peristiwa dalam rangkaian ini memiliki sebab dan konteksnya sendiri. Pengiriman pasukan pada masa Abu Bakar, perubahan komando pada masa Umar, Ajnadayn, dan Yarmuk bukanlah langkah-langkah dari satu rencana yang seluruh ujungnya telah diketahui sejak awal.</p>
+        <p style="margin-bottom:0;">Jika dibaca secara retrospektif, rangkaian tersebut memperlihatkan kesinambungan keterlibatan pemerintahan Islam dengan kawasan Syam. Namun, pola itu terlihat dari masa sesudahnya.</p>
+
+        <h3 class="section-head">Ketika Baitul Maqdis Diserahkan</h3>
+        <p>Setelah Yarmuk, pasukan Muslim melanjutkan operasi terhadap kota-kota yang masih bertahan. Menurut sejumlah kronik, Baitul Maqdis dikepung selama beberapa bulan. Kota ini memiliki pertahanan yang kuat dan kedudukan penting dalam kawasan tersebut.</p>
+        <p>Sejumlah riwayat sejarah menyebut bahwa Patriark Sophronius, pemimpin gerejawi kota, meminta agar penyerahan diterima langsung oleh Khalifah Umar. Permintaan ini kemudian disampaikan kepada Madinah, dan Umar datang menuju Baitul Maqdis untuk menerima penyerahan kota.</p>
+        <p>Penanggalan peristiwa tersebut tidak sepenuhnya sama dalam berbagai rekonstruksi sejarah. Karena itu, waktu penyerahannya lebih aman ditempatkan sekitar 637 sampai 638 M, bukan pada satu angka tahun yang dianggap mutlak.</p>
+        <p>Citra Umar sebagai pemimpin yang hidup sederhana telah menjadi bagian penting dari cara generasi berikutnya mengingat peristiwa tersebut. Dalam tradisi Islam, penyerahan sebuah kota besar tidak dikenang melalui pesta kemegahan seorang penakluk, tetapi melalui gambaran seorang khalifah yang tidak membiarkan kemenangan menjauhkannya dari kesederhanaan.</p>
+        <p style="margin-bottom:0;">Sumber-sumber sejarah juga menyebut adanya jaminan keamanan bagi penduduk Aelia dalam konteks penyerahan kota. Jaminan tersebut hadir dalam beberapa versi dengan redaksi dan klausul yang tidak sepenuhnya sama. Dokumen ini perlu dibedakan dari teks yang berkembang kemudian dan dikenal sebagai al-Syuruth al-'Umariyyah, yaitu kumpulan ketentuan mengenai komunitas non-Muslim.</p>
+
+        <p class="intro-line" style="margin-top:24px;">Teks Jaminan Keamanan Aelia:</p>
+        <div class="quote-block">
+          <p class="quote-trans" style="margin-top:0;">"Inilah jaminan keamanan yang diberikan oleh hamba Allah, Umar, Amirul Mukminin, kepada penduduk Ilya' (Al Quds/Jerusalem). Beliau memberikan jaminan keamanan bagi jiwa, harta, gereja-gereja, salib-salib, orang yang sakit maupun yang sehat, serta seluruh pemeluk agama mereka. Gereja-gereja mereka tidak boleh ditempati, tidak boleh dihancurkan, tidak boleh dikurangi sedikit pun bangunan atau lahannya. Mereka tidak boleh dipaksa meninggalkan agama mereka, dan tidak seorang pun dari mereka boleh disakiti.</p>
+          <p class="quote-trans">Penduduk Ilya' wajib membayar jizyah, sebagaimana yang dibayarkan oleh penduduk kota-kota lain. Siapa pun di antara mereka yang keluar dari kota, maka keselamatan jiwa dan hartanya dijamin hingga tiba di tempat yang aman. Adapun yang tetap tinggal, maka ia juga berada dalam jaminan keamanan dan berkewajiban membayar jizyah sebagaimana penduduk Ilya' lainnya.</p>
+          <p class="quote-trans">Atas seluruh isi dokumen ini berlaku perjanjian Allah, jaminan Rasul-Nya, jaminan para khalifah, dan jaminan seluruh kaum mukminin, selama mereka menunaikan kewajiban membayar jizyah."</p>
+        </div>
+
+        <h3 class="section-head">Estafet Tanpa Wasiat Politik Tunggal</h3>
+        <p>Jika setiap peristiwa ini dipandang secara terpisah, ia tampak sebagai keputusan-keputusan yang berdiri sendiri: penunjukan Usamah, keteguhan Abu Bakar di tengah krisis, perubahan komando dan rangkaian kemenangan pada masa Umar, hingga penyerahan Baitul Maqdis. Namun ketika disusun dalam satu rangkaian sejarah, arah perjalanannya terlihat jelas, menuju Syam, hingga akhirnya Baitul Maqdis berada di bawah naungan Islam.</p>
+        <p>Rasulullah &#65018; memulai langkah pertama dengan mengirim pasukan Usamah menuju perbatasan Syam. Abu Bakar, meski Madinah sedang dilanda krisis, tetap bersikeras memberangkatkan pasukan itu, lalu memperluas ekspedisi ke Irak dan Syam setelah Jazirah Arab berhasil dipersatukan. Umar melanjutkan estafet tersebut dengan mengatur strategi dan menunjuk para panglima terbaik, hingga akhirnya datang sendiri menerima penyerahan Baitul Maqdis.</p>
+        <p>Memang tidak ada riwayat yang menyebut Rasulullah &#65018; menyusun sebuah blueprint politik yang secara eksplisit memerintahkan pembebasan Baitul Maqdis. Namun arah perjalanan sejarah menunjukkan bahwa setiap keputusan besar itu saling menyambung, menjadi mata rantai yang pada akhirnya mengantarkan kaum Muslimin kepada pembebasan kota suci tersebut. Yang berpindah dari fase kenabian menuju masa Khulafa' al-Rasyidin bukan hanya tanggung jawab kepemimpinan semata, melainkan juga arah yang sama, yang terus dijaga oleh setiap generasi yang menerimanya.</p>
+        <p>Estafet dalam bab ini bukan sekadar kesinambungan nilai dan kepemimpinan, tetapi juga kesinambungan sebuah misi besar. Usamah tidak menghadapi persoalan yang sama dengan Umar, sebagaimana Abu Bakar tidak memimpin dalam keadaan yang sama dengan Rasulullah &#65018;. Namun, di tengah perubahan situasi dan tantangan yang terus berkembang, mereka tetap menjaga arah perjuangan yang sama.</p>
+        <p>Karena itulah, pembebasan Baitul Maqdis tidak lahir dari satu keputusan besar yang berdiri sendiri, melainkan merupakan buah dari rangkaian kepemimpinan yang saling menyambung, hingga cita-cita itu terwujud pada masa Umar bin Khattab.</p>
+        <p style="margin-bottom:0;">Perjalanan panjang ini, dari sebuah pasukan yang dipimpin seorang pemuda hingga penyerahan sebuah kota kepada seorang khalifah yang dikenang karena kesederhanaannya, mengingatkan kita bahwa sejarah besar jarang dibentuk oleh satu keputusan yang menentukan segalanya. Karena itulah, pembebasan Baitul Maqdis bukanlah hasil kerja satu orang atau satu masa, melainkan buah dari estafet kepemimpinan yang dijaga dengan istiqamah dari satu generasi ke generasi berikutnya.</p>
+
+        <div class="reflect-box">
+          <span class="label">Pertanyaan Reflektif</span>
+          <p>Setelah melihat bahwa Usamah, Abu Bakar, para panglima, dan Umar menghadapi keadaan yang berbeda, apa yang dapat kita pelajari tentang menjaga arah tanpa harus mengulang cara yang sama?</p>
+        </div>
+
+        <div class="note-box">
+          <b>Catatan Istilah.</b> Dalam literatur berbahasa Inggris, <em>al-Syuruth al-'Umariyyah</em> sering disebut <em>Pact of Umar</em>. Istilah ini tidak selalu merujuk pada jaminan keamanan yang diberikan kepada penduduk Aelia dalam konteks penyerahan Baitul Maqdis.
+        </div>
+
+        <div class="chapternav">
+          <a href="#bab3"><span class="dir">&larr; Sebelumnya</span><div class="ttl">Bab Tiga &mdash; Horizon Syam</div></a>
+          <a href="#epilog" class="next"><span class="dir">Selanjutnya &rarr;</span><div class="ttl">Epilog</div></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="page">
+      <!-- ===================== EPILOG ===================== -->
+      <section id="epilog" class="section">
+        <div class="kicker-label">Epilog</div>
+        <h1 class="page-title">Yang Telah Kita Pelajari Bersama</h1>
+
+        <p>Perjalanan ini dimulai dari sebuah malam, ketika Al-Aqsa menjadi persinggahan sebelum langit dibuka, dan berakhir pada sebuah kota yang diserahkan kepada seorang khalifah yang datang dengan kesederhanaan. Di antara keduanya, terbentang kurang dari dua dekade sejarah yang melibatkan seorang Nabi &#65018;, para sahabatnya, dan generasi yang melanjutkan amanah tersebut.</p>
+        <p>Ada sesuatu yang berubah dalam cara memandang Al-Aqsa bagi siapa pun yang menelusuri keempat bab ini dengan saksama. Al-Aqsa bukan lagi sekadar nama tempat yang muncul dalam berita atau simbol yang diperebutkan maknanya oleh berbagai kepentingan hari ini.</p>
+        <p>Ia adalah simpul tempat risalah para nabi bertemu, kiblat awal kaum Muslimin sebelum mereka diperintahkan menghadap Ka'bah, serta bagian dari horizon dakwah yang semakin nyata pada fase akhir kehidupan Rasulullah &#65018;.</p>
+        <p>Kedudukan sucinya berakar pada wahyu dan ditegaskan oleh riwayat-riwayat yang sahih. Karena itu, nilainya tidak bergantung pada naik-turunnya kepentingan politik pada zaman mana pun, termasuk zaman kita sendiri.</p>
+        <p>Namun, setelah menelusuri seluruh perjalanan ini, kita dapat melihat adanya satu benang merah yang menghubungkan setiap peristiwa. Memang benar, perpindahan kiblat, Perang Mu'tah, Tabuk, pengangkatan Usamah, keteguhan Abu Bakar, hingga kepemimpinan Umar lahir dari konteks dan tantangannya masing-masing, dan tidak satu pun riwayat menyebutkan bahwa seluruhnya dirancang sebagai satu skenario politik yang dirinci sejak awal.</p>
+        <p>Namun ketika seluruh peristiwa itu dirangkai dalam satu alur sejarah, arah perjalanannya terlihat jelas: semakin mendekatkan kaum Muslimin kepada Syam, hingga akhirnya Baitul Maqdis berada di bawah naungan Islam. Membaca arah ini adalah membaca pola secara retrospektif, sebuah cara memandang yang bernilai untuk mengambil pelajaran, namun tetap berbeda kedudukannya dari nash yang menjadi pijakan setiap bab dalam buku ini.</p>
+        <p>Karena itu, pembebasan Baitul Maqdis bukanlah hasil dari satu keputusan yang berdiri sendiri, melainkan puncak dari rangkaian langkah yang saling menyambung: Rasulullah &#65018; meletakkan orientasi dan membuka jalannya, Abu Bakar memastikan arah itu tidak terhenti meskipun dihadang krisis besar, dan Umar melanjutkan momentum tersebut hingga Allah menganugerahkan penyerahan Baitul Maqdis kepada kaum Muslimin.</p>
+        <p>Pada akhirnya, muncul pertanyaan: dari mana seseorang mulai mengambil bagian dalam estafet ini?</p>
+        <p>Jawabannya: mulai ikut serta, dari manapun posisinya. Usamah tidak memulai perjalanannya dengan membebaskan sebuah kota. Ia memulainya dengan menerima amanah kepemimpinan yang dipercayakan kepadanya, meski usianya masih muda.</p>
+        <p>Keteguhan Abu Bakar pun tidak perlu dibaca sebagai bagian dari sebuah skenario besar tentang Syam. Yang tampak jelas adalah keputusannya untuk tidak menunda amanah yang telah ditetapkan Rasulullah &#65018;, meskipun keadaan Madinah sedang sangat sulit.</p>
+        <p>Mengambil bagian dalam estafet semacam ini, bagi kita hari ini, mungkin dimulai dari sesuatu yang jauh lebih sederhana: kesungguhan menjaga apa yang telah dipercayakan kepada kita, di tempat dan zaman yang kita jalani sendiri, tanpa harus menunggu keadaan menjadi sempurna terlebih dahulu.</p>
+        <p>Buku ini ditutup bukan dengan ajakan menyalin sejarah, sebab keadaan, pelaku, dan tantangan tidak pernah kembali dalam bentuk yang sama. Yang dapat diteruskan adalah kualitas manusia yang membentuknya: cara mereka menjaga amanah, membaca keadaan, dan mengambil keputusan di tengah keterbatasan.</p>
+
+        <h3 class="section-head">Tentang Kelanjutan Ikhtiar Ini</h3>
+        <p style="margin-bottom:0;">Semangat menjaga dan meneruskan amanah sejarah inilah yang melandasi berbagai ruang belajar yang sedang dibangun untuk generasi setelah kita.</p>
+      </section>
+
+      <!-- ===================== TENTANG GENSA ===================== -->
+      <section id="tentang-gensa" class="section">
+        <div class="kicker-label">Penerbit</div>
+        <h1 class="page-title">Tentang GenSa</h1>
+        <p>GenSa, kependekan dari Generasi Saladin, adalah inisiatif edukasi dan literasi yang dikembangkan oleh Yayasan Saladin Peradaban Berilmu. Melalui berbagai program pembelajaran, media, dan ruang kolaborasi, GenSa berupaya mendekatkan generasi muda kepada sejarah, sirah, dan warisan peradaban Islam.</p>
+        <p>Ikhtiar ini berangkat dari keyakinan bahwa sejarah tidak cukup hanya dikenang. Ia perlu dipahami secara jujur, ditelusuri melalui sumber yang dapat dipertanggungjawabkan, dan dibaca sebagai bekal untuk menghadapi persoalan zaman.</p>
+        <p>Semangat tersebut terangkum dalam kalimat yang menjadi pijakan GenSa:</p>
+        <p style="text-align:center; font-family:var(--display); font-weight:900; color:var(--maroon); font-size:1.3em; margin:26px 0;">Learn History. Repeat Victory.</p>
+        <p>Kalimat ini bukan ajakan untuk menyalin peristiwa masa lalu secara harfiah. Setiap zaman memiliki keadaan, pelaku, dan tantangannya sendiri. Yang dapat dipelajari dan diteruskan adalah kualitas manusia serta prinsip yang memungkinkan suatu generasi menghadapi zamannya: kesungguhan dalam belajar, keteguhan menjaga amanah, keberanian mengambil tanggung jawab, dan kemampuan bertindak di tengah keterbatasan.</p>
+        <p style="margin-bottom:0;">Buku yang berada di tangan pembaca merupakan salah satu bagian dari ikhtiar tersebut. GenSa berupaya menyajikan sejarah melalui pendekatan yang teliti terhadap sumber, tanpa menjadikannya terasa jauh dari pembaca umum.</p>
+
+        <h3 class="section-head">Program dan Kanal GenSa</h3>
+        <p><b style="color:var(--maroon); font-family:var(--display);">GenSa TV</b><br>
+        Menghadirkan konten video mengenai sejarah, sirah, pembentukan karakter, dan peradaban Islam melalui berbagai seri dokumenter, pembelajaran, podcast, dan refleksi.</p>
+        <p><b style="color:var(--maroon); font-family:var(--display);">GenSa Class</b><br>
+        Program pembelajaran daring yang membahas tema-tema sejarah dan peradaban secara lebih mendalam, terarah, dan terstruktur.</p>
+        <p><b style="color:var(--maroon); font-family:var(--display);">Rumah Literasi GenSa</b><br>
+        Dirintis sebagai ruang baca, belajar, dan diskusi yang mempertemukan generasi muda dengan literatur sejarah dan peradaban Islam.</p>
+
+        <h3 class="section-head">Kontak dan Tautan Resmi</h3>
+        <div class="contact-row"><div class="k">Website</div><div>gensaladin.id</div></div>
+        <div class="contact-row"><div class="k">Instagram</div><div>@gen.saladin</div></div>
+        <div class="contact-row" style="border-bottom:none;"><div class="k">YouTube</div><div>GenSa TV</div></div>
+      </section>
+
+      <!-- ===================== GLOSARIUM ===================== -->
+      <section id="glosarium" class="section">
+        <div class="kicker-label">Rujukan Istilah</div>
+        <h1 class="page-title">Glosarium</h1>
+
+        <div class="gloss-entry"><div class="gloss-term">Aelia</div>Nama yang digunakan untuk Jerusalem/Baitul Maqdis dalam konteks administratif pada periode penyerahan kota kepada Khalifah Umar bin Khattab, sekitar 637&ndash;638 M.</div>
+        <div class="gloss-entry"><div class="gloss-term">Ajnadayn</div>Nama pertempuran antara pasukan Muslim dan Romawi pada 634 M, salah satu titik penting dalam melemahnya pertahanan Romawi di Palestina, mendahului Pertempuran Yarmuk.</div>
+        <div class="gloss-entry"><div class="gloss-term">al-Syuruth al-'Umariyyah</div>Kumpulan ketentuan mengenai kedudukan komunitas non-Muslim (ahl al-dzimmah) yang berkembang dan dikodifikasi pada periode setelah masa Umar bin Khattab. Perlu dibedakan dari Jaminan Keamanan Umar bagi Penduduk Aelia.</div>
+        <div class="gloss-entry"><div class="gloss-term">Baitul Maqdis</div>Istilah dalam literatur Islam untuk kawasan suci atau kota Al Quds/Jerusalem. Cakupannya dapat berbeda sesuai konteks sumber.</div>
+        <div class="gloss-entry"><div class="gloss-term">Estafet</div>Dalam buku ini, istilah yang menggambarkan kesinambungan tanggung jawab, nilai, dan keputusan kepemimpinan dari satu generasi ke generasi berikutnya.</div>
+        <div class="gloss-entry"><div class="gloss-term">Hadits sahih</div>Riwayat perkataan, perbuatan, atau ketetapan Rasulullah &#65018; yang telah melalui penilaian ketat para ulama hadits dan dinyatakan memenuhi syarat kesahihan sanad dan matan.</div>
+        <div class="gloss-entry"><div class="gloss-term">Isra'</div>Perjalanan malam Rasulullah &#65018; dari Masjidil Haram di Makkah menuju Masjidil Aqsa di Baitul Maqdis, sebagaimana disebutkan dalam QS Al-Isra' [17]: 1.</div>
+        <div class="gloss-entry"><div class="gloss-term">Istinbath</div>Proses penyimpulan atau penggalian makna dan hukum dari nash oleh para ulama, berbeda dari nash itu sendiri.</div>
+        <div class="gloss-entry"><div class="gloss-term">Kiblat</div>Arah yang dituju umat Islam ketika melaksanakan salat. Awalnya menghadap Baitul Maqdis, kemudian dipindahkan menghadap Ka'bah berdasarkan QS Al-Baqarah [2]: 142-144.</div>
+        <div class="gloss-entry"><div class="gloss-term">Khulafa' al-Rasyidin</div>Empat khalifah pertama dalam sejarah Islam setelah wafatnya Rasulullah &#65018;: Abu Bakar, Umar bin Khattab, Utsman bin Affan, dan Ali bin Abi Thalib.</div>
+        <div class="gloss-entry"><div class="gloss-term">Mi'raj</div>Perjalanan naiknya Rasulullah &#65018; ke langit dari Baitul Maqdis, kelanjutan dari peristiwa Isra'.</div>
+        <div class="gloss-entry"><div class="gloss-term">Mu'tah</div>Ekspedisi militer pada tahun kedelapan hijriah. Sejumlah sumber sirah mengaitkan pemberangkatannya dengan terbunuhnya al-Harits bin Umair al-Azdi.</div>
+        <div class="gloss-entry"><div class="gloss-term">Nash</div>Teks eksplisit dari Al-Qur'an dan hadits sahih, sebagai lawan dari istinbath atau pembacaan pola.</div>
+        <div class="gloss-entry"><div class="gloss-term">Patriark</div>Gelar pemimpin gerejawi tertinggi dalam tradisi Kristen tertentu, seperti Sophronius yang memimpin Baitul Maqdis pada masa penyerahan kota.</div>
+        <div class="gloss-entry"><div class="gloss-term">Riddah</div>Gerakan kemurtadan dan penolakan sebagian kelompok terhadap otoritas pemerintahan Islam setelah wafatnya Rasulullah &#65018;.</div>
+        <div class="gloss-entry"><div class="gloss-term">Riwayat</div>Laporan atau catatan mengenai suatu peristiwa yang diteruskan dari generasi ke generasi, dengan tingkat kekuatan yang bervariasi.</div>
+        <div class="gloss-entry"><div class="gloss-term">Sanad</div>Rangkaian perawi yang menyampaikan suatu riwayat atau hadits, digunakan untuk menilai kekuatan dan keabsahan riwayat tersebut.</div>
+        <div class="gloss-entry"><div class="gloss-term">Sirah</div>Catatan sejarah kehidupan Rasulullah &#65018;, mencakup perjalanan hidup, dakwah, dan peristiwa-peristiwa penting di dalamnya.</div>
+        <div class="gloss-entry"><div class="gloss-term">Syam</div>Kawasan regional historis yang luas, mencakup area yang kini dikenal sebagai Palestina, Suriah, Yordania, dan Lebanon.</div>
+        <div class="gloss-entry"><div class="gloss-term">Tabuk</div>Mobilisasi besar yang dipimpin langsung oleh Rasulullah &#65018; menuju perbatasan Syam pada tahun kesembilan hijriah.</div>
+        <div class="gloss-entry" style="border-bottom:none;"><div class="gloss-term">Yarmuk</div>Pertempuran besar antara pasukan Muslim dan Romawi pada 636 M, yang meruntuhkan kekuatan lapangan utama Romawi di Syam.</div>
+      </section>
+
+      <!-- ===================== DAFTAR RUJUKAN ===================== -->
+      <section id="rujukan" class="section">
+        <div class="kicker-label">Bibliografi</div>
+        <h1 class="page-title">Daftar Rujukan</h1>
+
+        <div class="ref-cat">
+          <h4>Al-Qur'an dan Tafsir</h4>
+          <div class="ref-item">Kementerian Agama Republik Indonesia. <em>Al-Qur'an dan Terjemahannya: Edisi Penyempurnaan 2019</em>. Jakarta, 2019.</div>
+          <div class="ref-item">Al-Tabari, Muhammad ibn Jarir. <em>Jami' al-Bayan 'an Ta'wil Ay al-Qur'an.</em></div>
+          <div class="ref-item">Ibn Katsir, Ismail ibn Umar. <em>Tafsir al-Qur'an al-'Azim.</em></div>
+        </div>
+
+        <div class="ref-cat">
+          <h4>Hadits Sahih</h4>
+          <div class="ref-item">Al-Bukhari, Muhammad ibn Ismail. <em>Sahih al-Bukhari.</em> Hadits no. 7, 1189, 3366, 4261&ndash;4262, 4418, dan 4469.</div>
+          <div class="ref-item">Muslim ibn al-Hajjaj. <em>Sahih Muslim.</em> Hadits no. 162a, 172, 520a, 1397a, dan 2769a&ndash;b.</div>
+        </div>
+
+        <div class="ref-cat">
+          <h4>Sirah dan Sejarah Awal Islam</h4>
+          <div class="ref-item">Al-Waqidi, Muhammad ibn Umar. <em>al-Maghazi.</em></div>
+          <div class="ref-item">Ibn Sa'd, Muhammad. <em>al-Tabaqat al-Kubra.</em></div>
+          <div class="ref-item">Al-Tabari, Muhammad ibn Jarir. <em>Tarikh al-Rusul wa al-Muluk.</em></div>
+          <div class="ref-item">Al-Baladzuri, Ahmad ibn Yahya. <em>Futuh al-Buldan.</em></div>
+          <div class="ref-item">Ibn Katsir, Ismail ibn Umar. <em>al-Bidayah wa al-Nihayah.</em></div>
+        </div>
+
+        <div class="ref-cat">
+          <h4>Fiqh Klasik</h4>
+          <div class="ref-item">Ibn Qayyim al-Jawziyyah. <em>Ahkam Ahl al-Dhimmah.</em> Ed. Yusuf al-Bakri dan Ahmad al-'Ararūri. Dammam: Dar Ramadi li-l-Nashr, 1418 H/1997 M.</div>
+        </div>
+
+        <div class="ref-cat">
+          <h4>Kajian Modern</h4>
+          <div class="ref-item">Levy-Rubin, Milka. "Shurut Umar and Its Alternatives: The Legal Debate throughout the Eighth and Ninth Centuries over the Status of the Dhimmis." <em>Jerusalem Studies in Arabic and Islam</em> 30 (2005): 170&ndash;206.</div>
+          <div class="ref-item">Alkiek, Tesneem. <em>Religious Minorities under Muslim Rule.</em> Yaqeen Institute for Islamic Research, 2017.</div>
+          <div class="ref-item">Al-Asykar, Usamah Jum'ah. <em>Futuh Filisthin.</em> Muassasah Filisthin li ats-Tsaqafah wa an-Nasyr.</div>
+        </div>
+
+        <div class="note-box" style="margin-top:30px;">
+          <b>Catatan Penelusuran.</b> Nomor hadits dan keterangan kitab atau bab dicantumkan pada akhir masing-masing bab. Penomoran dapat berbeda antar-edisi, sehingga pembaca disarankan menelusuri riwayat melalui nama koleksi, kitab, perawi, dan potongan matan.
+        </div>
+      </section>
+    </div>
+
+    <footer id="footer">
+      <div class="tag">GENSALADIN.ID</div>
+      <div style="margin-top:6px;">Learn History. Repeat Victory.</div>
+      <div style="margin-top:16px; opacity:.7;">&copy; 2026 Yayasan Saladin Peradaban Berilmu</div>
+    </footer>
+
+  </main>
+</div>
+
+<div id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr;</div>
+
+<script>
+// Sidebar toggle
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const menuBtn = document.getElementById('menuBtn');
+function openSidebar(){ sidebar.classList.add('open'); overlay.classList.add('show'); }
+function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+menuBtn.addEventListener('click', ()=>{
+  sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+});
+document.querySelectorAll('#tocNav a').forEach(a=>{
+  a.addEventListener('click', ()=>{ if(window.innerWidth<=900) closeSidebar(); });
+});
+
+// Scroll progress + back to top + active TOC link
+const progress = document.getElementById('progress');
+const toTop = document.getElementById('toTop');
+const sections = document.querySelectorAll('main section[id]');
+const tocLinks = document.querySelectorAll('#tocNav a');
+
+function onScroll(){
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progress.style.width = scrolled + '%';
+  toTop.classList.toggle('show', h.scrollTop > 600);
+
+  let current = '';
+  sections.forEach(sec=>{
+    const rect = sec.getBoundingClientRect();
+    if(rect.top <= 140 && rect.bottom >= 140) current = sec.id;
+  });
+  tocLinks.forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+  });
+}
+document.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+// Font size control
+function setFont(size){
+  document.body.classList.remove('fs-sm','fs-lg');
+  if(size==='sm') document.body.classList.add('fs-sm');
+  if(size==='lg') document.body.classList.add('fs-lg');
+  localStorage.setItem('aqsa-fontsize', size);
+}
+const savedFont = localStorage.getItem('aqsa-fontsize');
+if(savedFont) setFont(savedFont);
+</script>
+
+</body>
+</html>

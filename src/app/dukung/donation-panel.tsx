@@ -1,16 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { IconArrow } from "@/components/icons";
 
 type FundraisingItem = {
   label: string;
-  target: number;
-  raised: number;
   desc: string;
 };
-
-const formatRupiah = (n: number) => "Rp " + n.toLocaleString("id-ID");
 
 export default function DonationPanel({
   items,
@@ -54,12 +51,14 @@ export default function DonationPanel({
         <span className="font-semibold text-ink-mid">
           {items[activeCategory].label}
         </span>{" "}
-        — {formatRupiah(items[activeCategory].raised)} terkumpul dari
-        target {formatRupiah(items[activeCategory].target)}.
+        — {items[activeCategory].desc}
       </p>
-      <button className="flex items-center gap-2 bg-maroon px-8 py-3.5 text-[15px] font-bold text-white hover:bg-maroon-light">
+      <Link
+        href="/kampanye"
+        className="flex w-fit items-center gap-2 bg-maroon px-8 py-3.5 text-[15px] font-bold text-white hover:bg-maroon-light"
+      >
         Dukung Sekarang <IconArrow />
-      </button>
+      </Link>
     </div>
   );
 }
