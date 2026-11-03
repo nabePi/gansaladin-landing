@@ -15,6 +15,14 @@ const ebooks = [
     cover: "/images/ebook-cover-alaqsa.jpg",
     href: "/ebook/al-aqsa-dan-horizon-syam",
   },
+  {
+    judul: "The Fitrah Code — Fase I: The Blueprint",
+    penulis: "Tim GenSa",
+    abstrak:
+      "30 hari merancang peta kemenanganmu. Fase pertama menelusuri kata kunci Al-Qur'an tentang manusia, yaitu fitrah, ruh dan nafs, insan, alast, hanif, serta basyar, untuk membaca ulang rancangan diri sebelum berbicara tentang misi dan peradaban.",
+    cover: "/images/ebook-cover-fitrah-code.png",
+    href: "/ebook/the-fitrah-code",
+  },
 ];
 
 export default function EbookPage() {

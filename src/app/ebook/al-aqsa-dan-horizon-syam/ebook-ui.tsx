@@ -33,14 +33,16 @@ export function PullIdea({
   label,
   children,
 }: {
-  label: string;
+  label?: string;
   children: ReactNode;
 }) {
   return (
     <div className="my-6 rounded-md border border-[#cfae5c] border-l-4 border-l-[#A8842B] bg-[linear-gradient(135deg,#F3EAD6,#efe2c4)] px-6 py-5 text-[1.02em] text-[#4a0d16] italic">
-      <span className="mb-2 block text-[10.5px] font-bold tracking-[1.5px] text-[#A8842B] uppercase not-italic">
-        {label}
-      </span>
+      {label && (
+        <span className="mb-2 block text-[10.5px] font-bold tracking-[1.5px] text-[#A8842B] uppercase not-italic">
+          {label}
+        </span>
+      )}
       {children}
     </div>
   );
