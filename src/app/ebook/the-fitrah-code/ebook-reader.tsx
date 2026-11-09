@@ -136,7 +136,7 @@ export default function EbookReader() {
       <div className="flex min-h-screen pt-[136px]">
         {/* Sidebar */}
         <aside
-          className={`fixed top-[136px] bottom-0 left-0 z-[800] w-[82%] max-w-[320px] overflow-y-auto border-r border-[#e4d7ba] bg-[#FFFEFB] py-[22px] pb-[60px] transition-transform duration-300 md:w-[300px] md:max-w-none md:translate-x-0 ${
+          className={`fixed top-[136px] bottom-0 left-0 z-[800] w-[82%] max-w-[320px] overflow-y-auto border-r border-[#e4d7ba] bg-[#FFFEFB] py-[22px] pb-[60px] transition-transform duration-300 md:sticky md:top-[136px] md:bottom-auto md:h-[calc(100vh-136px)] md:w-[300px] md:max-w-none md:shrink-0 md:translate-x-0 md:self-start ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -169,7 +169,7 @@ export default function EbookReader() {
         </aside>
 
         {/* Main content */}
-        <main ref={mainRef} className="min-w-0 flex-1 md:ml-[300px]">
+        <main ref={mainRef} className="min-w-0 flex-1">
           <section
             id="cover"
             className="relative flex min-h-[calc(100vh-136px)] flex-col items-center justify-center overflow-hidden px-5 py-10 text-center text-white"
