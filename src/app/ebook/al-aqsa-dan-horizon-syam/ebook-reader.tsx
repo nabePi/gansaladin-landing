@@ -48,6 +48,7 @@ export default function EbookReader() {
   const [progress, setProgress] = useState(0);
   const [showToTop, setShowToTop] = useState(false);
   const [activeId, setActiveId] = useState("cover");
+  const [sidebarBottom, setSidebarBottom] = useState(0);
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,6 +57,14 @@ export default function EbookReader() {
       const scrollable = h.scrollHeight - h.clientHeight;
       setProgress(scrollable > 0 ? (h.scrollTop / scrollable) * 100 : 0);
       setShowToTop(h.scrollTop > 600);
+
+      const footers = document.querySelectorAll("footer");
+      const siteFooter = footers[footers.length - 1];
+      setSidebarBottom(
+        siteFooter
+          ? Math.max(0, window.innerHeight - siteFooter.getBoundingClientRect().top)
+          : 0,
+      );
 
       const sections = mainRef.current?.querySelectorAll("section[id]");
       sections?.forEach((sec) => {
@@ -137,7 +146,8 @@ export default function EbookReader() {
       <div className="flex min-h-screen pt-[136px]">
         {/* Sidebar */}
         <aside
-          className={`fixed top-[136px] bottom-0 left-0 z-[800] w-[82%] max-w-[320px] overflow-y-auto border-r border-[#e4d7ba] bg-[#FFFEFB] py-[22px] pb-[60px] transition-transform duration-300 md:sticky md:top-[136px] md:bottom-auto md:h-[calc(100vh-136px)] md:w-[300px] md:max-w-none md:shrink-0 md:translate-x-0 md:self-start ${
+          style={{ bottom: sidebarBottom }}
+          className={`fixed top-[136px] left-0 z-[800] w-[82%] max-w-[320px] overflow-y-auto border-r border-[#e4d7ba] bg-[#FFFEFB] py-[22px] pb-[60px] transition-transform duration-300 md:w-[300px] md:max-w-none md:translate-x-0 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -170,7 +180,7 @@ export default function EbookReader() {
         </aside>
 
         {/* Main content */}
-        <main ref={mainRef} className="min-w-0 flex-1">
+        <main ref={mainRef} className="min-w-0 flex-1 md:ml-[300px]">
           <section
             id="cover"
             className="relative flex min-h-[calc(100vh-136px)] flex-col items-center justify-center overflow-hidden px-5 py-10 text-center text-white"
