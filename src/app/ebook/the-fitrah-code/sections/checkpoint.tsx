@@ -24,7 +24,7 @@ export function Checkpoint() {
         <li>{`Dorongan apa yang paling sering memimpin hidupku?`}</li>
         <li>{`Dalam hal apa aku sering mencari makna di tempat yang salah, dan apa yang sebenarnya sedang aku lupakan?`}</li>
         <li>{`Kapan terakhir kali aku benar-benar sadar bahwa Allah adalah Rabb-ku?`}</li>
-        <li>{`Prinsip apa yang perlu ku jaga meski tidak selalu populer?`}</li>
+        <li>{`Prinsip apa yang perlu kujaga meski tidak selalu populer?`}</li>
         <li>{`Bagian mana dari diriku yang selama ini paling aku abaikan, tubuh, akal, atau hati?`}</li>
       </CheckpointList>
       <ReflectBox label="Penutup Fase 1">
@@ -32,6 +32,7 @@ export function Checkpoint() {
       </ReflectBox>
       <ChapterNav
         prev={{ href: "#hari6", label: "Sebelumnya", title: "Hari 6 — Basyar dan Ruh" }}
+        next={{ href: "ebook-the-fitrah-code-fase-2.html", label: "Fase Berikutnya", title: "Fase II — The Glitch" }}
       />
     </EbookSection>
   );
