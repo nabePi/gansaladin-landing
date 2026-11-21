@@ -119,7 +119,7 @@ export default function Footer() {
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-7">
           <div className="text-[13px] text-white/30">
-            &copy; 2025 Yayasan Saladin Peradaban Berilmu. Hak cipta
+            &copy; 2026 Yayasan Saladin Peradaban Berilmu. Hak cipta
             dilindungi.
           </div>
           <div className="text-[13px] text-white/30">
