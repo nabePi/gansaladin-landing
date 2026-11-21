@@ -23,6 +23,14 @@ const ebooks = [
     cover: "/images/ebook-cover-fitrah-code.png",
     href: "/ebook/the-fitrah-code",
   },
+  {
+    judul: "The Fitrah Code — Fase II: The Glitch",
+    penulis: "Tim GenSa",
+    abstrak:
+      "Fase kedua mengenali gangguan batin yang menutupi fitrah: hawa, qalb, sakinah dan tuma’ninah, ghaflah, tazkiyah, hingga taubat nasuha. Enam hari untuk memeriksa kondisi batin dengan jujur dan mulai pulang.",
+    cover: "/images/ebook-cover-fitrah-code-fase-2.png",
+    href: "/ebook/the-fitrah-code-fase-2",
+  },
 ];
 
 export default function EbookPage() {

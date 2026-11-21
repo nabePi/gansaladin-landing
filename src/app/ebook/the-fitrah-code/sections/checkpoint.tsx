@@ -32,7 +32,7 @@ export function Checkpoint() {
       </ReflectBox>
       <ChapterNav
         prev={{ href: "#hari6", label: "Sebelumnya", title: "Hari 6 — Basyar dan Ruh" }}
-        next={{ href: "ebook-the-fitrah-code-fase-2.html", label: "Fase Berikutnya", title: "Fase II — The Glitch" }}
+        next={{ href: "/ebook/the-fitrah-code-fase-2", label: "Fase Berikutnya", title: "Fase II — The Glitch" }}
       />
     </EbookSection>
   );
