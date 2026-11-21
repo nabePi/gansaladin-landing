@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pre-Order Satu Kota, Dua Belas Kisah</title>
+<meta name="description" content="Kalender meja 2027 Satu Kota, Dua Belas Kisah: 12 kartu, 12 kisah Baitul Maqdis. Pre-order Rp89.000 sampai 3 Desember 2026. Fund the Story, Yayasan Saladin Peradaban Berilmu.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pre-Order Kalender 2027: Satu Kota, Dua Belas Kisah">
+<meta property="og:description" content="Kalender meja 2027 Satu Kota, Dua Belas Kisah: 12 kartu, 12 kisah Baitul Maqdis. Pre-order Rp89.000 sampai 3 Desember 2026. Fund the Story, Yayasan Saladin Peradaban Berilmu.">
+<meta property="og:url" content="https://www.gensaladin.id/l/kal27">
+<meta property="og:image" content="https://www.gensaladin.id/kal27/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Nunito:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: halaman produk satu kolom bergaya kartu kalender — panorama interaktif sebagai pusat, lalu isi kartu, kuis singkat, cara pakai, dan form pesanan yang merangkum ke WhatsApp. Satu tampilan terang, mengikuti identitas produk. */
+:root{
+  color-scheme:light;
+  --paper:#FBF6EC; --card:#FFFDF8; --cream:#F6EEDC; --ink:#3A2E2A; --ink-soft:#6B5A52;
+  --terra:#C8694A; --terra-deep:#A9523A; --sage:#9DB38A; --sage-deep:#5F7A4C; --blue:#7FA3B8; --blue-deep:#4E7287;
+  --line:#E6DAC4; --gold:#D9A441;
+  --f-display:"Fraunces","Georgia",serif;
+  --f-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:650;line-height:1.15;text-wrap:balance;margin:0;color:var(--ink)}
+h2{font-size:clamp(26px,3.6vw,36px)}
+h3{font-size:20px}
+p{margin:0}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--terra-deep)}
+.muted{color:var(--ink-soft)}
+a{color:var(--blue-deep)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+/* draft notice */
+.draft{background:var(--ink);color:var(--cream);font-size:13.5px;text-align:center;padding:8px 12px;border-radius:0 0 12px 12px;margin:0 auto 12px;max-width:1040px}
+.draft b{color:var(--gold)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:center;padding-block:28px 40px}
+.hero-copy{display:flex;flex-direction:column;gap:16px;min-width:0}
+.hero h1{font-size:clamp(38px,6vw,62px);color:var(--terra)}
+.hero .sub{font-size:18px;font-weight:700}
+.hero .tag{font-family:var(--f-display);font-style:italic;font-size:19px;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--cream);border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px;font-size:13.5px;font-weight:700}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
+.price .now{font-family:var(--f-display);font-size:36px;font-weight:700;color:var(--terra-deep);line-height:1}
+.price s{color:var(--ink-soft);font-size:17px}
+.price .save{background:var(--sage);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:800}
+.price .until{flex-basis:100%;font-size:14px;color:var(--ink-soft)}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:13px 22px;font-weight:800;font-size:15.5px;border:2px solid var(--ink);background:var(--terra);color:#FFF8EF;text-decoration:none;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.ghost{background:var(--card);color:var(--ink)}
+.hero-img{position:relative;min-width:0}
+.hero-img img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:14px;border:2px solid var(--ink);box-shadow:8px 8px 0 var(--sage)}
+.vis{position:absolute;right:10px;bottom:10px;background:rgba(58,46,42,.82);color:var(--cream);font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px}
+
+section.block{padding-block:44px;border-top:2px dashed var(--line);display:flex;flex-direction:column;gap:22px}
+.head{display:flex;flex-direction:column;gap:8px;max-width:680px}
+
+/* panorama */
+.pano-wrap{position:relative;border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--cream)}
+.pano-inner{position:relative;width:100%;aspect-ratio:992/246;transition:transform .45s ease}
+.pano-wrap img{display:block;width:100%;height:100%}
+@media (max-width:640px){.pano-wrap:not(.all) .pano-inner{width:807px;height:200px;aspect-ratio:auto}}
+.dim{position:absolute;top:0;bottom:0;background:rgba(251,246,236,.82);transition:width .45s ease,left .45s ease}
+.dim.l{left:0}
+.dim.r{right:0}
+.focus{position:absolute;top:4px;bottom:4px;border:3px solid var(--terra);border-radius:12px;transition:left .45s ease,width .45s ease;pointer-events:none}
+.pano-wrap.all .dim,.pano-wrap.all .focus{opacity:0}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px}
+.months button{border:1.5px solid var(--ink);background:var(--card);border-radius:10px;padding:8px 0;font-weight:800;font-size:13px;cursor:pointer}
+.months button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.months button.ahad-hint{position:relative}
+.story{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
+.mcard{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.mcard .num{font-weight:800;font-size:13px;color:var(--ink-soft);letter-spacing:.06em}
+.mcard h3{font-size:26px}
+.mcard .el{font-weight:700;color:var(--blue-deep)}
+.mcard .val{font-family:var(--f-display);font-size:19px;color:var(--terra-deep)}
+.qbox{background:var(--sage);color:#1F2A18;border:2px solid var(--ink);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.qbox .lbl{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.qbox .q{font-family:var(--f-display);font-size:20px;line-height:1.3}
+.fact-btn{align-self:flex-start;background:var(--card);border:1.5px solid var(--ink);border-radius:999px;padding:7px 14px;font-weight:800;font-size:13.5px;cursor:pointer}
+.fact{background:var(--card);border-radius:10px;padding:10px 12px;font-size:14.5px;color:var(--ink)}
+.pano-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.pano-nav .group{display:flex;gap:8px}
+.small-btn{border:1.5px solid var(--ink);background:var(--card);border-radius:999px;padding:8px 16px;font-weight:800;font-size:14px;cursor:pointer}
+
+/* anatomy */
+.anat{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;align-items:start}
+.anat-img{position:relative;min-width:0;border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+.anat-img img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+.pin{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--terra);color:#FFF8EF;border:2px solid var(--ink);font-weight:800;font-size:14px;cursor:pointer;display:grid;place-items:center}
+.pin[aria-pressed="true"]{background:var(--ink);color:var(--cream);transform:translate(-50%,-50%) scale(1.15)}
+.parts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.parts li button{width:100%;text-align:left;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.parts li button[aria-pressed="true"]{border-color:var(--ink);background:var(--cream)}
+.parts .n{width:26px;height:26px;border-radius:50%;background:var(--terra);color:#FFF8EF;font-weight:800;font-size:13px;display:grid;place-items:center}
+.parts b{display:block}
+.parts span.d{font-size:14px;color:var(--ink-soft)}
+.spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.spec div{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.spec b{display:block;font-family:var(--f-display);font-size:20px}
+.spec span{font-size:13.5px;color:var(--ink-soft)}
+
+/* quiz */
+.quiz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.qz{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.qz p.s{font-family:var(--f-display);font-size:18px;line-height:1.35}
+.qz .opts{display:flex;gap:8px}
+.qz .opts button{flex:1;border:1.5px solid var(--ink);background:var(--cream);border-radius:999px;padding:8px 0;font-weight:800;cursor:pointer}
+.qz .opts button:disabled{cursor:default;opacity:.55}
+.qz .opts button.pick{opacity:1;background:var(--ink);color:var(--cream)}
+.qz .res{font-size:14.5px;border-radius:10px;padding:10px 12px;background:var(--cream)}
+.qz .res b{color:var(--terra-deep)}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+.steps li{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;counter-increment:s;display:flex;flex-direction:column;gap:6px}
+.steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-weight:800;background:var(--blue);color:#fff}
+.steps p{font-size:14.5px;color:var(--ink-soft)}
+
+/* fund */
+.fund{background:var(--ink);color:var(--cream);border-radius:18px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:center}
+.fund h2{color:var(--cream)}
+.fund .eyebrow{color:var(--gold)}
+.fund p{color:#E9DFCB}
+.fund .note{font-size:13.5px;color:#CBBFA9}
+
+/* form */
+.order{max-width:720px}
+form{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.legend{font-weight:800;font-size:14.5px}
+.field .hint{font-size:13px;color:var(--ink-soft)}
+input[type=text],input[type=tel],textarea,select{width:100%;border:1.5px solid var(--ink);background:var(--paper);border-radius:10px;padding:11px 12px;font-size:15.5px}
+textarea{min-height:84px;resize:vertical}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:420px){.two{grid-template-columns:minmax(0,1fr)}}
+.amts{display:flex;flex-wrap:wrap;gap:8px}
+.amt{position:relative}
+.amt input{position:absolute;opacity:0;width:1px;height:1px}
+.amt span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:800;font-size:14.5px;background:var(--paper);cursor:pointer}
+.amt input:checked+span{border-color:var(--ink);background:var(--cream);box-shadow:2px 2px 0 var(--ink)}
+.amt input:focus-visible+span{outline:3px solid var(--blue);outline-offset:2px}
+.rp{display:flex;align-items:center;border:1.5px solid var(--ink);background:var(--paper);border-radius:10px;padding-left:12px;max-width:260px}
+.rp b{color:var(--ink-soft)}
+.rp input[type=text]{border:0;background:transparent;padding-left:6px}
+.rp:focus-within{outline:3px solid var(--blue);outline-offset:2px}
+.rp input:focus-visible{outline:none}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--cream);font-size:22px;font-weight:800;cursor:pointer;line-height:1}
+.qty output{min-width:44px;text-align:center;font-family:var(--f-display);font-size:28px;font-variant-numeric:tabular-nums}
+.ways{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.way{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;border:1.5px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:var(--paper)}
+.way:has(input:checked){border-color:var(--ink);background:var(--cream)}
+.way input{width:18px;height:18px;margin-top:4px;accent-color:var(--terra)}
+.way b{display:block;font-size:15px}
+.way .hint{display:block}
+@media (max-width:520px){.ways{grid-template-columns:minmax(0,1fr)}}
+.check{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;font-size:14.5px}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--terra)}
+.err{color:var(--terra-deep);font-weight:700;font-size:13.5px}
+/* pembayaran */
+.pay{display:flex;flex-direction:column;gap:18px}
+.thanks{background:var(--sage);border:2px solid var(--ink);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.thanks h2{color:#1F2A18}
+.thanks .code{font-family:var(--f-body);font-weight:800;background:var(--card);border:1.5px solid var(--ink);border-radius:999px;padding:3px 12px;align-self:flex-start;font-size:15px;letter-spacing:.04em}
+.psteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:ps}
+.pstep{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;counter-increment:ps;min-width:0}
+.pstep h3::before{content:counter(ps);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--terra);color:#FFF8EF;border:2px solid var(--ink);font-family:var(--f-body);font-size:15px;font-weight:800;margin-right:10px;vertical-align:2px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.amount{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;background:var(--cream);border-radius:12px;padding:12px 14px}
+.amount b{font-family:var(--f-display);font-size:30px;color:var(--terra-deep);font-variant-numeric:tabular-nums}
+.methods{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px}
+.method{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;background:var(--paper);min-width:0}
+.method .lbl{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
+.acc{font-family:var(--f-display);font-size:28px;font-weight:700;letter-spacing:.03em;font-variant-numeric:tabular-nums}
+.qris img{display:block;width:100%;max-width:240px;height:auto;background:#fff;border-radius:8px;padding:8px;border:1.5px solid var(--line)}
+@media (max-width:640px){.methods{grid-template-columns:minmax(0,1fr)}.qris img{max-width:260px;margin-inline:auto}}
+.drop{border:2px dashed var(--ink-soft);border-radius:14px;padding:18px;text-align:center;background:var(--paper);display:flex;flex-direction:column;gap:8px;align-items:center}
+.drop input{max-width:100%}
+.drop img{max-width:220px;max-height:260px;border-radius:8px;border:1.5px solid var(--line)}
+.ok{color:var(--sage-deep);font-weight:800}
+details.msgbox summary{cursor:pointer;font-weight:700;font-size:14px}
+.pay pre{white-space:pre-wrap;word-break:break-word;margin:0;font-family:var(--f-body);font-size:14px;background:var(--paper);border-radius:10px;padding:12px;max-height:260px;overflow:auto}
+
+/* faq */
+details{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px}
+details+details{margin-top:8px}
+summary{font-weight:800;cursor:pointer}
+details p{margin-top:8px;color:var(--ink-soft);font-size:15px}
+
+footer{border-top:2px dashed var(--line);padding-top:24px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-soft)}
+footer b{color:var(--ink)}
+
+@media (max-width:860px){
+  .hero,.story,.anat,.fund,.order{grid-template-columns:minmax(0,1fr)}
+  .quiz,.steps{grid-template-columns:minmax(0,1fr)}
+  .spec{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .months{grid-template-columns:repeat(6,minmax(0,1fr))}
+    .two{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Pre-order · Fund the Story</span>
+      <h1>Satu Kota, Dua Belas Kisah</h1>
+      <p class="sub">Kalender 2027 · Tadabbur Baitul Maqdis</p>
+      <p class="tag">Dari tanah yang diberkahi, kita belajar tentang iman, keteguhan, dan harapan.</p>
+      <div class="chips"><span class="chip">12 kartu A5 landscape</span><span class="chip">Dudukan kayu 10 cm</span><span class="chip">1 nilai, 1 renungan, 1 pertanyaan tiap bulan</span><span class="chip">Kirim pertengahan Desember atau ambil di stan GenSa Berilmu (stan 75) IBF, 9–13 Desember 2026</span></div>
+      <div class="price" id="heroPrice"><span class="now" id="pNow"></span><s id="pNormal"></s><span class="save" id="pSave"></span><span class="until" id="pUntil"></span></div>
+      <div class="cta-row"><a class="btn" href="#pesan">Pesan sekarang</a><a class="btn ghost" href="#kisah">Lihat 12 kisahnya</a></div>
+    </div>
+    <div class="hero-img"><img src="/kal27/img/hero.jpg" alt="Visualisasi kalender meja Satu Kota, Dua Belas Kisah berdiri di dudukan kayu, dengan cover panorama Baitul Maqdis" width="1000" height="1000"><span class="vis">Visualisasi</span></div>
+  </header>
+
+  <section class="block" id="kisah">
+    <div class="head">
+      <span class="eyebrow">Satu kota, dua belas kepingan</span>
+      <h2>Setiap kartu punya satu elemen. Tumpuk semuanya, kotanya utuh.</h2>
+      <p class="muted">Pilih bulan untuk melihat kepingannya di panorama, nilai yang dibawanya, dan pertanyaan untuk diobrolkan.</p>
+    </div>
+    <div class="pano-wrap" id="pano">
+      <div class="pano-inner" id="panoInner">
+        <img src="/kal27/img/panorama.jpg" alt="Visualisasi panorama 12 elemen kalender yang membentuk satu kota" width="992" height="246">
+        <div class="dim l" id="dimL"></div><div class="dim r" id="dimR"></div><div class="focus" id="focus"></div>
+      </div>
+    </div>
+    <div class="months" id="months" role="group" aria-label="Pilih bulan"></div>
+    <div class="story" aria-live="polite">
+      <article class="mcard">
+        <span class="num" id="mNum"></span>
+        <h3 id="mName"></h3>
+        <p class="el" id="mEl"></p>
+        <p class="val" id="mVal"></p>
+      </article>
+      <div class="qbox">
+        <span class="lbl">Ngobrol Bersama</span>
+        <p class="q" id="mQ"></p>
+        <button class="fact-btn" type="button" id="factBtn" aria-expanded="false">Tahukah kamu?</button>
+        <p class="fact" id="mFact" hidden></p>
+      </div>
+    </div>
+    <div class="pano-nav">
+      <div class="group"><button class="small-btn" type="button" id="prev">‹ Sebelumnya</button><button class="small-btn" type="button" id="next">Berikutnya ›</button></div>
+      <button class="small-btn" type="button" id="allBtn" aria-pressed="false">Lihat kota utuh</button>
+    </div>
+  </section>
+
+  <section class="block" id="isi">
+    <div class="head">
+      <span class="eyebrow">Isi satu kartu</span>
+      <h2>Bukan sekadar tanggal. Setiap bulan, satu tadabbur kecil.</h2>
+      <p class="muted">Tekan angka di gambar atau daftar di sampingnya. Contoh di bawah adalah kartu Januari.</p>
+    </div>
+    <div class="anat">
+      <div class="anat-img" id="anatImg"><img src="/kal27/img/anatomi-januari.jpg" alt="Visualisasi kartu Januari 2027 di dudukan kayu: kubah, baris nilai, grid kalender, renungan, pertanyaan, dan fakta Kubah Batu" width="1000" height="1000"><span class="vis">Visualisasi</span></div>
+      <ul class="parts" id="parts"></ul>
+    </div>
+    <div class="spec">
+      <div><b>21 × 14,8 cm</b><span>Kartu A5 landscape</span></div>
+      <div><b>12 + 1</b><span>Kartu bulan dan cover</span></div>
+      <div><b>6 baris</b><span>Grid tetap, libur nasional dilingkari</span></div>
+      <div><b>Reusable</b><span>Dudukan kayu bisa dipakai lagi</span></div>
+    </div>
+  </section>
+
+  <section class="block" id="kuis">
+    <div class="head">
+      <span class="eyebrow">Coba dulu</span>
+      <h2>Benar atau salah?</h2>
+      <p class="muted">Tiga fakta dari kartu. Jawabannya ada di kalender.</p>
+    </div>
+    <div class="quiz" id="quiz"></div>
+  </section>
+
+  <section class="block" id="cara">
+    <div class="head">
+      <span class="eyebrow">Cara pakai</span>
+      <h2>Satu bulan, satu kartu di depan.</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Pasang di dudukan</h3><p>Susun kartu Januari paling depan dan Desember paling belakang. Panoramanya langsung terlihat utuh.</p></li>
+      <li><h3>Pindahkan setiap awal bulan</h3><p>Kartu bulan yang sudah lewat dipindah ke barisan paling belakang, jadi kotanya tetap lengkap sepanjang tahun.</p></li>
+      <li><h3>Tadabbur bersama</h3><p>Baca renungannya, lalu ajak anak menjawab pertanyaan bulan itu di meja makan atau sebelum tidur.</p></li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="fund">
+      <div><span class="eyebrow">Fund the Story</span><h2>Setiap kalender ikut menghidupkan kisah berikutnya.</h2></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <p>Kalender ini bagian dari Fund the Story, ikhtiar Yayasan Saladin Peradaban Berilmu (GenSa) untuk mendanai program dakwahnya.</p>
+        <p class="note">Kenali program lainnya di <a href="https://www.gensaladin.id" target="_blank" rel="noopener">www.gensaladin.id</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="pesan">
+    <div class="head">
+      <span class="eyebrow">Form pre-order</span>
+      <h2>Pesan kalendermu</h2>
+      <p class="muted">Isi data di bawah. Setelah itu, kirim pesanan ke admin lewat WhatsApp, lakukan pembayaran, dan unggah bukti transfernya.</p>
+    </div>
+    <div class="order">
+      <p class="thanks" id="tutupNote" hidden style="background:var(--cream)"></p>
+      <form id="form" novalidate>
+        <div class="field">
+          <span class="legend" id="qtyLbl">Jumlah kalender</span>
+          <div class="qty" role="group" aria-labelledby="qtyLbl">
+            <button type="button" id="minus" aria-label="Kurangi">−</button>
+            <output id="qty" aria-live="polite">1</output>
+            <button type="button" id="plus" aria-label="Tambah">+</button>
+          </div>
+          <span class="hint" id="qtyHint">Beli lebih dari satu untuk keluarga, guru, atau masjid.</span>
+        </div>
+        <div class="field">
+          <span class="legend" id="caraLbl">Cara menerima</span>
+          <div class="ways" role="radiogroup" aria-labelledby="caraLbl">
+            <label class="way"><input type="radio" name="cara" id="caraKirim" value="kirim" checked><span><b>Dikirim ke alamat</b><span class="hint" id="kirimHint"></span></span></label>
+            <label class="way"><input type="radio" name="cara" id="caraIBF" value="ibf"><span><b>Ambil di IBF 2026</b><span class="hint" id="ibfHint"></span></span></label>
+          </div>
+        </div>
+        <div class="field"><label for="nama">Nama lengkap</label><input type="text" id="nama" autocomplete="name" required></div>
+        <div class="field"><label for="wa">Nomor WhatsApp</label><input type="tel" id="wa" inputmode="tel" autocomplete="tel" placeholder="08xx xxxx xxxx" required><span class="hint">Untuk konfirmasi pesanan dan pengiriman.</span></div>
+        <div id="addrBlock" style="display:flex;flex-direction:column;gap:16px">
+        <div class="field"><label for="alamat">Alamat pengiriman</label><textarea id="alamat" autocomplete="street-address" placeholder="Nama jalan, nomor rumah, RT/RW, patokan" required></textarea></div>
+        <div class="two">
+          <div class="field"><label for="kelurahan">Kelurahan/Desa</label><input type="text" id="kelurahan" autocomplete="address-level4" required></div>
+          <div class="field"><label for="kecamatan">Kecamatan</label><input type="text" id="kecamatan" autocomplete="address-level3" required></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="kota">Kota/Kabupaten</label><input type="text" id="kota" autocomplete="address-level2" required></div>
+          <div class="field"><label for="kodepos">Kode pos (opsional)</label><input type="text" id="kodepos" inputmode="numeric" autocomplete="postal-code"></div>
+        </div>
+        </div>
+        <div class="field"><label for="untuk">Kalender ini untuk</label>
+          <select id="untuk"><option>Keluarga sendiri</option><option>Hadiah</option><option>Sekolah atau TPA</option><option>Masjid atau kantor</option></select></div>
+        <div class="field">
+          <span class="legend" id="donLbl">Tambah donasi dakwah (opsional)</span>
+          <div class="amts" role="radiogroup" aria-labelledby="donLbl">
+            <label class="amt"><input type="radio" name="donasi" value="0" checked><span>Tidak dulu</span></label>
+            <label class="amt"><input type="radio" name="donasi" value="10000"><span>Rp10.000</span></label>
+            <label class="amt"><input type="radio" name="donasi" value="50000"><span>Rp50.000</span></label>
+            <label class="amt"><input type="radio" name="donasi" value="100000"><span>Rp100.000</span></label>
+            <label class="amt"><input type="radio" name="donasi" value="lain" id="donLain"><span>Isi nominal</span></label>
+          </div>
+          <div class="rp" id="donCustomWrap" hidden><b>Rp</b><input type="text" id="donCustom" inputmode="numeric" placeholder="25.000" aria-label="Nominal donasi dalam rupiah"></div>
+          <span class="hint">Untuk program dakwah Yayasan Saladin Peradaban Berilmu, di luar harga kalender.</span>
+        </div>
+        <div class="field"><label for="catatan">Catatan (opsional)</label><textarea id="catatan" placeholder="Misalnya: kirim sebagai hadiah atas nama…"></textarea></div>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="web">Kosongkan</label><input type="text" id="web" tabindex="-1" autocomplete="off"></div>
+        <label class="check"><input type="checkbox" id="setuju" required><span id="setujuTxt"></span></label>
+        <p class="muted" style="font-size:13px">Data Anda hanya dipakai untuk memproses pesanan dan pengiriman kalender ini.</p>
+        <p class="err" id="err" role="alert" hidden></p>
+        <button class="btn" type="submit" id="submitBtn">Buat pesanan</button>
+      </form>
+    </div>
+
+    <div class="pay" id="bayar" hidden tabindex="-1">
+      <div class="thanks">
+        <span class="code" id="kode"></span>
+        <h2 id="tJudul">Terima kasih sudah memesan.</h2>
+        <p id="simpanNote" hidden><b>Pesanan belum tersimpan otomatis karena gangguan jaringan.</b> Pastikan Anda mengirim pesan WhatsApp di langkah 1.</p>
+        <p>Pesanan kamu akan diverifikasi oleh admin terlebih dahulu. Pesanan tercatat setelah admin mengonfirmasi pembayaran lewat WhatsApp.</p>
+      </div>
+      <ol class="psteps">
+        <li class="pstep">
+          <h3>Kirim pesanan ke admin</h3>
+          <p class="muted">Tekan tombol di bawah. WhatsApp terbuka dengan pesan pesanan yang sudah terisi, tinggal dikirim.</p>
+          <div class="btns"><a class="btn" id="waLink" href="#" target="_blank" rel="noopener">Kirim lewat WhatsApp</a><button class="small-btn" type="button" id="copyMsg">Salin pesan</button><span class="muted" id="copyStatus" style="font-size:13px" role="status"></span></div>
+          <details class="msgbox"><summary>Lihat isi pesan</summary><pre id="msg"></pre></details>
+          <span class="muted" style="font-size:13px">Jika WhatsApp tidak terbuka, salin pesan lalu kirim ke <a id="adminTxt" target="_blank" rel="noopener"></a>.</span>
+        </li>
+        <li class="pstep">
+          <h3>Lakukan pembayaran</h3>
+          <div class="amount"><span id="payLbl">Total</span><b id="payTotal"></b><span class="muted" id="payNote"></span></div>
+          <div class="methods">
+            <div class="method">
+              <span class="lbl">Transfer bank</span>
+              <span>BSI (Bank Syariah Indonesia)</span>
+              <span class="acc" id="accNo">7332610133</span>
+              <span>a.n. <b>Yayasan Saladin Peradaban Berilmu</b></span>
+              <div class="btns"><button class="small-btn" type="button" id="copyAcc">Salin nomor rekening</button><span class="muted" id="accStatus" style="font-size:13px" role="status"></span></div>
+            </div>
+            <div class="method qris">
+              <span class="lbl">QRIS</span>
+              <img src="/kal27/img/qris.png" alt="Kode QRIS a.n. Saladin Peradaban Berilmu" width="412" height="453">
+              <span class="muted" style="font-size:13px">Pindai dengan aplikasi bank atau e-wallet, lalu isi nominal sesuai total. Membayar dari HP yang sama? Tangkap layar gambar ini, lalu unggah di menu QRIS aplikasi Anda.</span>
+            </div>
+          </div>
+          <p class="muted" style="font-size:14px">Tulis kode pesanan <b id="kode2"></b> di berita transfer agar mudah dicocokkan.</p>
+        </li>
+        <li class="pstep">
+          <h3>Unggah bukti transfer</h3>
+          <div id="upOn" hidden>
+            <div class="drop">
+              <label for="bukti"><b>Pilih foto atau PDF bukti transfer</b></label>
+              <input type="file" id="bukti" accept="image/*,application/pdf">
+              <span class="muted" style="font-size:13px">Maksimal 5 MB.</span>
+              <img id="buktiPrev" alt="Pratinjau bukti transfer" hidden>
+            </div>
+            <div class="btns" style="margin-top:10px"><button class="btn" type="button" id="kirimBukti" disabled>Kirim bukti transfer</button><span id="upStatus" role="status" style="font-size:14px"></span></div>
+          </div>
+          <div id="upOff">
+            <p class="muted">Kirim foto bukti transfer ke WhatsApp admin, dengan menyebut kode pesanan.</p>
+            <div class="btns"><a class="btn ghost" id="waBukti" href="#" target="_blank" rel="noopener">Kirim bukti lewat WhatsApp</a></div>
+          </div>
+        </li>
+      </ol>
+      <p>Ada pertanyaan? Hubungi admin di <a id="adminAsk2" target="_blank" rel="noopener"></a>.</p>
+      <div><button class="small-btn" type="button" id="ubah">‹ Ubah pesanan</button></div>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="head"><span class="eyebrow">Pertanyaan</span><h2>Yang sering ditanyakan</h2></div>
+    <div>
+      <details><summary>Kapan kalender dikirim?</summary><p id="faqKirim"></p></details>
+      <details><summary>Untuk usia berapa?</summary><p>Untuk semua usia. Renungan, pertanyaan, dan fun fact di setiap kartu bisa dibaca dan didiskusikan bersama.</p></details>
+      <details><summary>Apa saja yang ada di setiap kartu?</summary><p>Satu elemen ilustrasi die-cut, grid kalender dengan libur nasional, satu nilai dengan ayat atau hadits, satu renungan, satu pertanyaan obrolan keluarga, dan satu fun fact.</p></details>
+      <details><summary>Siapa yang memeriksa isi kalender?</summary><p>Kutipan ayat, hadits, dan fakta sejarah diperiksa oleh Ustadz Edgar Hamas.</p></details>
+      <details><summary>Berapa kuota pre-order?</summary><p id="faqKuota"></p></details>
+      <details><summary>Bagaimana cara membayar?</summary><p>Setelah menekan "Buat pesanan", halaman pembayaran menampilkan total, rekening BSI 7332610133 a.n. Yayasan Saladin Peradaban Berilmu, dan QRIS. Jika diambil di IBF, transfer bisa langsung. Jika dikirim, transfer setelah admin membalas dengan total termasuk ongkos kirim.</p></details>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>2026 · Yayasan Saladin Peradaban Berilmu</b></p>
+    <p>Bagian dari Fund the Story, ikhtiar Yayasan Saladin Peradaban Berilmu (GenSa) untuk mendanai program dakwahnya.</p>
+    <p>Ada pertanyaan? <a id="adminAsk" target="_blank" rel="noopener"></a></p>
+  </footer>
+</div>
+
+<script>
+/* ===== Ubah di sini sebelum halaman dibagikan ===== */
+const CONFIG={
+  hargaSatuan:89000,                // harga pre-order per kalender
+  hargaNormal:125000,               // harga setelah pre-order ditutup
+  tanggalKirim:"pertengahan Desember 2026",
+  ambilIBF:"di stan GenSa Berilmu (stan nomor 75), Islamic Book Fair ke-24, Hall A–B Jakarta International Convention Center (JICC), Senayan, Jakarta, kapan saja selama pameran 9–13 Desember 2026",
+  tutupPO:"3 Desember 2026",
+  adminWA:"6281944233210",          // nomor admin, format 62xxxxxxxxxx
+  kuota:100,                        // kuota pre-order
+  endpoint:"https://script.google.com/macros/s/AKfycbyrs--_3wd-H0JzEYQ5QBqg7aj0jX8X1Hv7jMwE3wHaol11E6EmfDmPnFen65okhQ-meA/exec",                      // URL Web App Google Apps Script (berakhiran /exec). Kosong = pesanan & bukti hanya lewat WhatsApp
+  maksJumlah:20
+};
+/* ================================================== */
+
+const MONTHS=[
+ {id:"jan",name:"Januari",el:"Kubah Emas",val:"Barakna Hawlahu: keberkahan di sekelilingnya",q:"Siapa yang ingin kamu bahagiakan hari ini, dan kebaikan apa yang bisa kamu lakukan untuknya?",fact:"Kubah emas ini bernama Qubbatush Shakhrah. Ia salah satu bangunan di kawasan Masjidil Aqsa, bukan keseluruhannya.",x:[36.2,63.9]},
+ {id:"feb",name:"Februari",el:"Anak dan Layangan",val:"'Abd: merdeka karena menjadi hamba Allah",q:"Kalau benang membantu layangan tetap terbang, apa yang membantu kita tetap berada di jalan Allah?",fact:"Kata 'abd (hamba) dan 'ibadah berasal dari akar kata Arab yang sama.",x:[69,91.6]},
+ {id:"mar",name:"Maret",el:"Pohon Zaitun Tua",val:"Hanif: tegak dalam taat",q:"Apa yang menjadi akar kekuatan kita untuk tetap taat kepada Allah?",fact:"Al-Qur'an menyebut zaitun sebagai pohon yang diberkahi (QS. An-Nur: 35).",x:[19.1,41.7]},
+ {id:"apr",name:"April",el:"Keramik dan Lentera",val:"Itqan & Syakilah: berbeda potensi, berkarya dengan baik",q:"Apa yang kamu sukai dan ingin kamu pelajari agar bisa melakukannya dengan lebih baik?",fact:"Dinding luar Kubah Batu dahulu bermozaik kaca, lalu dilapisi ubin keramik pada abad ke-16.",x:[63.4,78]},
+ {id:"mei",name:"Mei",el:"Mimbar Nuruddin",val:"Khalifah: amanah lintas generasi",q:"Kebaikan apa yang bisa kamu mulai hari ini agar orang lain merasakan manfaatnya kelak?",fact:"Mimbar penggantinya dibuat dari sekitar 16.500 potongan kayu, tanpa lem dan tanpa paku.",x:[64.9,80]},
+ {id:"jun",name:"Juni",el:"Sosok Pembebas",val:"'Izzah: mulia karena iman, terjaga dalam akhlak",q:"Bagaimana caranya tetap baik dan adil kepada orang lain saat kita sedang menang?",fact:"Salahuddin menerima penyerahan Al-Quds pada Jumat, 27 Rajab 583 H (2 Oktober 1187).",x:[2.4,9]},
+ {id:"jul",name:"Juli",el:"Gerbang Kota Tua",val:"Ikramudh Dhaif: memuliakan tamu",q:"Apa yang bisa kamu lakukan agar tamu merasa senang dan diterima di rumahmu?",fact:"Kota tua Al-Quds punya delapan gerbang utama, tujuh di antaranya masih terbuka.",x:[1.4,28.1]},
+ {id:"agu",name:"Agustus",el:"Kucing di Anak Tangga",val:"Rahmatan lil 'Alamin: rahmat bagi seluruh alam",q:"Bagaimana kita bisa membuat makhluk Allah di sekitar kita merasa aman dan disayangi?",fact:"Abu Hurairah berarti “bapak anak kucing”. Ia sering bermain dengan anak kucingnya saat menggembala kambing.",x:[92.1,98.7]},
+ {id:"sep",name:"September",el:"Anak-anak Berlari",val:"Bunyanun Marshush: saling menguatkan",q:"Apa yang bisa kamu lakukan agar teman-temanmu merasa didukung dan tidak tertinggal?",fact:"Kata madrasah berasal dari bahasa Arab darasa, yang berkaitan dengan kegiatan belajar.",x:[79.5,96.7]},
+ {id:"okt",name:"Oktober",el:"Tumpukan Batu",val:"Isti'mar: memakmurkan bumi",q:"Batu kecil apa yang bisa kamu susun bulan ini agar sekitarmu menjadi lebih baik?",fact:"Tumpukan batu penanda jalan disebut cairn, dipakai sejak zaman dahulu di berbagai wilayah.",x:[93.6,98.2]},
+ {id:"nov",name:"November",el:"Sabil Qaytbay",val:"Waqf: manfaat yang terus mengalir",q:"Kebaikan apa yang ingin kamu tinggalkan agar orang lain masih merasakan manfaatnya?",fact:"Kata sabil berarti “jalan”. Tempat air minum gratis disebut sabil, berkaitan dengan ungkapan fī sabīlillāh (di jalan Allah).",x:[87.5,97]},
+ {id:"des",name:"Desember",el:"Anak Menatap Kota",val:"Wa'dullah Haqq: janji Allah itu benar",q:"Kebaikan apa yang ingin terus kamu perjuangkan, meskipun hasilnya belum terlihat?",fact:"Nama Al-Aqsa berarti “yang terjauh”, merujuk pada jaraknya dari Masjidil Haram.",x:[59.4,64.9]}
+];
+const $=id=>document.getElementById(id);
+let cur=0, showAll=false;
+
+/* panorama */
+$("months").innerHTML=MONTHS.map((m,i)=>`<button type="button" aria-pressed="false" data-i="${i}">${m.name.slice(0,3)}</button>`).join("");
+$("months").addEventListener("click",e=>{const b=e.target.closest("button");if(b)showMonth(+b.dataset.i)});
+function showMonth(i){
+  cur=(i+12)%12; showAll=false;
+  const m=MONTHS[cur];
+  $("pano").classList.remove("all"); $("allBtn").setAttribute("aria-pressed","false"); $("allBtn").textContent="Lihat kota utuh";
+  const [a,b]=m.x, pad=1.2;
+  const l=Math.max(0,a-pad), r=Math.min(100,b+pad);
+  $("dimL").style.width=l+"%"; $("dimR").style.width=(100-r)+"%";
+  $("focus").style.left=l+"%"; $("focus").style.width=(r-l)+"%";
+  panPano();
+  document.querySelectorAll("#months button").forEach((btn,k)=>btn.setAttribute("aria-pressed",k===cur?"true":"false"));
+  $("mNum").textContent=String(cur+1).padStart(2,"0")+" / 12";
+  $("mName").textContent=m.name+" 2027";
+  $("mEl").textContent=m.el;
+  $("mVal").textContent=m.val;
+  $("mQ").textContent=m.q;
+  $("mFact").textContent=m.fact; $("mFact").hidden=true;
+  $("factBtn").setAttribute("aria-expanded","false"); $("factBtn").textContent="Tahukah kamu?";
+}
+$("prev").onclick=()=>showMonth(cur-1);
+$("next").onclick=()=>showMonth(cur+1);
+$("factBtn").onclick=()=>{const open=$("mFact").hidden;$("mFact").hidden=!open;$("factBtn").setAttribute("aria-expanded",String(open));$("factBtn").textContent=open?"Tutup":"Tahukah kamu?"};
+$("allBtn").onclick=()=>{
+  showAll=!showAll;
+  $("pano").classList.toggle("all",showAll);
+  $("allBtn").setAttribute("aria-pressed",String(showAll));
+  $("allBtn").textContent=showAll?"Sorot satu bulan":"Lihat kota utuh";
+  panPano();
+};
+function panPano(){
+  const inner=$("panoInner"), W=$("pano").clientWidth, IW=inner.offsetWidth;
+  if(showAll||IW<=W+1){inner.style.transform="";return}
+  const m=MONTHS[cur], c=(m.x[0]+m.x[1])/200*IW;
+  const t=Math.min(0,Math.max(W-IW,W/2-c));
+  inner.style.transform=`translateX(${t}px)`;
+}
+addEventListener("resize",panPano);
+showMonth(0);
+
+/* anatomy */
+const PARTS=[
+ {t:"Elemen ilustrasi die-cut",d:"Kepingan kota bulan itu. Saat ditumpuk, dua belas kepingan membentuk satu panorama.",x:40,y:15},
+ {t:"Baris nilai",d:"Satu nilai Islam dengan kutipan ayat atau hadits sebagai jangkarnya.",x:12.5,y:30.6},
+ {t:"Grid kalender",d:"Enam baris tetap, Ahad diberi warna, libur nasional dilingkari.",x:22,y:42.5},
+ {t:"Renungan",d:"Satu paragraf pendek, dari kisah menuju pelajaran.",x:93.5,y:34.5},
+ {t:"Pertanyaan obrolan",d:"Satu pertanyaan untuk dijawab.",x:47.5,y:65.5},
+ {t:"Tahukah kamu?",d:"Satu fakta singkat tentang objek atau sejarahnya.",x:50,y:55}
+];
+$("parts").innerHTML=PARTS.map((p,i)=>`<li><button type="button" aria-pressed="${i===0}" data-i="${i}"><span class="n">${i+1}</span><span><b>${p.t}</b><span class="d">${p.d}</span></span></button></li>`).join("");
+$("anatImg").insertAdjacentHTML("beforeend",PARTS.map((p,i)=>`<button type="button" class="pin" style="left:${p.x}%;top:${p.y}%" aria-label="${p.t}" aria-pressed="${i===0}" data-i="${i}">${i+1}</button>`).join(""));
+function pickPart(i){document.querySelectorAll("#parts button, #anatImg .pin").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.i===i)))}
+document.addEventListener("click",e=>{const b=e.target.closest("#parts button, #anatImg .pin");if(b)pickPart(+b.dataset.i)});
+
+/* quiz */
+const QUIZ=[
+ {s:"Kubah emas di Al-Quds adalah keseluruhan Masjidil Aqsa.",a:false,e:"Kubah emas itu Qubbatush Shakhrah, salah satu bangunan di kawasan Masjidil Aqsa. Kisahnya di kartu Januari."},
+ {s:"Mimbar di Masjidil Aqsa dirakit dari ribuan potongan kayu tanpa lem dan tanpa paku.",a:true,e:"Mimbar penggantinya tersusun dari sekitar 16.500 potongan kayu yang saling mengunci. Kisahnya di kartu Mei."},
+ {s:"Semua gerbang utama kota tua Al-Quds masih terbuka sampai sekarang.",a:false,e:"Kota tua Al-Quds punya delapan gerbang utama, dan tujuh di antaranya masih terbuka. Kisahnya di kartu Juli."}
+];
+$("quiz").innerHTML=QUIZ.map((q,i)=>`<div class="qz"><p class="s">${q.s}</p><div class="opts"><button type="button" data-i="${i}" data-v="1">Benar</button><button type="button" data-i="${i}" data-v="0">Salah</button></div><p class="res" id="res${i}" hidden></p></div>`).join("");
+$("quiz").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  const i=+b.dataset.i, pick=b.dataset.v==="1", q=QUIZ[i];
+  b.parentElement.querySelectorAll("button").forEach(x=>{x.disabled=true;x.classList.toggle("pick",x===b)});
+  const r=$("res"+i);r.innerHTML=`<b>${pick===q.a?"Tepat.":"Belum tepat."}</b> ${q.e}`;r.hidden=false;
+});
+
+/* order */
+const rupiah=n=>"Rp"+n.toLocaleString("id-ID");
+let qty=1;
+const angka=t=>+String(t).replace(/\D/g,"")||0;
+function donasi(){const r=document.querySelector('input[name="donasi"]:checked');if(!r)return 0;return r.value==="lain"?angka($("donCustom").value):+r.value}
+function renderOrder(){
+  $("qty").textContent=qty;
+  $("minus").disabled=qty<=1; $("plus").disabled=qty>=CONFIG.maksJumlah;
+}
+$("minus").onclick=()=>{if(qty>1){qty--;renderOrder()}};
+$("plus").onclick=()=>{if(qty<CONFIG.maksJumlah){qty++;renderOrder()}};
+$("kirimHint").textContent=`Dikirim ${CONFIG.tanggalKirim}. Ongkos kirim dikonfirmasi admin.`;
+$("ibfHint").textContent=`Diambil ${CONFIG.ambilIBF}, tanpa ongkos kirim.`;
+$("faqKirim").textContent=`Pilih salah satu saat memesan: dikirim ke alamat ${CONFIG.tanggalKirim}, atau diambil langsung ${CONFIG.ambilIBF}. Pre-order ditutup ${CONFIG.tutupPO}.`;
+const cara=()=>$("caraIBF").checked?"ibf":"kirim";
+function renderCara(){
+  const ibf=cara()==="ibf";
+  $("addrBlock").hidden=ibf;
+  $("setujuTxt").innerHTML=ibf
+    ?`Saya memahami ini <b>pre-order</b>: kalender diambil <b>${CONFIG.ambilIBF}</b> dengan menunjukkan bukti pesanan.`
+    :`Saya memahami ini <b>pre-order</b>: kalender dikirim <b>${CONFIG.tanggalKirim}</b>, dan ongkos kirim dikonfirmasi admin.`;
+}
+document.querySelectorAll('input[name="cara"]').forEach(r=>r.addEventListener("change",renderCara));
+document.querySelectorAll('input[name="donasi"]').forEach(r=>r.addEventListener("change",()=>{const lain=$("donLain").checked;$("donCustomWrap").hidden=!lain;if(lain)$("donCustom").focus();renderOrder()}));
+$("donCustom").addEventListener("input",e=>{const n=angka(e.target.value);e.target.value=n?n.toLocaleString("id-ID"):"";renderOrder()});
+renderCara();
+const adminDisp=CONFIG.adminWA.replace(/^62/,"0").replace(/(\d{4})(\d{4})(\d+)/,"$1-$2-$3");
+$("adminTxt").textContent=adminDisp;
+$("adminTxt").href=`https://wa.me/${CONFIG.adminWA}`;
+$("adminAsk").textContent=`Chat admin di WhatsApp ${adminDisp}`;
+$("adminAsk").href=`https://wa.me/${CONFIG.adminWA}?text=${encodeURIComponent("Assalamu'alaikum, saya ingin bertanya tentang kalender Satu Kota, Dua Belas Kisah 2027.")}`;
+$("faqKuota").textContent=`Pre-order dibatasi ${CONFIG.kuota} kalender dan ditutup ${CONFIG.tutupPO}, atau lebih cepat bila kuota habis. Pesanan tercatat setelah admin mengonfirmasi lewat WhatsApp.`;
+renderOrder();
+if(CONFIG.hargaSatuan){
+  $("pNow").textContent=rupiah(CONFIG.hargaSatuan);
+  if(CONFIG.hargaNormal>CONFIG.hargaSatuan){$("pNormal").textContent=rupiah(CONFIG.hargaNormal);$("pSave").textContent="Hemat "+rupiah(CONFIG.hargaNormal-CONFIG.hargaSatuan)}else{$("pNormal").hidden=$("pSave").hidden=true}
+  $("pUntil").textContent=`Kuota ${CONFIG.kuota} kalender. Harga pre-order berlaku sampai ${CONFIG.tutupPO} atau sampai kuota habis. Setelah itu ${CONFIG.hargaNormal?rupiah(CONFIG.hargaNormal):"harga normal"}.`;
+}else{$("heroPrice").hidden=true}
+
+function buildMsg(d){
+  return [
+   "Assalamu'alaikum, saya ingin pre-order kalender *Satu Kota, Dua Belas Kisah 2027*.",
+   `Kode pesanan: *${d.kode}*`,
+   "",
+   `Jumlah: ${d.qty} kalender`,
+   `Harga: ${CONFIG.hargaSatuan?"harga pre-order "+rupiah(CONFIG.hargaSatuan)+" per kalender, subtotal "+rupiah(CONFIG.hargaSatuan*d.qty):"menunggu konfirmasi admin"}`,
+   d.donasi?`Donasi dakwah: ${rupiah(d.donasi)}`:null,
+   CONFIG.hargaSatuan&&d.donasi?`Total kalender + donasi: ${rupiah(CONFIG.hargaSatuan*d.qty+d.donasi)}${d.cara==="kirim"?" (belum termasuk ongkir)":""}`:null,
+   `Cara menerima: ${d.cara==="ibf"?"Ambil di stan GenSa Berilmu (stan 75) IBF 2026, JICC":"Dikirim ke alamat ("+CONFIG.tanggalKirim+")"}`,
+   `Nama: ${d.nama}`,
+   `No. WhatsApp: ${d.wa}`,
+   d.cara==="kirim"?`Alamat: ${d.alamat}`:null,
+   d.cara==="kirim"?`Kelurahan/Desa: ${d.kelurahan}`:null,
+   d.cara==="kirim"?`Kecamatan: ${d.kecamatan}`:null,
+   d.cara==="kirim"?`Kota/Kabupaten: ${d.kota}${d.kodepos?", "+d.kodepos:""}`:null,
+   `Untuk: ${d.untuk}`,
+   d.catatan?`Catatan: ${d.catatan}`:null,
+   "",
+   d.cara==="ibf"?"Saya akan transfer sesuai total dan mengirim bukti transfernya. Terima kasih.":"Mohon info total dengan ongkos kirim. Setelah itu saya transfer dan mengirim bukti transfernya. Terima kasih."
+  ].filter(x=>x!==null).join("\n");
+}
+$("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=id=>$(id).value.trim();
+  const d={qty,cara:cara(),nama:v("nama"),wa:v("wa"),alamat:v("alamat"),kelurahan:v("kelurahan"),kecamatan:v("kecamatan"),kota:v("kota"),donasi:donasi(),kodepos:v("kodepos"),untuk:$("untuk").value,catatan:v("catatan")};
+  const missing=[];
+  if(!d.nama)missing.push("nama");
+  if(!/^[0-9+\s-]{9,}$/.test(d.wa))missing.push("nomor WhatsApp yang valid");
+  if(d.cara==="kirim"&&!d.alamat)missing.push("alamat");
+  if(d.cara==="kirim"&&!d.kelurahan)missing.push("kelurahan/desa");
+  if(d.cara==="kirim"&&!d.kecamatan)missing.push("kecamatan");
+  if(d.cara==="kirim"&&!d.kota)missing.push("kota/kabupaten");
+  if($("donLain").checked&&d.donasi<1000)missing.push("nominal donasi (minimal Rp1.000), atau pilih \u201cTidak dulu\u201d");
+  if(!$("setuju").checked)missing.push("persetujuan pre-order");
+  if(missing.length){$("err").textContent="Lengkapi dulu: "+missing.join(", ")+".";$("err").hidden=false;return}
+  $("err").hidden=true;
+  if($("web").value)return;
+  if(CONFIG.endpoint){
+    $("submitBtn").disabled=true; $("submitBtn").textContent="Menyimpan pesanan…";
+    kirimServer({type:"order",web:$("web").value,...d}).then(j=>{
+      if(j.ok){d.kode=j.kode; if(typeof j.sisa==="number")tampilKuota(j.sisa); tampilBayar(d,true)}
+      else{$("err").textContent=j.error||"Pesanan belum tersimpan.";$("err").hidden=false; if(typeof j.sisa==="number")tampilKuota(j.sisa)}
+    }).catch(()=>{d.kode=kodeLokal(); tampilBayar(d,false)})
+      .finally(()=>{$("submitBtn").disabled=false;$("submitBtn").textContent="Buat pesanan"});
+  }else{d.kode=kodeLokal(); tampilBayar(d,false)}
+});
+const kodeLokal=()=>"KAL-"+Date.now().toString(36).slice(-5).toUpperCase();
+async function kirimServer(obj){
+  const res=await fetch(CONFIG.endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(obj)});
+  return await res.json();
+}
+function tampilBayar(d,tersimpan){
+  order=d;
+  const msg=buildMsg(d);
+  $("msg").textContent=msg;
+  $("waLink").href=`https://wa.me/${CONFIG.adminWA}?text=${encodeURIComponent(msg)}`;
+  $("copyStatus").textContent="";
+  $("kode").textContent="Kode pesanan "+d.kode; $("kode2").textContent=d.kode;
+  $("tJudul").textContent=`Terima kasih sudah memesan, ${d.nama.split(" ")[0]}.`;
+  const sub=(CONFIG.hargaSatuan||0)*d.qty+d.donasi;
+  $("payTotal").textContent=rupiah(sub);
+  const rincian=`${d.qty} × ${rupiah(CONFIG.hargaSatuan||0)} (harga pre-order)${d.donasi?" + donasi dakwah "+rupiah(d.donasi):""}`;
+  if(d.cara==="ibf"){$("payLbl").textContent="Total yang ditransfer";$("payNote").textContent=`${rincian}. Diambil di IBF, tanpa ongkos kirim.`}
+  else{$("payLbl").textContent="Total";$("payNote").textContent=`${rincian}, belum termasuk ongkos kirim. Transfer setelah admin membalas dengan total termasuk ongkir.`}
+  $("waBukti").href=`https://wa.me/${CONFIG.adminWA}?text=${encodeURIComponent(`Assalamu'alaikum, berikut bukti transfer untuk pesanan ${d.kode} atas nama ${d.nama}.`)}`;
+  $("upOn").hidden=!(CONFIG.endpoint&&tersimpan); $("upOff").hidden=!!(CONFIG.endpoint&&tersimpan);
+  $("simpanNote").hidden=!(CONFIG.endpoint&&!tersimpan);
+  $("bukti").value=""; $("buktiPrev").hidden=true; $("kirimBukti").disabled=true; $("upStatus").textContent="";
+  document.querySelector("#pesan .order").hidden=true; document.querySelector("#pesan .head").hidden=true;
+  $("bayar").hidden=false;
+  $("pesan").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+  $("bayar").focus({preventScroll:true});
+}
+let order=null;
+$("ubah").onclick=()=>{$("bayar").hidden=true;document.querySelector("#pesan .order").hidden=false;document.querySelector("#pesan .head").hidden=false;$("pesan").scrollIntoView({block:"start"})};
+$("adminAsk2").textContent=`WhatsApp ${adminDisp}`; $("adminAsk2").href=$("adminAsk").href;
+$("copyAcc").onclick=async()=>{try{await navigator.clipboard.writeText("7332610133");$("accStatus").textContent="Tersalin."}catch(e){const r=document.createRange();r.selectNodeContents($("accNo"));const s=getSelection();s.removeAllRanges();s.addRange(r);$("accStatus").textContent="Sudah diblok, tekan salin."}};
+$("bukti").addEventListener("change",()=>{
+  const f=$("bukti").files[0]; $("upStatus").textContent=""; $("buktiPrev").hidden=true;
+  if(!f){$("kirimBukti").disabled=true;return}
+  if(f.size>5*1024*1024){$("upStatus").textContent="Ukuran file lebih dari 5 MB.";$("kirimBukti").disabled=true;return}
+  if(f.type.startsWith("image/")){$("buktiPrev").src=URL.createObjectURL(f);$("buktiPrev").hidden=false}
+  $("kirimBukti").disabled=false;
+});
+$("kirimBukti").onclick=async()=>{
+  const f=$("bukti").files[0]; if(!f||!order||!CONFIG.endpoint)return;
+  $("kirimBukti").disabled=true;
+  const ok=await unggahBukti(order.kode,order.wa,f,$("upStatus"));
+  if(!ok){$("upOff").hidden=false;$("kirimBukti").disabled=false}
+};
+async function unggahBukti(kode,wa,f,st){
+  st.textContent="Mengirim…"; st.className="";
+  try{
+    const b64=await new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(",")[1]);r.onerror=no;r.readAsDataURL(f)});
+    const j=await kirimServer({type:"bukti",kode,wa,filename:f.name,mimeType:f.type,data:b64});
+    if(!j.ok){st.textContent=j.error||"Gagal mengirim.";return false}
+    st.textContent="Bukti terkirim. Admin akan memverifikasi pembayaran Anda."; st.className="ok"; return true;
+  }catch(e){st.textContent="Gagal mengirim. Coba lagi, atau kirim bukti lewat WhatsApp ke admin.";return false}
+}
+function tampilKuota(sisa){
+  $("pUntil").textContent=`Sisa kuota ${sisa} dari ${CONFIG.kuota} kalender. Harga pre-order berlaku sampai ${CONFIG.tutupPO} atau sampai kuota habis. Setelah itu ${rupiah(CONFIG.hargaNormal)}.`;
+}
+function tutupForm(teks){
+  $("form").hidden=true;
+  $("tutupNote").innerHTML=teks; $("tutupNote").hidden=false;
+}
+if(CONFIG.endpoint){
+  fetch(CONFIG.endpoint).then(r=>r.json()).then(j=>{
+    if(!j.ok)return;
+    tampilKuota(j.sisa);
+    if(j.tutup)tutupForm(`<b>Pre-order sudah ditutup.</b> Terima kasih atas antusiasmenya. Kalender masih bisa dibeli langsung di stan GenSa Berilmu (stan 75) IBF, 9–13 Desember 2026.`);
+    else if(j.sisa<=0)tutupForm(`<b>Kuota pre-order sudah habis.</b> Terima kasih atas antusiasmenya. Hubungi admin untuk info stok di IBF.`);
+  }).catch(()=>{});
+}
+$("copyMsg").onclick=async()=>{
+  try{await navigator.clipboard.writeText($("msg").textContent);$("copyStatus").textContent="Pesan tersalin."}
+  catch(err){const r=document.createRange();r.selectNodeContents($("msg"));const s=getSelection();s.removeAllRanges();s.addRange(r);$("copyStatus").textContent="Teks sudah diblok, tekan Ctrl/Cmd+C."}
+};
+</script>
+
+</body>
+</html>
