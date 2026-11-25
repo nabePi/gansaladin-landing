@@ -147,13 +147,41 @@ section.block{padding-block:44px;border-top:2px dashed var(--line);display:flex;
 .fund .note{font-size:13.5px;color:#CBBFA9}
 
 /* form */
-.order{max-width:720px}
+.order{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+.order>form{max-width:720px}
+.sum{position:sticky;top:16px;background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:18px;box-shadow:4px 4px 0 var(--ink);display:flex;flex-direction:column;gap:12px;min-width:0}
+.sum-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sum-head h3{font-size:18px}
+.sum-toggle{display:none;border:1.5px solid var(--ink);background:var(--cream);border-radius:999px;padding:5px 12px;font-weight:800;font-size:13px;cursor:pointer}
+.sum-rows{margin:0;display:flex;flex-direction:column;gap:10px}
+.sum-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14.5px}
+.sum-row dt{color:var(--ink-soft)}
+.sum-row dt small{display:block;font-size:12.5px}
+.sum-row dd{margin:0;font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:2px dashed var(--line);padding-top:12px}
+.sum-total span{font-weight:800}
+.sum-total b{font-family:var(--f-display);font-size:26px;color:var(--terra-deep);font-variant-numeric:tabular-nums}
+.sum-note{margin:0;font-size:13px;color:var(--ink-soft)}
+@media (max-width:860px){
+  .sum{top:auto;bottom:10px;z-index:15;padding:12px 14px;gap:8px}
+  .sum-toggle{display:inline-block}
+  .sum:not(.open) .sum-rows{display:none}
+  .sum-total{border-top:0;padding-top:0}
+  .sum-total b{font-size:22px}
+}
 form{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label,.legend{font-weight:800;font-size:14.5px}
 .field .hint{font-size:13px;color:var(--ink-soft)}
 input[type=text],input[type=tel],textarea,select{width:100%;border:1.5px solid var(--ink);background:var(--paper);border-radius:10px;padding:11px 12px;font-size:15.5px}
 textarea{min-height:84px;resize:vertical}
+input[readonly]{background:var(--cream);color:var(--ink-soft);cursor:not-allowed}
+.cbox{position:relative}
+.sug{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 4px);margin:0;padding:4px;list-style:none;background:var(--card);border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink);max-height:280px;overflow:auto}
+.sug li{padding:9px 10px;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;gap:1px;font-size:15px}
+.sug li[aria-selected=true]{background:var(--cream)}
+.sug li small{color:var(--ink-soft);font-size:13px}
+.sug li.none{cursor:default;color:var(--ink-soft);font-size:14px}
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
 @media (max-width:420px){.two{grid-template-columns:minmax(0,1fr)}}
 .amts{display:flex;flex-wrap:wrap;gap:8px}
@@ -357,14 +385,20 @@ footer b{color:var(--ink)}
         <div class="field"><label for="email">Email</label><input type="email" id="email" inputmode="email" autocomplete="email" placeholder="nama@email.com" required><span class="hint">Kode pesanan dan langkah konfirmasi dikirim ke email ini.</span></div>
         <div id="addrBlock" style="display:flex;flex-direction:column;gap:16px">
         <div class="field"><label for="alamat">Alamat pengiriman</label><textarea id="alamat" autocomplete="street-address" placeholder="Nama jalan, nomor rumah, RT/RW, patokan" required></textarea></div>
-        <div class="two">
-          <div class="field"><label for="kelurahan">Kelurahan/Desa</label><input type="text" id="kelurahan" autocomplete="address-level4" required></div>
-          <div class="field"><label for="kecamatan">Kecamatan</label><input type="text" id="kecamatan" autocomplete="address-level3" required></div>
+        <div class="field"><label for="kelurahan">Kelurahan/Desa</label><input type="text" id="kelurahan" autocomplete="address-level4" required></div>
+        <div class="field">
+          <label for="kecamatan">Kecamatan</label>
+          <div class="cbox">
+            <input type="text" id="kecamatan" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="kecList" autocomplete="off" autocapitalize="characters" placeholder="Ketik nama kecamatan" required>
+            <ul class="sug" id="kecList" role="listbox" aria-label="Pilihan kecamatan" hidden></ul>
+          </div>
+          <span class="hint" id="kecHint">Ketik lalu pilih dari daftar. Kota/kabupaten terisi otomatis.</span>
         </div>
         <div class="two">
-          <div class="field"><label for="kota">Kota/Kabupaten</label><input type="text" id="kota" autocomplete="address-level2" required></div>
+          <div class="field"><label for="kota">Kota/Kabupaten</label><input type="text" id="kota" readonly tabindex="-1" placeholder="Terisi otomatis" aria-describedby="kecHint"></div>
           <div class="field"><label for="kodepos">Kode pos (opsional)</label><input type="text" id="kodepos" inputmode="numeric" autocomplete="postal-code"></div>
         </div>
+        <p class="hint" id="ongkirInfo" aria-live="polite" hidden></p>
         </div>
         <div class="field"><label for="untuk">Kalender ini untuk</label>
           <select id="untuk"><option>Keluarga sendiri</option><option>Hadiah</option><option>Sekolah atau TPA</option><option>Masjid atau kantor</option></select></div>
@@ -387,6 +421,16 @@ footer b{color:var(--ink)}
         <p class="err" id="err" role="alert" hidden></p>
         <button class="btn" type="submit" id="submitBtn">Buat pesanan</button>
       </form>
+      <aside class="sum" id="sum" aria-label="Ringkasan biaya">
+        <div class="sum-head"><h3>Ringkasan biaya</h3><button type="button" class="sum-toggle" id="sumToggle" aria-expanded="false" aria-controls="sumRows">Rincian</button></div>
+        <dl class="sum-rows" id="sumRows">
+          <div class="sum-row"><dt>Kalender<small id="sumKal"></small></dt><dd id="sumKalV"></dd></div>
+          <div class="sum-row" id="sumDonRow" hidden><dt>Donasi dakwah</dt><dd id="sumDonV"></dd></div>
+          <div class="sum-row"><dt>Ongkos kirim<small id="sumOngS"></small></dt><dd id="sumOngV"></dd></div>
+        </dl>
+        <div class="sum-total" aria-live="polite"><span id="sumTotLbl">Total</span><b id="sumTotal"></b></div>
+        <p class="sum-note" id="sumNote"></p>
+      </aside>
     </div>
 
     <div class="loader" id="loader" hidden role="status" aria-live="polite">
@@ -572,15 +616,34 @@ $("quiz").addEventListener("click",e=>{
 
 /* order */
 const rupiah=n=>"Rp"+n.toLocaleString("id-ID");
-let qty=1;
+let qty=1,ongkirKg=1,ongkir=null,ongkirSeq=0,kecPick=null,ongkirState="idle";
 const angka=t=>+String(t).replace(/\D/g,"")||0;
 function donasi(){const r=document.querySelector('input[name="donasi"]:checked');if(!r)return 0;return r.value==="lain"?angka($("donCustom").value):+r.value}
 function renderOrder(){
   $("qty").textContent=qty;
   $("minus").disabled=qty<=1; $("plus").disabled=qty>=CONFIG.maksJumlah;
+  renderSum();
 }
-$("minus").onclick=()=>{if(qty>1){qty--;renderOrder()}};
-$("plus").onclick=()=>{if(qty<CONFIG.maksJumlah){qty++;renderOrder()}};
+function renderSum(){
+  if(!CONFIG.hargaSatuan){$("sum").hidden=true;return}
+  const kirim=cara()==="kirim",don=donasi();
+  let total=CONFIG.hargaSatuan*qty+don,ong,ongS="",ada=false;
+  if(!kirim){ong="Gratis";ongS="Ambil di IBF"}
+  else if(ongkirState==="ok"&&ongkir!=null){ong=rupiah(ongkir);ongS=`Lion Parcel Reguler, ${ongkirKg} kg`;total+=ongkir;ada=true}
+  else if(ongkirState==="loading")ong="Menghitung…";
+  else if(ongkirState==="fail"){ong="Dari admin";ongS="Dikonfirmasi lewat WhatsApp"}
+  else{ong="–";ongS="Pilih kecamatan dulu"}
+  $("sumKal").textContent=`${qty} × ${rupiah(CONFIG.hargaSatuan)}`;
+  $("sumKalV").textContent=rupiah(CONFIG.hargaSatuan*qty);
+  $("sumDonRow").hidden=!don; $("sumDonV").textContent=rupiah(don);
+  $("sumOngV").textContent=ong; $("sumOngS").textContent=ongS;
+  $("sumTotal").textContent=rupiah(total);
+  $("sumTotLbl").textContent=kirim&&!ada?"Subtotal":"Total";
+  $("sumNote").textContent=kirim&&!ada?"Belum termasuk ongkos kirim.":"";
+}
+$("sumToggle").onclick=()=>{const o=$("sum").classList.toggle("open");$("sumToggle").setAttribute("aria-expanded",o);$("sumToggle").textContent=o?"Tutup":"Rincian"};
+$("minus").onclick=()=>{if(qty>1){qty--;renderOrder();cekOngkir()}};
+$("plus").onclick=()=>{if(qty<CONFIG.maksJumlah){qty++;renderOrder();cekOngkir()}};
 $("kirimHint").textContent=`Dikirim ${CONFIG.tanggalKirim}. Ongkos kirim dikonfirmasi admin.`;
 $("ibfHint").textContent=`Diambil ${CONFIG.ambilIBF}, tanpa ongkos kirim.`;
 $("faqKirim").textContent=`Pilih salah satu saat memesan: dikirim ke alamat ${CONFIG.tanggalKirim}, atau diambil langsung ${CONFIG.ambilIBF}. Pre-order ditutup ${CONFIG.tutupPO}.`;
@@ -591,11 +654,91 @@ function renderCara(){
   $("setujuTxt").innerHTML=ibf
     ?`Saya memahami ini <b>pre-order</b>: kalender diambil <b>${CONFIG.ambilIBF}</b> dengan menunjukkan bukti pesanan.`
     :`Saya memahami ini <b>pre-order</b>: kalender dikirim <b>${CONFIG.tanggalKirim}</b>, dan ongkos kirim dikonfirmasi admin.`;
+  renderSum();
 }
 document.querySelectorAll('input[name="cara"]').forEach(r=>r.addEventListener("change",renderCara));
 document.querySelectorAll('input[name="donasi"]').forEach(r=>r.addEventListener("change",()=>{const lain=$("donLain").checked;$("donCustomWrap").hidden=!lain;if(lain)$("donCustom").focus();renderOrder()}));
 $("donCustom").addEventListener("input",e=>{const n=angka(e.target.value);e.target.value=n?n.toLocaleString("id-ID"):"";renderOrder()});
 renderCara();
+function cekOngkir(){
+  const el=$("ongkirInfo");
+  ongkir=null;
+  const seq=++ongkirSeq;
+  if(!kecPick){ongkirState="idle";el.hidden=true;renderSum();return}
+  const kg=qty;ongkirKg=kg;
+  ongkirState="loading";el.hidden=false;el.textContent="Menghitung ongkir…";renderSum();
+  const gagal="Ongkir belum bisa dihitung otomatis, admin akan mengonfirmasi lewat WhatsApp.";
+  const selesai=()=>{if(seq===ongkirSeq)renderSum()};
+  fetch("/api/ongkir?"+new URLSearchParams({kecamatan:kecPick.kec,kota:kecPick.kota,kg:kg})).then(r=>r.json()).then(j=>{
+    if(seq!==ongkirSeq)return;
+    if(j.ok){ongkir=j.ongkir;ongkirState="ok";el.textContent=`Ongkos kirim Lion Parcel Reguler: ${rupiah(j.ongkir)}${j.sla?" (estimasi "+j.sla+")":""}. Dihitung untuk ${ongkirKg} kg.`}
+    else{ongkirState="fail";el.textContent=gagal}
+  }).catch(()=>{if(seq===ongkirSeq){ongkirState="fail";el.textContent=gagal}}).finally(selesai);
+}
+let kecData=null,kecItems=[],kecIdx=-1;
+const kecInp=$("kecamatan"),kecList=$("kecList");
+function muatKec(){
+  return kecData||(kecData=fetch("/kal27/kecamatan.json").then(r=>r.json()).catch(()=>{kecData=null;return []}));
+}
+function cariKec(data,q){
+  const t=q.toUpperCase().replace(/\s+/g," ").trim();
+  if(t.length<2)return [];
+  const a=[],b=[],c=[];
+  for(const x of data){
+    const kec=x[0];
+    if(kec.startsWith(t))a.push(x);
+    else if(kec.includes(" "+t))b.push(x);
+    else if(kec.includes(t)||(kec+" "+x[2].toUpperCase()).includes(t))c.push(x);
+    if(a.length>=8)break;
+  }
+  return a.concat(b,c).slice(0,8);
+}
+function tutupSug(){kecList.hidden=true;kecInp.setAttribute("aria-expanded","false");kecInp.removeAttribute("aria-activedescendant");kecIdx=-1}
+function sorotSug(i){
+  kecIdx=i;
+  [...kecList.children].forEach((li,n)=>li.setAttribute("aria-selected",n===i?"true":"false"));
+  if(i>=0&&kecList.children[i]){kecInp.setAttribute("aria-activedescendant",kecList.children[i].id);kecList.children[i].scrollIntoView({block:"nearest"})}
+  else kecInp.removeAttribute("aria-activedescendant");
+}
+function bukaSug(items,q){
+  kecItems=items;kecList.replaceChildren();
+  if(!items.length){
+    const li=document.createElement("li");li.className="none";li.setAttribute("role","option");li.setAttribute("aria-disabled","true");
+    li.textContent=q.trim().length<2?"Ketik minimal 2 huruf nama kecamatan.":"Kecamatan tidak ditemukan. Cek ejaan, atau hubungi admin lewat WhatsApp.";
+    kecList.append(li);
+  }else items.forEach((x,n)=>{
+    const li=document.createElement("li");li.id="kec"+n;li.setAttribute("role","option");li.setAttribute("aria-selected","false");
+    const b=document.createElement("b");b.textContent=x[0];
+    const s=document.createElement("small");s.textContent=`${x[2]}, ${x[3]}`;
+    li.append(b,s);
+    li.addEventListener("mousedown",e=>{e.preventDefault();pilihKec(n)});
+    kecList.append(li);
+  });
+  kecList.hidden=false;kecInp.setAttribute("aria-expanded","true");kecIdx=-1;
+}
+function pilihKec(n){
+  const x=kecItems[n];if(!x)return;
+  kecPick={kec:x[0],kota:x[1],label:x[2],prov:x[3]};
+  kecInp.value=x[0];$("kota").value=x[2];$("kecHint").textContent=`Provinsi ${x[3]}.`;
+  tutupSug();cekOngkir();
+}
+kecInp.addEventListener("input",async()=>{
+  if(kecPick){kecPick=null;$("kota").value="";$("kecHint").textContent="Ketik lalu pilih dari daftar. Kota/kabupaten terisi otomatis.";cekOngkir()}
+  const q=kecInp.value;
+  const data=await muatKec();
+  if(q!==kecInp.value)return;
+  bukaSug(cariKec(data,q),q);
+});
+kecInp.addEventListener("focus",()=>{muatKec()});
+kecInp.addEventListener("keydown",e=>{
+  if(kecList.hidden)return;
+  const n=kecItems.length;
+  if(e.key==="ArrowDown"){e.preventDefault();if(n)sorotSug((kecIdx+1)%n)}
+  else if(e.key==="ArrowUp"){e.preventDefault();if(n)sorotSug((kecIdx-1+n)%n)}
+  else if(e.key==="Enter"){if(kecIdx>=0){e.preventDefault();pilihKec(kecIdx)}else if(n===1){e.preventDefault();pilihKec(0)}}
+  else if(e.key==="Escape"){tutupSug()}
+});
+kecInp.addEventListener("blur",()=>{setTimeout(tutupSug,120)});
 const adminDisp=CONFIG.adminWA.replace(/^62/,"0").replace(/(\d{4})(\d{4})(\d+)/,"$1-$2-$3");
 $("adminTxt").textContent=adminDisp;
 $("adminTxt").href=`https://wa.me/${CONFIG.adminWA}`;
@@ -618,6 +761,8 @@ function buildMsg(d){
    `Harga: ${CONFIG.hargaSatuan?"harga pre-order "+rupiah(CONFIG.hargaSatuan)+" per kalender, subtotal "+rupiah(CONFIG.hargaSatuan*d.qty):"menunggu konfirmasi admin"}`,
    d.donasi?`Donasi dakwah: ${rupiah(d.donasi)}`:null,
    CONFIG.hargaSatuan&&d.donasi?`Total kalender + donasi: ${rupiah(CONFIG.hargaSatuan*d.qty+d.donasi)}${d.cara==="kirim"?" (belum termasuk ongkir)":""}`:null,
+   d.cara==="kirim"&&d.ongkir?`Ongkir Lion Parcel Reguler (${d.ongkirKg} kg): ${rupiah(d.ongkir)}`:null,
+   d.cara==="kirim"&&d.ongkir&&CONFIG.hargaSatuan?`Total termasuk ongkir: ${rupiah(CONFIG.hargaSatuan*d.qty+d.donasi+d.ongkir)}`:null,
    `Cara menerima: ${d.cara==="ibf"?"Ambil di stan GenSa Berilmu (stan 75) IBF 2026, JICC":"Dikirim ke alamat ("+CONFIG.tanggalKirim+")"}`,
    `Nama: ${d.nama}`,
    `No. WhatsApp: ${d.wa}`,
@@ -625,7 +770,7 @@ function buildMsg(d){
    d.cara==="kirim"?`Alamat: ${d.alamat}`:null,
    d.cara==="kirim"?`Kelurahan/Desa: ${d.kelurahan}`:null,
    d.cara==="kirim"?`Kecamatan: ${d.kecamatan}`:null,
-   d.cara==="kirim"?`Kota/Kabupaten: ${d.kota}${d.kodepos?", "+d.kodepos:""}`:null,
+   d.cara==="kirim"?`Kota/Kabupaten: ${d.kota}${kecPick?", "+kecPick.prov:""}${d.kodepos?", "+d.kodepos:""}`:null,
    `Untuk: ${d.untuk}`,
    d.catatan?`Catatan: ${d.catatan}`:null,
    "",
@@ -636,15 +781,14 @@ let mengirim=false;
 $("form").addEventListener("submit",e=>{
   e.preventDefault();
   const v=id=>$(id).value.trim();
-  const d={qty,cara:cara(),nama:v("nama"),wa:v("wa"),email:v("email"),alamat:v("alamat"),kelurahan:v("kelurahan"),kecamatan:v("kecamatan"),kota:v("kota"),donasi:donasi(),kodepos:v("kodepos"),untuk:$("untuk").value,catatan:v("catatan")};
+  const d={qty,cara:cara(),nama:v("nama"),wa:v("wa"),email:v("email"),alamat:v("alamat"),kelurahan:v("kelurahan"),kecamatan:v("kecamatan"),kota:v("kota"),donasi:donasi(),kodepos:v("kodepos"),untuk:$("untuk").value,catatan:v("catatan"),ongkir:ongkir,ongkirKg:ongkirKg};
   const missing=[];
   if(!d.nama)missing.push("nama");
   if(!/^[0-9+\s-]{9,}$/.test(d.wa))missing.push("nomor WhatsApp yang valid");
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email))missing.push("email yang valid");
   if(d.cara==="kirim"&&!d.alamat)missing.push("alamat");
   if(d.cara==="kirim"&&!d.kelurahan)missing.push("kelurahan/desa");
-  if(d.cara==="kirim"&&!d.kecamatan)missing.push("kecamatan");
-  if(d.cara==="kirim"&&!d.kota)missing.push("kota/kabupaten");
+  if(d.cara==="kirim"&&!kecPick)missing.push("kecamatan (pilih dari daftar yang muncul saat mengetik)");
   if($("donLain").checked&&d.donasi<1000)missing.push("nominal donasi (minimal Rp1.000), atau pilih \u201cTidak dulu\u201d");
   if(!$("setuju").checked)missing.push("persetujuan pre-order");
   if(missing.length){$("err").textContent="Lengkapi dulu: "+missing.join(", ")+".";$("err").hidden=false;return}
@@ -678,6 +822,7 @@ function tampilBayar(d,tersimpan){
   $("payTotal").textContent=rupiah(sub);
   const rincian=`${d.qty} × ${rupiah(CONFIG.hargaSatuan||0)} (harga pre-order)${d.donasi?" + donasi dakwah "+rupiah(d.donasi):""}`;
   if(d.cara==="ibf"){$("payLbl").textContent="Total yang ditransfer";$("payNote").textContent=`${rincian}. Diambil di IBF, tanpa ongkos kirim.`}
+  else if(d.ongkir){$("payTotal").textContent=rupiah(sub+d.ongkir);$("payLbl").textContent="Total termasuk ongkir";$("payNote").textContent=`${rincian} + ongkir Lion Parcel Reguler ${rupiah(d.ongkir)}. Ongkir final dikonfirmasi admin sebelum Anda transfer.`}
   else{$("payLbl").textContent="Total";$("payNote").textContent=`${rincian}, belum termasuk ongkos kirim. Transfer setelah admin membalas dengan total termasuk ongkir.`}
   $("waBukti").href=`https://wa.me/${CONFIG.adminWA}?text=${encodeURIComponent(`Assalamu'alaikum, berikut bukti transfer untuk pesanan ${d.kode} atas nama ${d.nama}.`)}`;
   $("upOn").hidden=!(CONFIG.endpoint&&tersimpan); $("upOff").hidden=!!(CONFIG.endpoint&&tersimpan);
@@ -727,7 +872,7 @@ function tampilKuota(sisa){
   $("pQuota").hidden=false;
 }
 function tutupForm(teks){
-  $("form").hidden=true;
+  $("form").hidden=true;$("sum").hidden=true;
   $("tutupNote").innerHTML=teks; $("tutupNote").hidden=false;
 }
 if(CONFIG.endpoint){
