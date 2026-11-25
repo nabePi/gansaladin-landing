@@ -385,6 +385,7 @@ footer b{color:var(--ink)}
         <div class="field"><label for="email">Email</label><input type="email" id="email" inputmode="email" autocomplete="email" placeholder="nama@email.com" required><span class="hint">Kode pesanan dan langkah konfirmasi dikirim ke email ini.</span></div>
         <div id="addrBlock" style="display:flex;flex-direction:column;gap:16px">
         <div class="field"><label for="alamat">Alamat pengiriman</label><textarea id="alamat" autocomplete="street-address" placeholder="Nama jalan, nomor rumah, RT/RW, patokan" required></textarea></div>
+        <div class="field"><label for="kelurahan">Kelurahan/Desa</label><input type="text" id="kelurahan" autocomplete="address-level4" required></div>
         <div class="field">
           <label for="kecamatan">Kecamatan</label>
           <div class="cbox">
@@ -397,7 +398,6 @@ footer b{color:var(--ink)}
           <div class="field"><label for="kota">Kota/Kabupaten</label><input type="text" id="kota" readonly tabindex="-1" placeholder="Terisi otomatis" aria-describedby="kecHint"></div>
           <div class="field"><label for="kodepos">Kode pos (opsional)</label><input type="text" id="kodepos" inputmode="numeric" autocomplete="postal-code"></div>
         </div>
-        <div class="field"><label for="kelurahan">Kelurahan/Desa</label><input type="text" id="kelurahan" autocomplete="address-level4" required></div>
         <p class="hint" id="ongkirInfo" aria-live="polite" hidden></p>
         </div>
         <div class="field"><label for="untuk">Kalender ini untuk</label>
